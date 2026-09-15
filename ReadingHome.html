@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日外刊 · 精读主页</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F2A3C'/%3E%3Cpath d='M8 9h11a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H8z' fill='%23E9A03E'/%3E%3Cpath d='M8 23v-9a2 2 0 0 1 2-2h8v11z' fill='%23E7664C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --sand:#F7F1E5; --sand-2:#EFE6D3; --paper:#FFFDF7;
+    --ocean-deep:#0F2A3C; --ocean:#1B4A63; --coral:#E7664C; --coral-light:#F6D9CF;
+    --gold:#E9A03E; --gold-light:#F7E7C8; --ink:#22313C; --ink-soft:#5C6E7A;
+    --line:#DCCFB4;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sand); color:var(--ink);
+    font-family:'Work Sans','Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,'Times New Roman',serif;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 22px;}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,241,229,.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:62px;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; color:var(--ocean-deep);}
+  .brand .mark{
+    width:34px;height:34px;border-radius:9px;background:var(--ocean-deep);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .brand small{display:block; font-family:'Work Sans',sans-serif; font-size:10px; letter-spacing:1.5px; color:var(--ink-soft); font-weight:600;}
+  .nav-actions{display:flex; gap:10px; align-items:center;}
+  .btn{
+    display:inline-flex; align-items:center; gap:6px;
+    border-radius:999px; padding:9px 16px; font-size:13.5px; font-weight:600;
+    border:1px solid transparent; cursor:pointer; font-family:inherit; line-height:1.2;
+  }
+  .btn-primary{background:var(--ocean-deep); color:#fff;}
+  .btn-primary:hover{background:var(--ocean);}
+  .btn-coral{background:var(--coral); color:#fff;}
+  .btn-coral:hover{background:#D5543B;}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--ocean-deep);}
+  .btn-ghost:hover{border-color:var(--coral); color:var(--coral);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:
+      radial-gradient(1000px 420px at 85% -10%, rgba(233,160,62,.16), transparent 60%),
+      linear-gradient(135deg,#0F2A3C 0%,#16415B 58%,#1B4A63 100%);
+    color:#F4EDDD; border-radius:0 0 26px 26px;
+    overflow:hidden;
+  }
+  .hero-in{display:grid; grid-template-columns:1.05fr .95fr; gap:26px; align-items:center; padding:46px 22px 40px;}
+  .hero h1{font-size:clamp(30px,4.4vw,46px); line-height:1.16; font-weight:600;}
+  .hero h1 em{font-style:normal; color:var(--gold);}
+  .hero .sub{margin-top:14px; color:#CFE0E6; font-size:15px; max-width:520px;}
+  .hero .meta{margin-top:20px; display:flex; gap:16px; flex-wrap:wrap; color:#AFC9D3; font-size:12.5px;}
+  .hero .meta b{color:var(--gold); font-weight:700;}
+  .hero-cta{margin-top:26px; display:flex; gap:12px; flex-wrap:wrap;}
+  .hero-art{width:100%; border-radius:16px; box-shadow:0 22px 50px rgba(0,0,0,.35); overflow:hidden; display:block; aspect-ratio:4/3;}
+
+  /* ---------- sections ---------- */
+  section{margin-top:44px;}
+  .sec-head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:18px;}
+  .sec-head h2{font-size:25px; font-weight:600; color:var(--ocean-deep);}
+  .sec-head .hint{font-size:13px; color:var(--ink-soft);}
+
+  /* today card */
+  .today{
+    background:var(--paper); border:1px solid var(--line); border-radius:18px;
+    padding:24px; display:grid; grid-template-columns:auto 1fr auto; gap:22px; align-items:center;
+    box-shadow:0 10px 26px rgba(34,49,60,.07);
+  }
+  .today .cal{
+    width:74px; text-align:center; border-radius:14px; background:var(--ocean-deep); color:#fff; padding:10px 4px;
+  }
+  .today .cal .d{font-family:'Fraunces',serif; font-size:30px; line-height:1; font-weight:600;}
+  .today .cal .m{font-size:11px; letter-spacing:2px; opacity:.85; margin-top:4px;}
+  .today .t-title{font-size:24px; font-weight:600; color:var(--ocean-deep); line-height:1.3;}
+  .today .t-meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
+  .chip{
+    font-size:11.5px; font-weight:600; padding:3px 10px; border-radius:999px;
+    background:var(--gold-light); color:#8A5A12;
+  }
+  .chip.coral{background:var(--coral-light); color:#A33B26;}
+  .chip.ocean{background:#DCE9EE; color:var(--ocean-deep);}
+  .today .t-desc{margin-top:9px; color:var(--ink-soft); font-size:13.5px; max-width:520px;}
+  .today .go{white-space:nowrap;}
+
+  /* article grid */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(315px,1fr)); gap:18px;}
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    display:flex; flex-direction:column; transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:0 16px 34px rgba(34,49,60,.12); border-color:var(--gold);}
+  .card .cv{height:104px; background:linear-gradient(135deg,#1B4A63,#0F2A3C); position:relative; display:flex; align-items:flex-end; padding:12px 16px;}
+  .card .cv::after{content:""; position:absolute; inset:0; background:radial-gradient(220px 90px at 85% 0%, rgba(233,160,62,.35), transparent 70%);}
+  .card .cv .src{position:relative; z-index:1; font-size:12px; color:#D9E6EA; font-weight:600; letter-spacing:.4px;}
+  .card .cb{padding:15px 16px 16px; flex:1; display:flex; flex-direction:column;}
+  .card .cb h3{font-size:18px; color:var(--ocean-deep); line-height:1.3;}
+  .card .cb .row{display:flex; gap:8px; flex-wrap:wrap; margin-top:9px;}
+  .card .cb p{font-size:12.5px; color:var(--ink-soft); margin-top:9px; flex:1;}
+  .card .cb .foot{display:flex; justify-content:space-between; align-items:center; margin-top:13px; font-size:12px; color:var(--ink-soft);}
+  .card .cb .foot a{color:var(--coral); font-weight:700;}
+
+  /* vocab test panel */
+  .test-panel{
+    background:linear-gradient(120deg,#0F2A3C,#1B4A63); border-radius:18px; color:#F4EDDD;
+    padding:26px 28px; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center;
+    box-shadow:0 14px 34px rgba(15,42,60,.25);
+  }
+  .test-panel h2{font-size:24px;}
+  .test-panel p{margin-top:6px; color:#CFE0E6; font-size:13.5px;}
+  .test-panel .stat{display:flex; gap:26px; margin-top:14px;}
+  .test-panel .stat b{font-family:'Fraunces',serif; font-size:28px; color:var(--gold); display:block; line-height:1;}
+  .test-panel .stat span{font-size:11.5px; color:#AFC9D3; letter-spacing:.5px;}
+
+  /* update note */
+  .note{
+    border-left:3px solid var(--coral); background:var(--paper); border-radius:0 12px 12px 0;
+    padding:14px 18px; font-size:13px; color:var(--ink-soft); margin-top:34px;
+  }
+  .note b{color:var(--ocean-deep);}
+
+  footer{border-top:1px solid var(--line); margin-top:46px; padding:22px 0 30px; text-align:center; color:var(--ink-soft); font-size:12.5px;}
+
+  .empty{
+    background:var(--paper); border:1px dashed var(--line); border-radius:14px;
+    padding:26px; text-align:center; color:var(--ink-soft); font-size:14px;
+  }
+
+  @media (max-width:860px){
+    .hero-in{grid-template-columns:1fr; padding:36px 22px;}
+    .hero-art{aspect-ratio:16/10; max-height:230px;}
+    .today{grid-template-columns:1fr; text-align:left;}
+    .today .go{justify-self:start;}
+    .test-panel{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="ReadingHome.html">
+      <span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h12a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H4z" fill="#E9A03E"/><path d="M4 5v14h11V5z" fill="#E7664C"/></svg></span>
+      <span>每日外刊精读<small>DAILY OUTLOOK · IELTS</small></span>
+    </a>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="ReadingHome.html#library">文章库</a>
+      <a class="btn btn-primary" href="Vocabulary_Test.html">生词测试</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <h1>每天一篇外刊，<br>练出<em>雅思阅读力</em></h1>
+      <p class="sub">精选 Nature、The Guardian、The Economist 等高质量外刊的科普与社论文章，按雅思 / 六级难度精读拆解。点击文章进入精读课件：逐句长难句分析、生词本积累、课后练习。</p>
+      <div class="meta">
+        <span>今日更新 <b id="todayDate">—</b></span>
+        <span>累计文章 <b id="totalCount">0</b> 篇</span>
+        <span>词汇测试 <b id="wordCount">0</b> 词</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-coral" id="heroGo" href="#">开始今日阅读 →</a>
+        <a class="btn btn-ghost" style="border-color:rgba(244,237,221,.4); color:#F4EDDD;" href="Vocabulary_Test.html">生词卡片测试</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E9A03E"/><stop offset="1" stop-color="#E7664C"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill="#0F2A3C"/>
+        <circle cx="320" cy="60" r="90" fill="url(#hg)" opacity=".28"/>
+        <circle cx="70" cy="250" r="110" fill="#1B4A63"/>
+        <g fill="none" stroke="#F4EDDD" stroke-width="3" opacity=".85">
+          <path d="M60 90 h180" stroke-linecap="round"/>
+          <path d="M60 115 h240" stroke-linecap="round" opacity=".6"/>
+          <path d="M60 140 h150" stroke-linecap="round" opacity=".4"/>
+        </g>
+        <g>
+          <rect x="60" y="180" width="70" height="46" rx="6" fill="#E9A03E"/>
+          <rect x="145" y="180" width="70" height="46" rx="6" fill="#E7664C"/>
+          <rect x="230" y="180" width="70" height="46" rx="6" fill="#7FA8B8"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <section id="todaySec">
+    <div class="sec-head">
+      <h2>今日推荐</h2>
+      <span class="hint">每天早晨更新，按发布时间自动轮换</span>
+    </div>
+    <div id="todayBox" class="empty">正在加载文章…</div>
+  </section>
+
+  <section id="library">
+    <div class="sec-head">
+      <h2>文章库</h2>
+      <span class="hint">按发布日期排列 · 点击进入精读课件</span>
+    </div>
+    <div id="libGrid" class="grid"></div>
+  </section>
+
+  <section>
+    <div class="test-panel">
+      <div>
+        <h2>生词卡片测试</h2>
+        <p>所有文章中生词本积累的生词汇总在一起，以卡片形式出题测试（看词选义 / 看义选词），答完看错题回顾。</p>
+        <div class="stat">
+          <div><b id="testWordCount">0</b><span>已积累生词</span></div>
+          <div><b id="testArticleCount">0</b><span>已读文章</span></div>
+        </div>
+      </div>
+      <a class="btn btn-coral" href="Vocabulary_Test.html" style="font-size:15px; padding:12px 22px;">开始测试 →</a>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>每日更新机制：</b>主页文章列表按 <code>date</code> 字段自动排序，「今日推荐」取最近发布的一篇。每天新增精读课件后，在 <code>ReadingHome.html</code> 的 <code>ARTICLES</code> 注册表中加入新条目（标题 / 来源 / 日期 / 课件路径）即可自动上架；生词测试会自动汇总所有文章的 <code>vocabbook:&lt;stem&gt;</code> 生词。
+  </div>
+</main>
+
+<footer>
+  每日外刊精读 · 雅思来源外刊精读主页 &nbsp;|&nbsp; 生词测试数据保存在本机浏览器 localStorage
+</footer>
+
+<script>
+/* ================= 文章注册表（新增文章时在此加一条即可） ================= */
+var ARTICLES = [
+  {
+    date: "2026-09-12",
+    source: "Nature · Lauren Gravitz",
+    title: "The Importance of Forgetting",
+    level: "雅思 6.5 / 六级",
+    minutes: 8,
+    tags: ["科学", "心理学", "记忆"],
+    file: "Forgetting_Lesson/The_Importance_of_Forgetting_Reading_Lesson.html",
+    stem: "The_Importance_of_Forgetting",
+    desc: "从果蝇实验到人类大脑：记忆为什么会消失？遗忘或许不是大脑的缺陷，而是让思维保持敏捷的关键机制。"
+  }
+];
+
+try { localStorage.setItem('home_articles', JSON.stringify(ARTICLES)); } catch (e) {}
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function loadVocab(stem){
+  try {
+    var raw = localStorage.getItem('vocabbook:' + stem);
+    if (!raw) return [];
+    var p = JSON.parse(raw);
+    return Array.isArray(p.items) ? p.items : [];
+  } catch (e) { return []; }
+}
+function pad(n){ return n < 10 ? '0' + n : '' + n; }
+function fmtDate(ds){
+  var d = new Date(ds + 'T00:00:00');
+  var week = ['周日','周一','周二','周三','周四','周五','周六'];
+  return { y: d.getFullYear(), m: pad(d.getMonth() + 1), d: pad(d.getDate()), w: week[d.getDay()] };
+}
+
+/* ---------- render ---------- */
+var articles = ARTICLES.slice().sort(function(a, b){ return b.date < a.date ? -1 : 1; });
+var now = new Date();
+var todayKey = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+var todayArticle = null;
+for (var i = 0; i < articles.length; i++) {
+  if (articles[i].date <= todayKey) { todayArticle = articles[i]; break; }
+}
+if (!todayArticle) todayArticle = articles[0];
+
+document.getElementById('todayDate').textContent = todayKey;
+document.getElementById('totalCount').textContent = articles.length;
+
+var todayBox = document.getElementById('todayBox');
+if (todayArticle) {
+  var f = fmtDate(todayArticle.date);
+  todayBox.className = 'today';
+  todayBox.innerHTML =
+    '<div class="cal"><div class="d">' + f.d + '</div><div class="m">' + f.m + '.' + f.y + '</div></div>' +
+    '<div>' +
+      '<div class="t-title">' + esc(todayArticle.title) + '</div>' +
+      '<div class="t-meta">' +
+        '<span class="chip ocean">' + esc(todayArticle.source) + '</span>' +
+        '<span class="chip">' + esc(todayArticle.level) + '</span>' +
+        '<span class="chip coral">' + esc(todayArticle.minutes) + ' min</span>' +
+        todayArticle.tags.map(function(t){ return '<span class="chip">#' + esc(t) + '</span>'; }).join('') +
+      '</div>' +
+      '<div class="t-desc">' + esc(todayArticle.desc) + '</div>' +
+    '</div>' +
+    '<a class="btn btn-primary go" href="' + esc(todayArticle.file) + '">开始精读 →</a>';
+  var hg = document.getElementById('heroGo');
+  hg.href = todayArticle.file;
+} else {
+  todayBox.innerHTML = '暂无文章。';
+}
+
+var lib = document.getElementById('libGrid');
+lib.innerHTML = articles.map(function(a){
+  var f = fmtDate(a.date);
+  return '<article class="card">' +
+    '<div class="cv"><span class="src">' + esc(a.source) + ' · ' + f.y + '.' + f.m + '.' + f.d + '</span></div>' +
+    '<div class="cb">' +
+      '<h3>' + esc(a.title) + '</h3>' +
+      '<div class="row">' +
+        '<span class="chip ocean">' + esc(a.level) + '</span>' +
+        '<span class="chip coral">' + esc(a.minutes) + ' min</span>' +
+        a.tags.map(function(t){ return '<span class="chip">#' + esc(t) + '</span>'; }).join('') +
+      '</div>' +
+      '<p>' + esc(a.desc) + '</p>' +
+      '<div class="foot"><span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px; margin-right:4px;"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>' + esc(a.date) + '</span><a href="' + esc(a.file) + '">进入精读 →</a></div>' +
+    '</div>' +
+  '</article>';
+}).join('');
+
+/* ---------- vocab stats ---------- */
+var totalWords = 0, readArticles = 0;
+articles.forEach(function(a){
+  var items = loadVocab(a.stem);
+  if (items.length) readArticles++;
+  totalWords += items.length;
+});
+document.getElementById('wordCount').textContent = totalWords;
+document.getElementById('testWordCount').textContent = totalWords;
+document.getElementById('testArticleCount').textContent = readArticles;
+</script>
+</body>
+</html>

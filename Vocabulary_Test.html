@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生词配对测试 · 每日外刊精读</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F2A3C'/%3E%3Cpath d='M8 9h11a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H8z' fill='%23E9A03E'/%3E%3Cpath d='M8 23v-9a2 2 0 0 1 2-2h8v11z' fill='%23E7664C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --sand:#F7F1E5; --paper:#FFFDF7; --ocean-deep:#0F2A3C; --ocean:#1B4A63;
+    --coral:#E7664C; --coral-light:#F6D9CF; --gold:#E9A03E; --gold-light:#F7E7C8;
+    --ink:#22313C; --ink-soft:#5C6E7A; --line:#DCCFB4; --ok:#2F8F5B; --ok-bg:#DCF0E4; --no:#C2452F; --no-bg:#F8DDD5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      radial-gradient(900px 420px at 85% -5%, rgba(233,160,62,.14), transparent 60%),
+      var(--sand);
+    color:var(--ink); font-family:'Work Sans','Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+    line-height:1.6; min-height:100vh;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,'Times New Roman',serif;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:960px; margin:0 auto; padding:0 20px;}
+
+  header.nav{position:sticky; top:0; z-index:50; background:rgba(247,241,229,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; color:var(--ocean-deep);}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:var(--ocean-deep);display:flex;align-items:center;justify-content:center;}
+  .btn{border-radius:999px; padding:9px 16px; font-size:13.5px; font-weight:600; border:1px solid transparent; cursor:pointer; font-family:inherit; line-height:1.2; display:inline-flex; align-items:center; gap:6px;}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--ocean-deep);}
+  .btn-ghost:hover{border-color:var(--coral); color:var(--coral);}
+  .btn-coral{background:var(--coral); color:#fff;}
+  .btn-coral:hover{background:#D5543B;}
+  .btn-ocean{background:var(--ocean-deep); color:#fff;}
+  .btn-ocean:hover{background:var(--ocean);}
+  .btn:disabled{opacity:.55; cursor:not-allowed;}
+
+  /* ---------- setup ---------- */
+  .setup{margin:34px 0 50px;}
+  .setup h1{font-size:30px; color:var(--ocean-deep);}
+  .setup .sub{margin-top:8px; color:var(--ink-soft); font-size:14px;}
+  .pool{margin-top:20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .pool label{font-size:13px; color:var(--ink-soft);}
+  .pool select{
+    border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-family:inherit; font-size:13.5px; background:var(--paper); color:var(--ink);
+  }
+  .start{margin-top:24px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+  .start .count{font-size:13px; color:var(--ink-soft);}
+
+  .empty{
+    background:var(--paper); border:1.5px dashed var(--line); border-radius:16px; padding:36px 24px; text-align:center; margin:0 0 50px;
+  }
+  .empty h3{font-size:19px; color:var(--ocean-deep);}
+  .empty p{margin-top:8px; font-size:13.5px; color:var(--ink-soft);}
+  .empty .btn{margin-top:18px;}
+
+  /* ---------- match ---------- */
+  .match{display:none; margin:26px 0 50px;}
+  .m-top{display:flex; align-items:center; gap:14px; margin-bottom:18px; flex-wrap:wrap;}
+  .m-progress{flex:1; min-width:160px; height:8px; background:#E7DCC6; border-radius:99px; overflow:hidden;}
+  .m-progress i{display:block; height:100%; background:linear-gradient(90deg,var(--gold),var(--coral)); border-radius:99px; transition:width .25s ease;}
+  .m-count{font-size:13.5px; color:var(--ink-soft); white-space:nowrap; font-weight:600;}
+  .m-reset{font-size:13px;}
+
+  .m-board{
+    background:var(--paper); border:1px solid var(--line); border-radius:22px; padding:22px 22px 26px;
+    box-shadow:0 16px 40px rgba(34,49,60,.10);
+  }
+  .m-hint{font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;}
+  .m-hint b{color:var(--ocean-deep);}
+  .m-cols{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .m-col-h{font-size:11.5px; font-weight:700; letter-spacing:1.6px; color:var(--coral); margin-bottom:10px;}
+  .m-list{display:flex; flex-direction:column; gap:9px;}
+  .m-card{
+    border:1.5px solid var(--line); border-radius:13px; padding:12px 15px; font-family:inherit;
+    font-size:14.5px; color:var(--ink); background:#FFFEF9; cursor:pointer; text-align:left;
+    transition:border-color .12s ease, background .12s ease, transform .08s ease;
+    line-height:1.45;
+  }
+  .m-card:hover:not(.done):not(.selected){border-color:var(--gold); background:#FFFBF0;}
+  .m-card.selected{border-color:var(--gold); background:var(--gold-light); box-shadow:0 0 0 2px rgba(233,160,62,.35);}
+  .m-card.done{border-color:var(--ok); background:var(--ok-bg); cursor:default; font-weight:600;}
+  .m-card.done .m-pos{color:var(--ok);}
+  .m-card.flash{border-color:var(--no); background:var(--no-bg); animation:flash .45s ease;}
+  @keyframes flash{0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);}}
+  .m-word{font-family:'Fraunces',serif; font-size:17px; font-weight:600; color:var(--ocean-deep);}
+  .m-card.done .m-word{color:var(--ok);}
+  .m-word-card{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+  .m-word-card .m-word{flex:0 0 auto;}
+  .m-voice{
+    margin-left:auto; flex:0 0 auto; width:26px; height:26px; border-radius:50%;
+    border:1px solid var(--line); background:var(--paper); display:inline-flex; align-items:center; justify-content:center;
+    font-size:12px; cursor:pointer; user-select:none;
+  }
+  .m-voice:hover{background:var(--gold-light); border-color:var(--gold);}
+  .m-voice.speaking{background:var(--gold); border-color:var(--gold);}
+  .m-pos{font-size:11px; color:var(--gold); font-weight:700; margin-left:2px; letter-spacing:.4px;}
+  .m-mean{font-size:14px; color:var(--ink); display:block;}
+  .m-mean-zh{display:block; font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+  .m-done-line{font-size:12px; color:var(--ok); font-weight:600; margin-top:2px;}
+  .m-done-line .m-src{display:block; font-weight:400; color:var(--ink-soft); font-style:italic; margin-top:1px; font-size:11.5px;}
+
+  .m-finish{display:none; margin-top:20px; text-align:center; padding:18px; background:var(--gold-light); border-radius:16px;}
+  .m-finish b{font-family:'Fraunces',serif; font-size:22px; color:var(--ocean-deep);}
+  .m-finish p{margin-top:6px; font-size:13.5px; color:var(--ink-soft);}
+  .m-finish .btn{margin-top:14px;}
+
+  /* ---------- result ---------- */
+  .result{display:none; margin:30px 0 50px; background:var(--paper); border:1px solid var(--line); border-radius:22px; padding:30px 26px; box-shadow:0 16px 40px rgba(34,49,60,.10);}
+  .r-head{text-align:center;}
+  .r-score{font-family:'Fraunces',serif; font-size:54px; font-weight:700; color:var(--ocean-deep); line-height:1;}
+  .r-score small{font-size:20px; color:var(--ink-soft); font-weight:500;}
+  .r-rate{margin-top:6px; font-size:14px; color:var(--ink-soft);}
+  .r-actions{margin-top:20px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;}
+
+  footer{border-top:1px solid var(--line); margin-top:40px; padding:22px 0 30px; text-align:center; color:var(--ink-soft); font-size:12.5px;}
+
+  @media (max-width:640px){
+    .m-cols{grid-template-columns:1fr; gap:18px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="ReadingHome.html">
+      <span class="mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 5h12a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H4z" fill="#E9A03E"/><path d="M4 5v14h11V5z" fill="#E7664C"/></svg></span>
+      <span>生词配对测试</span>
+    </a>
+    <a class="btn btn-ghost" href="ReadingHome.html">← 返回主页</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== 设置/开始 ===== -->
+  <section class="setup" id="setup">
+    <h1>生词配对测试</h1>
+    <p class="sub">汇总所有精读文章中你手动加入生词本的单词（含课程 Blocking Words），左右配对：点一个单词，再点它的释义。全部配对完成即通关。</p>
+
+    <div class="pool">
+      <label for="poolSel">练习范围：</label>
+      <select id="poolSel">
+        <option value="all">全部文章生词</option>
+      </select>
+    </div>
+
+    <div class="start">
+      <button type="button" class="btn btn-coral" id="startBtn" style="font-size:15px; padding:12px 26px;">开始配对</button>
+      <span class="count" id="poolCount"></span>
+    </div>
+  </section>
+
+  <!-- ===== 配对 ===== -->
+  <section class="match" id="match">
+    <div class="m-top">
+      <div class="m-progress"><i id="mBar"></i></div>
+      <span class="m-count" id="mCount"></span>
+      <button type="button" class="btn btn-ghost m-reset" id="resetBtn">Reset</button>
+    </div>
+    <div class="m-board">
+      <div class="m-hint">左边点一个单词，再到右边点它的释义。<b id="mHintState"></b></div>
+      <div class="m-cols">
+        <div>
+          <div class="m-col-h">WORDS</div>
+          <div class="m-list" id="wordList"></div>
+        </div>
+        <div>
+          <div class="m-col-h">MEANINGS</div>
+          <div class="m-list" id="meanList"></div>
+        </div>
+      </div>
+    </div>
+    <div class="m-finish" id="mFinish">
+      <b id="finishScore"></b>
+      <p id="finishRate"></p>
+      <button type="button" class="btn btn-ocean" id="againBtn">再配对一次</button>
+    </div>
+  </section>
+
+  <!-- ===== 结果 ===== -->
+  <section class="result" id="result">
+    <div class="r-head">
+      <div class="r-score" id="rScore"></div>
+      <div class="r-rate" id="rRate"></div>
+      <div class="r-actions">
+        <button type="button" class="btn btn-coral" id="retryBtn">重新配对</button>
+        <a class="btn btn-ghost" href="ReadingHome.html">返回主页</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>每日外刊精读 · 生词配对测试 &nbsp;|&nbsp; 生词数据来自各文章课件本地生词本（vocabbook:&lt;stem&gt;）</footer>
+
+<script>
+/* ================= 文章注册表（与主页保持一致，优先读取主页写入的版本） ================= */
+var ARTICLES = [
+  {
+    date: "2026-09-12",
+    source: "Nature · Lauren Gravitz",
+    title: "The Importance of Forgetting",
+    file: "Forgetting_Lesson/The_Importance_of_Forgetting_Reading_Lesson.html",
+    stem: "The_Importance_of_Forgetting"
+  }
+];
+try {
+  var stored = JSON.parse(localStorage.getItem('home_articles') || 'null');
+  if (Array.isArray(stored) && stored.length) ARTICLES = stored;
+} catch (e) {}
+
+function loadVocab(stem){
+  try {
+    var raw = localStorage.getItem('vocabbook:' + stem);
+    if (!raw) return [];
+    var p = JSON.parse(raw);
+    return Array.isArray(p.items) ? p.items : [];
+  } catch (e) { return []; }
+}
+
+/* ---------- build pool ---------- */
+var pools = ARTICLES.map(function(a){
+  return { title: a.title, stem: a.stem, items: loadVocab(a.stem) };
+}).filter(function(p){ return p.items.length > 0; });
+
+var poolSel = document.getElementById('poolSel');
+pools.forEach(function(p, i){
+  var o = document.createElement('option');
+  o.value = i;
+  o.textContent = p.title + '（' + p.items.length + ' 词）';
+  poolSel.appendChild(o);
+});
+function allItems(){
+  var out = [];
+  pools.forEach(function(p){ out = out.concat(p.items); });
+  return out;
+}
+function poolItems(){
+  var v = poolSel.value;
+  return (v === 'all' || v === null) ? allItems() : (pools[parseInt(v,10)] ? pools[parseInt(v,10)].items : []);
+}
+
+/* ---------- match state ---------- */
+var pairs = [];       // [{id, word, pos, meaning, source}]
+var selWordId = null;
+var doneIds = {};
+var attempts = 0;
+var matched = 0;
+var finished = false;
+
+function shuffle(arr){
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function norm(s){ return String(s || '').replace(/\s+/g, ' ').trim().toLowerCase(); }
+
+function buildPairs(items){
+  var out = [];
+  items.forEach(function(it, i){
+    var word = String(it.word || '').trim();
+    var meaning = String(it.meaning || '').trim();
+    var meaningEn = String(it.meaningEn || '').trim();
+    if (!word || (!meaning && !meaningEn)) return;
+    out.push({ id: 'w' + i + '_' + norm(word), word: word, pos: it.pos || '', meaning: meaning, meaningEn: meaningEn, source: it.source || '' });
+  });
+  return out;
+}
+function speakWord(word, btn){
+  try {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(word);
+    u.lang = 'en-US'; u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+  if (btn) {
+    btn.classList.add('speaking');
+    setTimeout(function(){ btn.classList.remove('speaking'); }, 700);
+  }
+}
+
+/* ---------- rendering ---------- */
+function showSetup(msg){
+  document.getElementById('setup').style.display = '';
+  document.getElementById('match').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  var ec = document.querySelector('.empty');
+  if (ec) ec.remove();
+  var box = document.createElement('div');
+  box.className = 'empty';
+  box.innerHTML = '<h3>还没有生词</h3><p>' + (msg || '先去精读课件里划词加入生词本（课文划选单词 → 「＋ 添加生词」），再回来配对测试。') + '</p>' +
+    '<a class="btn btn-ocean" href="ReadingHome.html">去读文章 →</a>';
+  document.getElementById('setup').after(box);
+}
+
+function startMatch(){
+  var items = poolItems().filter(function(it){ return String(it.meaning || '').trim() || String(it.meaningEn || '').trim(); });
+  var skipped = poolItems().length - items.length;
+  if (!items.length) { showSetup('当前范围内还没有带释义的生词。'); return; }
+  pairs = buildPairs(items);
+  if (!pairs.length) { showSetup('生词缺少释义，无法配对。'); return; }
+  pairs = shuffle(pairs);
+  selWordId = null; doneIds = {}; attempts = 0; matched = 0; finished = false;
+  document.getElementById('setup').style.display = 'none';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('match').style.display = '';
+  document.getElementById('mFinish').style.display = 'none';
+  if (skipped > 0) {
+    document.getElementById('mHintState').textContent = '本次共 ' + pairs.length + ' 词（' + skipped + ' 词缺少释义已跳过）。';
+  } else {
+    document.getElementById('mHintState').textContent = '';
+  }
+  renderBoard();
+}
+
+function renderBoard(){
+  var wl = document.getElementById('wordList');
+  var ml = document.getElementById('meanList');
+  wl.innerHTML = '';
+  ml.innerHTML = '';
+
+  pairs.forEach(function(p){
+    var done = !!doneIds[p.id];
+
+    var wb = document.createElement('button');
+    wb.type = 'button';
+    wb.className = 'm-card m-word-card';
+    if (done) wb.classList.add('done');
+    if (!done && selWordId === p.id) wb.classList.add('selected');
+    wb.innerHTML = '<span class="m-word">' + esc(p.word) + '</span>' +
+      (p.pos ? '<span class="m-pos">' + esc(p.pos) + '</span>' : '') +
+      '<span class="m-voice" title="朗读单词">🔊</span>' +
+      (done ? '<span class="m-done-line">✓ 已配对</span>' : '');
+    var voiceBtn = wb.querySelector('.m-voice');
+    voiceBtn.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      speakWord(p.word, voiceBtn);
+    });
+    wb.addEventListener('click', function(){ clickWord(p.id); });
+    wl.appendChild(wb);
+  });
+
+  var meanOrder = shuffle(pairs);
+  meanOrder.forEach(function(p){
+    var done = !!doneIds[p.id];
+    var mb = document.createElement('button');
+    mb.type = 'button';
+    mb.className = 'm-card';
+    if (done) mb.classList.add('done');
+    var meanMain = p.meaningEn || p.meaning;
+    var meanSub = p.meaningEn && p.meaning ? p.meaning : '';
+    mb.innerHTML = '<span class="m-mean">' + esc(meanMain) + '</span>' +
+      (meanSub ? '<span class="m-mean-zh">' + esc(meanSub) + '</span>' : '') +
+      (done ? '<span class="m-done-line">✓ ' + esc(p.word) + (p.source ? '<span class="m-src">' + esc(p.source) + '</span>' : '') + '</span>' : '');
+    mb.addEventListener('click', function(){ clickMeaning(p.id, mb); });
+    ml.appendChild(mb);
+  });
+
+  var bar = matched / pairs.length * 100;
+  document.getElementById('mBar').style.width = bar + '%';
+  document.getElementById('mCount').textContent = matched + ' / ' + pairs.length + ' matched';
+}
+
+function clickWord(id){
+  if (finished || doneIds[id]) return;
+  selWordId = (selWordId === id) ? null : id;
+  renderBoard();
+}
+
+function clickMeaning(id, el){
+  if (finished || doneIds[id]) return;
+  if (selWordId === null) return;
+  attempts++;
+  if (selWordId === id) {
+    doneIds[id] = 1;
+    matched++;
+    selWordId = null;
+    renderBoard();
+    if (matched >= pairs.length) finishMatch();
+  } else {
+    // wrong: flash the clicked meaning, keep the word selected (no rebuild, so the animation survives)
+    el.classList.add('flash');
+    setTimeout(function(){
+      el.classList.remove('flash');
+      if (!finished) renderBoard();
+    }, 500);
+  }
+}
+
+function finishMatch(){
+  finished = true;
+  var pct = Math.round(pairs.length / attempts * 100);
+  document.getElementById('mFinish').style.display = '';
+  document.getElementById('finishScore').textContent = matched + ' / ' + pairs.length + ' 配对完成';
+  document.getElementById('finishRate').textContent =
+    '共尝试 ' + attempts + ' 次' + (pct >= 100 ? '，一次全对，太棒了！' : '，正确率 ' + Math.min(100, pct) + '%');
+}
+
+function esc(s){ return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+document.getElementById('startBtn').addEventListener('click', startMatch);
+document.getElementById('resetBtn').addEventListener('click', function(){ selWordId = null; doneIds = {}; attempts = 0; matched = 0; finished = false; document.getElementById('mFinish').style.display = 'none'; renderBoard(); });
+document.getElementById('againBtn').addEventListener('click', startMatch);
+document.getElementById('retryBtn').addEventListener('click', startMatch);
+
+/* ---------- init ---------- */
+if (!pools.length) showSetup();
+else {
+  var n = allItems().length;
+  document.getElementById('poolCount').textContent = '共 ' + n + ' 个生词，来自 ' + pools.length + ' 篇文章';
+}
+</script>
+</body>
+</html>
