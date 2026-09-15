@@ -1,0 +1,294 @@
+{
+  "meta": {
+    "titleEn": "The Importance of Forgetting",
+    "filenameStem": "The_Importance_of_Forgetting",
+    "badges": [
+      "Student Worksheet",
+      "The Importance of Forgetting"
+    ],
+    "intro": "Complete all five parts below, then click Submit to check your objective answers. Sentence and paragraph imitation have no model answers — share your writing with a partner or teacher.",
+    "footer": "Reading & Writing · Student Worksheet · The Importance of Forgetting"
+  },
+  "matching": {
+    "directions": "Match each Power Word or Phrase (left) with its English meaning (right). Click a word, then click its meaning.",
+    "items": [
+      {
+        "word": "contradict",
+        "meaning": "to disagree with something (of facts or statements)"
+      },
+      {
+        "word": "assumption",
+        "meaning": "something accepted as true without proof"
+      },
+      {
+        "word": "mechanism",
+        "meaning": "a system of processes working together (here: a biological process)"
+      },
+      {
+        "word": "plasticity",
+        "meaning": "the ability to change and adapt"
+      },
+      {
+        "word": "overlook",
+        "meaning": "to fail to notice or consider something"
+      },
+      {
+        "word": "look at only half the picture",
+        "meaning": "to understand only part of a situation"
+      },
+      {
+        "word": "bump up against",
+        "meaning": "to come across something unexpected (a problem or a finding)"
+      },
+      {
+        "word": "wash out a few details",
+        "meaning": "to remove some details, keeping only the essentials"
+      }
+    ]
+  },
+  "fillInBlank": {
+    "directions": "Choose the best word from the Word Bank for each sentence. You may use a different form of the word if needed (e.g. preserve → preserved).",
+    "wordBank": [
+      "contradict",
+      "assumption",
+      "essential",
+      "preserve",
+      "integrate",
+      "mechanism",
+      "plasticity",
+      "overlook",
+      "decay",
+      "permanent"
+    ],
+    "items": [
+      {
+        "before": "The researchers' findings seemed to",
+        "after": "the old idea that forgetting was passive.",
+        "answer": "contradict"
+      },
+      {
+        "before": "For decades, scientists worked from the",
+        "after": "that unused memories simply decay over time.",
+        "answer": "assumption"
+      },
+      {
+        "before": "Davis showed that dopamine is",
+        "after": "to forgetting in fruit flies.",
+        "answer": "essential"
+      },
+      {
+        "before": "Blocking the same neurons",
+        "after": "the flies' memory of the association.",
+        "answer": "preserved",
+        "accepted": [
+          "preserve"
+        ]
+      },
+      {
+        "before": "When new neurons",
+        "after": "into an adult mouse's hippocampus, the mice forget more.",
+        "answer": "integrate",
+        "accepted": [
+          "integrates",
+          "integrating"
+        ]
+      }
+    ]
+  },
+  "imitation": {
+    "directions": "Study each sentence pattern and its example from the text. Write a new English sentence for each Chinese scenario, reusing the same structure.",
+    "items": [
+      {
+        "pattern": "Contrast & Concession — but / yet",
+        "example": "But those scientists might have been looking at only half the picture.",
+        "scenarios": [
+          "写一句：但批评者们可能只看到了问题的一面。",
+          "写一句：然而这项研究可能只解释了部分现象。"
+        ]
+      },
+      {
+        "pattern": "Contrast — not… but…",
+        "example": "Forgetting, Hardt says, 'is not a failure of memory, but a function of it'.",
+        "scenarios": [
+          "写一句：失败不是能力的缺陷，而是成长的一部分。",
+          "写一句：拖延不是懒惰的表现，而是情绪调节的问题。"
+        ]
+      },
+      {
+        "pattern": "Relative clause — in which / where",
+        "example": "a passive process in which memories, unused, decay over time",
+        "scenarios": [
+          "用 in which 描述一种你生活中的“被动过程”。",
+          "用 where 描述一个你可以长期储存信息的地方。"
+        ]
+      },
+      {
+        "pattern": "Comparative correlative — the more…, the stronger…",
+        "example": "The more often a memory is recalled, the stronger its neural network becomes.",
+        "scenarios": [
+          "写一句：练习越频繁，技能就越熟练。",
+          "写一句：睡眠越充足，第二天的状态就越好。"
+        ]
+      }
+    ]
+  },
+  "paragraphImitation": {
+    "directions": "Study the model paragraph (¶1–2) and its Paragraph Logic chain from Text Walkthrough. Choose ONE transferable scenario, then write a new English paragraph that follows the same development: Open claim → Turn: half the picture → Old assumption → Radical idea → Stakes.",
+    "sourceTag": "¶1–2",
+    "sourceTitle": "The Puzzle and the Radical Idea",
+    "modelParagraph": "Memory makes us who we are. For more than a century, researchers have worked to understand how memories are formed and then fixed for recall. But those scientists might have been looking at only half the picture. To understand how we remember, we must also understand how, and why, we forget. Until about ten years ago, most researchers thought that forgetting was a passive process in which memories, unused, decay over time like a photograph left in the sunlight. Then a handful of researchers investigating memory began to bump up against findings that seemed to contradict that decades-old assumption, and they began to put forward the radical idea that the brain is built to forget. A growing body of work suggests that the loss of memories is not a passive process. Rather, forgetting seems to be an active mechanism, constantly at work in the brain; in some animals, the brain's standard state is not to remember, but to forget. A better understanding of this state could lead to breakthroughs in treatments for anxiety, post-traumatic stress disorder, and even Alzheimer's disease.",
+    "modelSegments": [
+      {
+        "stepId": "1",
+        "text": "Memory makes us who we are."
+      },
+      {
+        "stepId": "2",
+        "text": "But those scientists might have been looking at only half the picture."
+      },
+      {
+        "stepId": "3",
+        "text": "Until about ten years ago, most researchers thought that forgetting was a passive process in which memories, unused, decay over time like a photograph left in the sunlight."
+      },
+      {
+        "stepId": "4",
+        "text": "Then a handful of researchers investigating memory began to bump up against findings that seemed to contradict that decades-old assumption, and they began to put forward the radical idea that the brain is built to forget."
+      },
+      {
+        "stepId": "5",
+        "text": "A growing body of work suggests that the loss of memories is not a passive process. Rather, forgetting seems to be an active mechanism, constantly at work in the brain; in some animals, the brain's standard state is not to remember, but to forget. A better understanding of this state could lead to breakthroughs in treatments for anxiety, post-traumatic stress disorder, and even Alzheimer's disease."
+      }
+    ],
+    "logicSteps": [
+      {
+        "id": "1",
+        "labelEn": "Open claim",
+        "labelZh": "提出主张"
+      },
+      {
+        "id": "2",
+        "labelEn": "Turn: half the picture",
+        "labelZh": "转折：只看到一半"
+      },
+      {
+        "id": "3",
+        "labelEn": "Old assumption",
+        "labelZh": "旧观点：被动遗忘"
+      },
+      {
+        "id": "4",
+        "labelEn": "Radical idea",
+        "labelZh": "新观点：大脑为遗忘而生"
+      },
+      {
+        "id": "5",
+        "labelEn": "Stakes",
+        "labelZh": "研究意义"
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "study",
+        "titleZh": "挑战一个学习误区",
+        "titleEn": "Challenging a study myth",
+        "prompt": "很多学生以为“学得越久越好”。请按同样的逻辑链写一段英文：先提出常识（学习塑造成绩）→ 转折：也许只看到一半 → 旧观点（熬夜刷题有效）→ 新观点（间隔与休息才是关键）→ 意义（可能改变备考方式）。"
+      },
+      {
+        "id": "tech",
+        "titleZh": "纠正一个技术偏见",
+        "titleEn": "Challenging a tech bias",
+        "prompt": "很多人以为“手机让孩子变笨”。请按同样的逻辑链写一段英文：先提出常识（屏幕影响成长）→ 转折：也许只看到一半 → 旧观点（屏幕时间越少越好）→ 新观点（内容与陪伴才是关键）→ 意义（可能改变家庭规则）。"
+      },
+      {
+        "id": "health",
+        "titleZh": "重新认识一个健康常识",
+        "titleEn": "Rethinking a health belief",
+        "prompt": "很多人以为“多睡觉就是懒”。请按同样的逻辑链写一段英文：先提出印象（睡眠占用时间）→ 转折：也许只看到一半 → 旧观点（睡得少＝勤奋）→ 新观点（睡眠是记忆与恢复的关键）→ 意义（可能改变作息安排）。"
+      }
+    ]
+  },
+  "summary": {
+    "directions": "Use the Word Bank to complete this guided summary (~170 words). Draw on the article's description structure: old assumption → radical idea → cross-species evidence → adaptive purpose.",
+    "wordBank": [
+      "passive",
+      "decay",
+      "active",
+      "dopamine",
+      "preserved",
+      "synapse",
+      "integrate",
+      "adaptive",
+      "generalize",
+      "treatments",
+      "disorders",
+      "essential",
+      "permanent",
+      "eliminate"
+    ],
+    "segments": [
+      "Until recently, most scientists treated forgetting as a ",
+      {
+        "blank": 0
+      },
+      " process in which unused memories ",
+      {
+        "blank": 1
+      },
+      " over time. The article describes a radical shift: the brain is actually built to forget, and forgetting is an ",
+      {
+        "blank": 2
+      },
+      " mechanism. Evidence now spans species. In fruit flies, ",
+      {
+        "blank": 3
+      },
+      " acts as a 'forget' signal, and blocking it ",
+      {
+        "blank": 4
+      },
+      " memories. In rats, actively removing AMPA receptors at the ",
+      {
+        "blank": 5
+      },
+      " is what lets memories fade. And when new neurons ",
+      {
+        "blank": 6
+      },
+      " into an adult mouse's hippocampus, older memories become harder to access.\n\nNone of this makes memory unreliable. Rather, forgetting serves an ",
+      {
+        "blank": 7
+      },
+      " purpose: it prevents the brain from 'overfitting' to specific details, so we can ",
+      {
+        "blank": 8
+      },
+      " and apply what we learn to new situations. The same logic may guide ",
+      {
+        "blank": 9
+      },
+      " for anxiety, PTSD and Alzheimer's disease, which researchers increasingly see as ",
+      {
+        "blank": 10
+      },
+      " of forgetting as much as remembering. Memory, in this view, is not a storehouse but a living system — and forgetting is its ",
+      {
+        "blank": 11
+      },
+      " partner."
+    ],
+    "answers": [
+      "passive",
+      "decay",
+      "active",
+      "dopamine",
+      "preserved",
+      "synapse",
+      "integrate",
+      "adaptive",
+      "generalize",
+      "treatments",
+      "disorders",
+      "essential"
+    ]
+  }
+}

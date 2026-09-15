@@ -1,0 +1,1074 @@
+{
+  "meta": {
+    "titleEn": "The Importance of Forgetting",
+    "titleZh": "读前 · 读中 · 读后：遗忘的重要性",
+    "filenameStem": "The_Importance_of_Forgetting",
+    "lessonType": "reading_and_writing",
+    "badges": [
+      "Reading & Writing",
+      "The Importance of Forgetting"
+    ],
+    "objectives": [
+      "通过略读识别文章从“旧观点 → 激进新说 → 跨物种证据 → 适应意义”的篇章推进",
+      "通过精读理解主动遗忘的神经机制（多巴胺、AMPA 受体、神经发生）",
+      "掌握 contradict、mechanism、plasticity 等学术词汇并从语境推断含义",
+      "围绕“完美记忆是福是祸”进行有依据的思辨表达"
+    ],
+    "timeEstimate": "建议用时：读前 ~6分钟 · 读中 ~22分钟 · 读后 ~16分钟",
+    "footer": "Reading & Writing courseware · Pre / While / Post · Adapted from Nature, “The importance of forgetting”"
+  },
+  "teacherTips": {
+    "leadin": "可先请学生口头分享一次“忘掉反而更好”的经历（30秒/人），用2分钟快速导入“遗忘也有价值”的话题，再进入下一环节。自学模式下学生可直接写下想法。",
+    "debate": "可先让学生个人表态，再按立场分组做小型辩论：2分钟准备后各组陈述理由。可提示他们引用文中的证据（果蝇/大鼠/小鼠实验）支撑观点。",
+    "exit": "可作为下课前的快速检验：请学生用今天学到的一个目标词造句，教师快速抽查2–3位。"
+  },
+  "preReading": {
+    "leadIn": {
+      "prompt": "Think of something you forgot recently — a name, a password, or a lesson. Did forgetting ever turn out to be useful?",
+      "placeholder": "Write a few sentences...",
+      "tipKey": "leadin"
+    },
+    "prediction": {
+      "hint": "Look at the title and the first two paragraphs.",
+      "prompt": "Based on the title \"The Importance of Forgetting\", what do you think the article argues — and how might forgetting actually help us? Jot down a quick guess; you'll check it after reading.",
+      "placeholder": "My prediction..."
+    },
+    "keyWords": [
+      {
+        "word": "hippocampus",
+        "meaning": "a seahorse-shaped part of the brain where new memories begin to take lasting form",
+        "example": "Autobiographical memories begin in the hippocampus.",
+        "meaningZh": "海马体（大脑中形成新记忆的结构）"
+      },
+      {
+        "word": "synapse",
+        "meaning": "the junction between two neurons, across which chemical messages pass",
+        "example": "Neurons communicate with one another through synapses.",
+        "meaningZh": "突触（神经元之间传递信号的连接点）"
+      },
+      {
+        "word": "dopamine",
+        "meaning": "a chemical messenger in the brain involved in mood, movement and memory",
+        "example": "Dopamine is essential to forgetting in fruit flies.",
+        "meaningZh": "多巴胺（与情绪、运动和记忆有关的神经递质）"
+      },
+      {
+        "word": "engram",
+        "meaning": "the physical trace of a memory stored in the brain",
+        "example": "Neuroscientists call this physical trace an engram.",
+        "meaningZh": "记忆印痕（记忆在大脑中的物理痕迹）"
+      },
+      {
+        "word": "receptor",
+        "meaning": "a structure on a cell that receives chemical signals",
+        "example": "AMPA receptors sit at the synapse.",
+        "meaningZh": "受体（细胞上接收化学信号的结构）"
+      },
+      {
+        "word": "neurogenesis",
+        "meaning": "the production of new neurons in the brain",
+        "example": "Neurogenesis in adult mice made them forget more.",
+        "meaningZh": "神经发生（大脑中新神经元的生成）"
+      }
+    ]
+  },
+  "whileReading": {
+    "passageParagraphs": [
+      "<p id=\"para-1\"><span class=\"sent-step\" data-step=\"1\">Memory makes us who we are.</span> It shapes our understanding of the world and helps us to predict what is coming. For more than a century, researchers have worked to understand how memories are formed and then fixed for recall. <span class=\"sent-step\" data-step=\"2\" id=\"sent-contrast-1\"><span class=\"cue dm\" data-cat=\"contrast\">But</span> those scientists might have been looking at only <span id=\"phrase-half-picture\">half the picture</span>.</span> To understand how we remember, we must also understand how, and why, we forget.</p>",
+      "<p id=\"para-2\"><span class=\"sent-step\" data-step=\"3\" id=\"sent-in-which\">Until about ten years ago, most researchers thought that forgetting was a passive process <span class=\"cue\">in which</span> memories, unused, decay over time like a photograph left in the sunlight.</span> <span class=\"sent-step\" data-step=\"4\" id=\"sent-that-findings\">Then a handful of researchers investigating memory began to <span id=\"phrase-bump-against\">bump up against</span> findings <span class=\"cue\">that</span> seemed to <span id=\"pw-contradict\" class=\"vocab\" data-word=\"contradict\">contradict</span> that decades-old <span id=\"pw-assumption\" class=\"vocab\" data-word=\"assumption\">assumption</span>, and they began to put forward the radical idea <span class=\"cue\">that</span> the brain is built to forget.</span> <span class=\"sent-step\" data-step=\"5\" id=\"sent-rather\">A growing body of work suggests <span class=\"cue\">that</span> the loss of memories is not a passive process. <span class=\"cue dm\" data-cat=\"contrast\">Rather</span>, forgetting seems to be an active <span id=\"pw-mechanism\" class=\"vocab\" data-word=\"mechanism\">mechanism</span>, constantly at work in the brain; in some animals, the brain's standard state is not to remember, but to forget. A better understanding of this state could lead to breakthroughs in treatments for anxiety, post-traumatic stress disorder, and even Alzheimer's disease.</span></p>",
+      "<p id=\"para-3\"><span class=\"sent-step\" data-step=\"1\">Different types of memory are created and stored in varying ways. Autobiographical memories — those of events experienced personally — begin to take lasting form in a part of the brain called the hippocampus in the hours and days <span class=\"cue\">that</span> follow the event.</span> <span class=\"sent-step\" data-step=\"2\">Neurons communicate with one another through synapses, and through a process known as synaptic <span id=\"pw-plasticity\" class=\"vocab\" data-word=\"plasticity\">plasticity</span> they constantly produce new proteins to remodel parts of the synapse, selectively strengthening their connections.</span> <span id=\"sent-the-more\">The more often a memory is recalled, the stronger its neural network becomes.</span> <span class=\"sent-step\" data-step=\"3\" id=\"sent-where\"><span class=\"dm\" data-cat=\"sequence\">Over time</span>, the memory becomes encoded in both the hippocampus and the cortex, <span class=\"cue\">where</span> it is eventually put away for long-term storage.</span> <span class=\"sent-step\" data-step=\"4\">Neuroscientists refer to this physical representation of a memory as an engram.</span></p>",
+      "<p id=\"para-4\"><span class=\"sent-step\" data-step=\"1\">Much is still unknown about how memories are created, <span class=\"cue dm\" data-cat=\"contrast\">but</span> how the brain forgets has been largely <span id=\"pw-overlook\" class=\"vocab\" data-word=\"overlook\">overlooked</span>.</span> <span class=\"sent-step\" data-step=\"2\">It was not at the forefront of Ron Davis's mind when he uncovered evidence of active forgetting in fruit flies in 2012.</span> <span class=\"sent-step\" data-step=\"3\">Davis was studying memory formation in the flies' mushroom bodies — dense networks of neurons <span class=\"cue\">that</span> store sensory memories. Intriguingly, he found <span class=\"cue\">that</span> dopamine is <span class=\"vocab\" data-word=\"essential\">essential</span> to forgetting.</span> <span class=\"sent-step\" data-step=\"4\" id=\"sent-yet\">He and his colleagues conditioned flies to associate electric shocks with certain odours, thereby training the insects to avoid them. They then activated the dopaminergic neurons and observed <span class=\"cue\">that</span> the flies quickly forgot the association. <span class=\"cue dm\" data-cat=\"contrast\">Yet</span> blocking the same neurons <span class=\"vocab\" data-word=\"preserve\">preserved</span> the memory. 'The brain is always trying to forget the information it's already learnt,' Davis says.</span></p>",
+      "<p id=\"para-5\"><span class=\"sent-step\" data-step=\"5\"><span class=\"dm\" data-cat=\"sequence\">A few years later</span>, Oliver Hardt found something similar in rats.</span> <span class=\"sent-step\" data-step=\"6\">Memories are encoded when the strength of the connection between neurons increases, and <span class=\"cue\">that</span> connection strength is determined by the amount of a particular type of receptor at the synapse. Known as AMPA receptors, these structures must be maintained for a memory to remain intact. Hardt's lab showed <span class=\"cue\">that</span> a dedicated mechanism continuously promotes the expression of AMPA receptors, yet some memories are still forgotten.</span> <span class=\"sent-step\" data-step=\"7\">When he blocked the mechanism behind AMPA-receptor removal in the hippocampus of rats, the animals were prevented from forgetting the locations of objects.</span> <span class=\"sent-step\" data-step=\"8\" id=\"sent-not-but\">Paul Frankland found further evidence <span class=\"cue\">that</span> the brain is wired to forget: when new neurons <span class=\"vocab\" data-word=\"integrate\">integrate</span> into an adult mouse's hippocampus, the mice forget more. Forgetting, Hardt says, 'is not a failure of memory, but a function of it'.</span></p>",
+      "<p id=\"para-6\"><span class=\"sent-step\" data-step=\"1\">Researchers think <span class=\"cue\">that</span> the human brain might operate in a similar way.</span> <span class=\"sent-step\" data-step=\"2\">Blake Richards suggests <span class=\"cue\">that</span> the brain's ability to forget might prevent an effect known as overfit, <span class=\"cue\">which</span> occurs when a mathematical model is so good at matching the data it has been trained on <span class=\"cue\">that</span> it cannot predict what comes next.</span> <span class=\"sent-step\" data-step=\"3\"><span class=\"dm\" data-cat=\"addition\">In a similar way</span>, if a person remembered every detail of an experience, it might be more difficult to generalize across experiences.</span> <span class=\"sent-step\" data-step=\"4\">'If you <span id=\"phrase-wash-out\">wash out a few details</span> but retain the gist, it helps you to use it in novel situations,' Richards says. 'It's entirely possible <span class=\"cue\">that</span> our brain engages in a bit of controlled forgetting in order to prevent us from overfitting to our experiences.'</span></p>"
+    ],
+    "gist": {
+      "hint": "先限时1–2分钟快速通读全文，不逐词读，抓住大意。",
+      "question": "What is the main idea of this article?",
+      "options": [
+        "Forgetting is a sign of memory failure that scientists hope to prevent.",
+        "Forgetting is an active, adaptive brain function — not the opposite of remembering, but part of it.",
+        "Memories are stored permanently in the hippocampus and never change.",
+        "Animals remember better when they produce more new neurons."
+      ],
+      "correct": 1,
+      "paragraphFunctions": [
+        {
+          "p": "¶1–2",
+          "label": "The Puzzle and the Radical Idea 谜题与激进观点"
+        },
+        {
+          "p": "¶3",
+          "label": "How Memories Are Made 记忆如何形成"
+        },
+        {
+          "p": "¶4–5",
+          "label": "Evidence Across Species 跨物种的证据"
+        },
+        {
+          "p": "¶6",
+          "label": "What Forgetting Is For 遗忘的作用"
+        }
+      ],
+      "doneMessage": "✓ 结构梳理完成——这是一篇“旧观点→激进新说→跨物种证据→适应意义”的科学报道。"
+    },
+    "structure": {
+      "cardTitle": "Text Structure",
+      "cardSubtitle": "说明结构 · Description",
+      "layout": "hub",
+      "question": "How is this article organised overall? (Hint: it is not a single chronological story.)",
+      "centerLines": [
+        "The new science",
+        "of forgetting"
+      ],
+      "centerSub": "Description structure",
+      "nodes": [
+        {
+          "label": "Puzzle ¶1",
+          "sub": "Memory defines us — why forget?",
+          "tone": "mint"
+        },
+        {
+          "label": "Radical idea ¶2",
+          "sub": "Passive decay → active mechanism",
+          "tone": "gold"
+        },
+        {
+          "label": "Biology ¶3",
+          "sub": "Hippocampus · synapse · engram",
+          "tone": "mint"
+        },
+        {
+          "label": "Flies ¶4",
+          "sub": "Dopamine = 'forget' signal",
+          "tone": "coral"
+        },
+        {
+          "label": "Rodents ¶5",
+          "sub": "AMPA removal + neurogenesis",
+          "tone": "gold"
+        },
+        {
+          "label": "Humans ¶6",
+          "sub": "Controlled forgetting → avoid overfit",
+          "tone": "plum"
+        }
+      ],
+      "summaryHtml": "全文整体是<strong>Description（分说式）结构</strong>——围绕“遗忘的新科学”从“旧观点 → 激进新说 → 生物学基础 → 跨物种证据 → 人类意义”逐层展开；其中第4–5段内部构成一个<strong>Evidence chain（证据链）</strong>子结构，从果蝇到大鼠、小鼠层层推进。"
+    },
+    "textWalkthrough": [
+      {
+        "title": "The Puzzle and the Radical Idea",
+        "subtitle": "谜题与激进观点",
+        "tag": "¶1–2",
+        "targets": [
+          "para-1",
+          "para-2"
+        ],
+        "paragraphLogic": {
+          "steps": [
+            {
+              "id": "1",
+              "labelEn": "Open claim",
+              "labelZh": "提出主张"
+            },
+            {
+              "id": "2",
+              "labelEn": "Turn: half the picture",
+              "labelZh": "转折：只看到一半"
+            },
+            {
+              "id": "3",
+              "labelEn": "Old assumption",
+              "labelZh": "旧观点：被动遗忘"
+            },
+            {
+              "id": "4",
+              "labelEn": "Radical idea",
+              "labelZh": "新观点：大脑为遗忘而生"
+            },
+            {
+              "id": "5",
+              "labelEn": "Stakes",
+              "labelZh": "研究意义"
+            }
+          ],
+          "devices": [
+            {
+              "cat": "contrast",
+              "labelEn": "Contrast",
+              "labelZh": "转折/让步"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "type": "Fact",
+            "question": "What did most researchers believe about forgetting until about ten years ago?",
+            "questionZh": "直到约十年前，多数研究者认为遗忘是怎样的？",
+            "answerEn": "They believed it was a passive process in which unused memories decay over time, like a photograph left in the sunlight.",
+            "answerZh": "他们认为遗忘是被动过程：未被使用的记忆随时间衰退，如同照片在阳光下褪色。"
+          },
+          {
+            "type": "Structure",
+            "question": "How does the opening turn from \"how we remember\" to \"why we forget\" — and what device signals the turn?",
+            "questionZh": "开头如何从“我们如何记忆”转向“我们为何遗忘”？用什么衔接手段标志这一转折？",
+            "answerEn": "It opens with the familiar question of how memories form, then turns with \"But\" to argue that scientists were looking at only half the picture: remembering cannot be understood without forgetting.",
+            "answerZh": "先提出熟悉的“记忆如何形成”问题，再用 But 转折指出科学家只看到一半图景：不理解遗忘就无法理解记忆。"
+          },
+          {
+            "type": "Infer",
+            "question": "Why might studying forgetting lead to treatments for anxiety or PTSD?",
+            "questionZh": "为什么研究遗忘可能推动焦虑、PTSD 等疾病的治疗？",
+            "answerEn": "If forgetting is an active, regulated mechanism, then disorders involving intrusive or persistent memories may be cases of faulty forgetting — so understanding the mechanism could point to new treatments.",
+            "answerZh": "如果遗忘是主动、可调节的机制，那么与侵入性记忆相关的疾病（焦虑、PTSD）可能是遗忘失灵——理解机制就指向治疗思路。"
+          }
+        ]
+      },
+      {
+        "title": "How Memories Are Made",
+        "subtitle": "记忆如何形成",
+        "tag": "¶3",
+        "targets": [
+          "para-3"
+        ],
+        "paragraphLogic": {
+          "steps": [
+            {
+              "id": "1",
+              "labelEn": "Location",
+              "labelZh": "定位：海马体"
+            },
+            {
+              "id": "2",
+              "labelEn": "Mechanism",
+              "labelZh": "机制：突触可塑性"
+            },
+            {
+              "id": "3",
+              "labelEn": "Consolidation",
+              "labelZh": "巩固：长期储存"
+            },
+            {
+              "id": "4",
+              "labelEn": "Trace",
+              "labelZh": "命名：印痕"
+            }
+          ],
+          "devices": [
+            {
+              "cat": "sequence",
+              "labelEn": "Sequence",
+              "labelZh": "顺序/推进"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "type": "Fact",
+            "question": "Where do autobiographical memories first take lasting form, and what happens to them over time?",
+            "questionZh": "自传体记忆最初在哪里形成持久痕迹？随时间推移它们会怎样？",
+            "answerEn": "They begin in the hippocampus; through repeated recall they become encoded in both the hippocampus and the cortex, and are eventually stored long-term in the cortex.",
+            "answerZh": "它们先在海马体形成；反复提取后同时编码于海马体与皮层，最终长期储存在皮层。"
+          },
+          {
+            "type": "Vocabulary",
+            "question": "What does \"plasticity\" mean in \"synaptic plasticity\"?",
+            "questionZh": "“突触可塑性”中的 plasticity 是什么意思？",
+            "answerEn": "Plasticity means the ability to change and adapt; synaptic plasticity is the constant remodelling of synapses that lets neurons strengthen or weaken their connections.",
+            "answerZh": "plasticity 意为“可塑性”：突触可塑性指突触不断重塑，使神经元连接增强或减弱的能力。"
+          },
+          {
+            "type": "Structure",
+            "question": "What pattern is used in \"The more often a memory is recalled, the stronger its neural network becomes\"?",
+            "questionZh": "“记忆被提取得越频繁，其神经回路就越强”使用了什么句式？",
+            "answerEn": "A comparative correlative: \"the more…, the stronger…\" expresses a proportional relationship — recall frequency directly scales with network strength.",
+            "answerZh": "比较关联句式 the more…, the stronger…：表达正比关系——提取越频繁，神经回路越强。"
+          }
+        ]
+      },
+      {
+        "title": "Evidence Across Species",
+        "subtitle": "跨物种的证据",
+        "tag": "¶4–5",
+        "targets": [
+          "para-4",
+          "para-5"
+        ],
+        "paragraphLogic": {
+          "steps": [
+            {
+              "id": "1",
+              "labelEn": "Overlooked problem",
+              "labelZh": "被忽视的问题"
+            },
+            {
+              "id": "2",
+              "labelEn": "Case: flies",
+              "labelZh": "果蝇实验"
+            },
+            {
+              "id": "3",
+              "labelEn": "Twist: dopamine",
+              "labelZh": "转折：多巴胺"
+            },
+            {
+              "id": "4",
+              "labelEn": "Proof: block & preserve",
+              "labelZh": "验证：阻断与保留"
+            },
+            {
+              "id": "5",
+              "labelEn": "From flies to rodents",
+              "labelZh": "从果蝇到大鼠"
+            },
+            {
+              "id": "6",
+              "labelEn": "Mechanism: AMPA receptors",
+              "labelZh": "机制：AMPA 受体"
+            },
+            {
+              "id": "7",
+              "labelEn": "Proof: blocking removal",
+              "labelZh": "验证：阻断清除"
+            },
+            {
+              "id": "8",
+              "labelEn": "Function",
+              "labelZh": "结论：遗忘是功能"
+            }
+          ],
+          "devices": [
+            {
+              "cat": "contrast",
+              "labelEn": "Contrast",
+              "labelZh": "转折"
+            },
+            {
+              "cat": "sequence",
+              "labelEn": "Sequence",
+              "labelZh": "顺序/推进"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "type": "Fact",
+            "question": "What did Davis find about dopamine in fruit flies, and how did he test it?",
+            "questionZh": "Davis 在果蝇身上发现了多巴胺的什么作用？他是如何验证的？",
+            "answerEn": "Dopamine is essential to forgetting: activating the dopaminergic neurons made flies quickly forget a shock–odour association, while blocking the same neurons preserved the memory.",
+            "answerZh": "多巴胺是遗忘所必需的：激活多巴胺神经元使果蝇迅速忘记“电击—气味”关联；阻断这些神经元则保留记忆。"
+          },
+          {
+            "type": "Structure",
+            "question": "How does the evidence move across paragraphs — and what signals the shift?",
+            "questionZh": "证据如何在段落间推进？什么标志了这种转换？",
+            "answerEn": "It moves from fruit flies (Davis) to rats (Hardt) and mice (Frankland) — a cross-species progression signalled by \"A few years later\" and parallel block-and-observe experiments.",
+            "answerZh": "证据从果蝇（Davis）到大鼠（Hardt）、小鼠（Frankland）逐层推进——由 A few years later 和平行的“阻断—观察”实验标志。"
+          },
+          {
+            "type": "Infer",
+            "question": "Why does Hardt call forgetting \"not a failure of memory, but a function of it\"?",
+            "questionZh": "Hardt 为何称遗忘“不是记忆的失败，而是记忆的功能”？",
+            "answerEn": "Because a dedicated mechanism actively removes AMPA receptors to erase connections; when that removal was blocked, rats stopped forgetting — so forgetting is built-in, regulated work, not decay.",
+            "answerZh": "因为存在专门移除 AMPA 受体、清除连接的主动机制；阻断该机制后大鼠不再遗忘——所以遗忘是内置且受调控的功能，而非衰退。"
+          }
+        ]
+      },
+      {
+        "title": "What Forgetting Is For",
+        "subtitle": "遗忘的作用",
+        "tag": "¶6",
+        "targets": [
+          "para-6"
+        ],
+        "paragraphLogic": {
+          "steps": [
+            {
+              "id": "1",
+              "labelEn": "Claim",
+              "labelZh": "提出观点"
+            },
+            {
+              "id": "2",
+              "labelEn": "Analogy: overfit",
+              "labelZh": "类比：过度拟合"
+            },
+            {
+              "id": "3",
+              "labelEn": "Illustration",
+              "labelZh": "举例说明"
+            },
+            {
+              "id": "4",
+              "labelEn": "Conclusion",
+              "labelZh": "结论"
+            }
+          ],
+          "devices": [
+            {
+              "cat": "addition",
+              "labelEn": "Addition",
+              "labelZh": "补充/类比"
+            }
+          ]
+        },
+        "questions": [
+          {
+            "type": "Vocabulary",
+            "question": "What does \"overfit\" mean, and why does Richards borrow it from artificial intelligence?",
+            "questionZh": "overfit 是什么意思？Richards 为什么从人工智能领域借用这个词？",
+            "answerEn": "Overfitting means a model matches its training data so precisely that it cannot predict new data; Richards uses it as an analogy for a memory that keeps every detail and therefore cannot generalise.",
+            "answerZh": "过度拟合指模型对训练数据拟合得过于精确，以致无法预测新数据；Richards 借它类比“记住一切细节、无法泛化”的记忆。"
+          },
+          {
+            "type": "Infer",
+            "question": "According to Richards, how does forgetting help us use past experience in new situations?",
+            "questionZh": "按 Richards 的观点，遗忘如何帮助我们把过往经验用于新情境？",
+            "answerEn": "By washing out a few details while retaining the gist, we avoid being trapped by specific instances and can apply the essence of an experience elsewhere.",
+            "answerZh": "忘掉部分细节、保留要旨，我们才不会被具体实例困住，能把经验的要点迁移到新情境。"
+          },
+          {
+            "type": "Reflect",
+            "question": "Do you think a perfect memory would be a blessing or a burden? Give reasons.",
+            "questionZh": "你认为完美的记忆是福还是祸？请说明理由。",
+            "answerEn": "Open response — strong answers weigh the trade-off: rich recall can help, but remembering every detail may make it harder to extract the gist and can feed obsessive thinking.",
+            "answerZh": "开放性回答——有力回答会权衡得失：丰富的回忆有帮助，但记住一切细节可能让人难以提取要旨，并助长强迫倾向。"
+          }
+        ]
+      }
+    ],
+    "deepDive": {
+      "title": "Four Threads Through the New Science of Forgetting",
+      "subtitle": "遗忘新科学的四条线索",
+      "question": "What four ideas weave through the article's account of the new science of forgetting?",
+      "bulletsEn": [
+        [
+          "Paradigm shift",
+          "Forgetting was long treated as passive decay; researchers now argue the brain is actively built to forget."
+        ],
+        [
+          "Cross-species evidence",
+          "Dopamine in flies, AMPA-receptor removal in rats and neurogenesis in mice all point to active forgetting."
+        ],
+        [
+          "The biology",
+          "Memories exist as changing synaptic connections; forgetting works by dismantling or rewriting them."
+        ],
+        [
+          "Adaptive purpose",
+          "Controlled forgetting prevents 'overfitting', supports generalisation, and may guide treatments for anxiety, PTSD and Alzheimer's."
+        ]
+      ],
+      "summaryEn": "The article describes a paradigm shift: forgetting is not memory failure but an adaptive brain function, backed by evidence across species and promising for treatment.",
+      "bulletsZh": [
+        [
+          "范式转变",
+          "遗忘长期被视为被动衰退；研究者如今认为大脑天生就是要遗忘的。"
+        ],
+        [
+          "跨物种证据",
+          "果蝇的多巴胺、大鼠的 AMPA 受体移除、小鼠的神经发生，都指向主动遗忘。"
+        ],
+        [
+          "生物学基础",
+          "记忆以不断变化的突触连接存在；遗忘通过拆除或改写连接实现。"
+        ],
+        [
+          "适应功能",
+          "受控遗忘防止“过度拟合”、支持泛化，并可能为焦虑、PTSD 与阿尔茨海默病提供治疗思路。"
+        ]
+      ],
+      "summaryZh": "文章描述了一场范式转变：遗忘不是记忆的失败，而是大脑的适应功能，有跨物种证据支持，并蕴含治疗前景。"
+    },
+    "powerWords": [
+      {
+        "target": "pw-contradict",
+        "word": "contradict",
+        "pos": "v.",
+        "meaningEn": "(of facts or statements) to disagree with something else",
+        "trait": "academic register",
+        "meaningZh": "与……矛盾；反驳"
+      },
+      {
+        "target": "pw-assumption",
+        "word": "assumption",
+        "pos": "n.",
+        "meaningEn": "something accepted as true without proof",
+        "trait": "academic register",
+        "meaningZh": "假设；假定"
+      },
+      {
+        "target": "pw-mechanism",
+        "word": "mechanism",
+        "pos": "n.",
+        "meaningEn": "a system of parts or processes working together (here: a biological process)",
+        "trait": "academic register",
+        "meaningZh": "机制；机理"
+      },
+      {
+        "target": "pw-plasticity",
+        "word": "plasticity",
+        "pos": "n.",
+        "meaningEn": "the ability to change and adapt (neural plasticity)",
+        "trait": "technical register",
+        "meaningZh": "可塑性（神经可塑性）"
+      },
+      {
+        "target": "pw-overlook",
+        "word": "overlook",
+        "pos": "v.",
+        "meaningEn": "to fail to notice or consider something",
+        "trait": "熟词僻义",
+        "meaningZh": "忽视；漏看（不是“俯瞰”）"
+      }
+    ],
+    "phrases": [
+      {
+        "target": "phrase-half-picture",
+        "word": "look at only half the picture",
+        "pos": "phr.",
+        "meaningEn": "to understand only part of a situation",
+        "trait": "idiomatic",
+        "meaningZh": "只看到事情的一面（片面理解）"
+      },
+      {
+        "target": "phrase-bump-against",
+        "word": "bump up against",
+        "pos": "phr.",
+        "meaningEn": "to come across something unexpected (a problem or a finding)",
+        "trait": "idiomatic",
+        "meaningZh": "偶然遇到（难题或发现）"
+      },
+      {
+        "target": "phrase-wash-out",
+        "word": "wash out a few details",
+        "pos": "phr.",
+        "meaningEn": "to forget or remove some details, keeping only the essentials",
+        "trait": "idiomatic",
+        "meaningZh": "滤掉一些细节（只留要点）"
+      }
+    ],
+    "structures": [
+      {
+        "title": "Contrast & Concession",
+        "subtitle": "转折与让步",
+        "tag": "but / rather / yet",
+        "items": [
+          {
+            "target": "sent-contrast-1",
+            "text": "But those scientists might have been looking at only half the picture."
+          },
+          {
+            "target": "sent-rather",
+            "text": "Rather, forgetting seems to be an active mechanism, constantly at work in the brain."
+          },
+          {
+            "target": "sent-yet",
+            "text": "Yet blocking the same neurons preserved the memory."
+          },
+          {
+            "target": "sent-not-but",
+            "text": "Forgetting, Hardt says, 'is not a failure of memory, but a function of it'."
+          }
+        ]
+      },
+      {
+        "title": "Relative Clauses",
+        "subtitle": "定语从句（补充说明）",
+        "tag": "that / in which / where",
+        "items": [
+          {
+            "target": "sent-in-which",
+            "text": "a passive process in which memories, unused, decay over time like a photograph left in the sunlight"
+          },
+          {
+            "target": "sent-that-findings",
+            "text": "findings that seemed to contradict that decades-old assumption"
+          },
+          {
+            "target": "sent-where",
+            "text": "the cortex, where it is eventually put away for long-term storage"
+          }
+        ]
+      },
+      {
+        "title": "Comparative Correlative",
+        "subtitle": "比较关联句式",
+        "tag": "the more…, the stronger…",
+        "items": [
+          {
+            "target": "sent-the-more",
+            "text": "The more often a memory is recalled, the stronger its neural network becomes."
+          }
+        ]
+      }
+    ],
+    "trueFalse": [
+      {
+        "n": 1,
+        "text": "Until recently, most scientists believed that forgetting was an active process.",
+        "answer": false,
+        "reason": "The article says most researchers thought forgetting was a passive process in which unused memories decay over time."
+      },
+      {
+        "n": 2,
+        "text": "In Davis's experiments, blocking dopaminergic neurons preserved the flies' memory of the shock–odour association.",
+        "answer": true,
+        "reason": "Activating the neurons made the flies forget quickly, while blocking the same neurons preserved the memory."
+      },
+      {
+        "n": 3,
+        "text": "Hardt found that actively removing AMPA receptors at synapses strengthens long-term memory.",
+        "answer": false,
+        "reason": "It is the maintenance of AMPA receptors that keeps a memory intact; their active removal is what allows forgetting."
+      },
+      {
+        "n": 4,
+        "text": "Increasing neurogenesis in adult mice made them forget more.",
+        "answer": true,
+        "reason": "Frankland's 2014 study found the opposite of better memory: more new neurons meant the mice forgot more."
+      },
+      {
+        "n": 5,
+        "text": "Richards believes that remembering every detail helps people generalise across experiences.",
+        "answer": false,
+        "reason": "He argues that controlled forgetting — washing out details while keeping the gist — prevents overfitting and supports generalisation."
+      }
+    ],
+    "vocabMatch": [
+      {
+        "word": "contradict",
+        "meaning": "to say the opposite of something; (of facts) to disagree with something"
+      },
+      {
+        "word": "assumption",
+        "meaning": "something accepted as true without proof"
+      },
+      {
+        "word": "mechanism",
+        "meaning": "a system of parts or processes that work together"
+      },
+      {
+        "word": "plasticity",
+        "meaning": "the ability to change and adapt"
+      },
+      {
+        "word": "overlook",
+        "meaning": "to fail to notice or consider something"
+      },
+      {
+        "word": "preserve",
+        "meaning": "to keep something unchanged or intact"
+      },
+      {
+        "word": "essential",
+        "meaning": "absolutely necessary; central"
+      },
+      {
+        "word": "integrate",
+        "meaning": "to combine into an existing whole"
+      }
+    ],
+    "vocabMatchHint": "There are eight highlighted words in the text. Match each word with its meaning.",
+    "vocabDoneMessage": "🎉 全部配对成功！你已从语境推断出生词含义。",
+    "longSentences": [
+      {
+        "id": "long-1",
+        "type": "复合句 · 时间状语 + 宾语从句 + 定语从句",
+        "sentence": "Until about ten years ago, most researchers thought that forgetting was a passive process in which memories, unused, decay over time like a photograph left in the sunlight.",
+        "translation": "直到大约十年前，多数研究者认为遗忘是一个被动过程：未被使用的记忆会随时间流逝而衰退，就像遗留在阳光下的照片。",
+        "clauses": [
+          {
+            "label": "时间状语从句",
+            "part": "Until about ten years ago"
+          },
+          {
+            "label": "主句",
+            "part": "most researchers thought"
+          },
+          {
+            "label": "宾语从句",
+            "part": "that forgetting was a passive process"
+          },
+          {
+            "label": "定语从句",
+            "part": "in which memories, unused, decay over time like a photograph left in the sunlight"
+          }
+        ],
+        "segZh": {
+          "Until about ten years ago": "大约十年前",
+          "most researchers thought": "大多数研究人员认为",
+          "that forgetting was a passive process in which": "遗忘是一个被动的过程，在这个过程中",
+          "memories": "记忆",
+          "unused": "未被使用的",
+          "decay": "随时间衰退",
+          "over time like a photograph": "就像一张照片",
+          "left": "遗留在",
+          "in the sunlight": "阳光之下"
+        }
+      },
+      {
+        "id": "long-5",
+        "type": "复合句 · 定语从句 + 同位语从句",
+        "sentence": "Then a handful of researchers investigating memory began to bump up against findings that seemed to contradict that decades-old assumption, and they began to put forward the radical idea that the brain is built to forget.",
+        "translation": "随后，少数研究记忆的科学家开始碰到一些似乎与那个几十年之久的假设相矛盾的研究发现，并开始提出一个激进的观点：大脑天生就是要遗忘的。",
+        "clauses": [
+          {
+            "label": "句首时间状语",
+            "part": "Then"
+          },
+          {
+            "label": "主句（含分词定语）",
+            "part": "a handful of researchers investigating memory began to bump up against findings"
+          },
+          {
+            "label": "定语从句",
+            "part": "that seemed to contradict that decades-old assumption"
+          },
+          {
+            "label": "并列分句",
+            "part": "and they began to put forward the radical idea"
+          },
+          {
+            "label": "同位语从句",
+            "part": "that the brain is built to forget"
+          }
+        ],
+        "segZh": {
+          "Then a handful": "随后一小部分",
+          "of researchers investigating memory": "研究记忆的研究者",
+          "began": "开始",
+          "to bump up against findings": "撞上了一些研究发现",
+          "that seemed": "这些发现似乎",
+          "to contradict that decades-old assumption": "与那个几十年的旧假设相矛盾",
+          "and they began": "并且他们开始",
+          "to put forward the radical idea": "提出这个激进的观点",
+          "that the brain is built": "大脑天生就被构建成",
+          "to forget": "去遗忘"
+        }
+      },
+      {
+        "id": "long-2",
+        "type": "并列复合句 · 分词状语",
+        "sentence": "Neurons communicate with one another through synapses, and through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse, selectively strengthening their connections.",
+        "translation": "神经元通过突触相互通信；通过一个被称为“突触可塑性”的过程，它们不断产生新的蛋白质来重塑突触的某些部分，从而有选择地强化连接。",
+        "clauses": [
+          {
+            "label": "并列分句 1",
+            "part": "Neurons communicate with one another through synapses"
+          },
+          {
+            "label": "并列分句 2",
+            "part": "and through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse"
+          },
+          {
+            "label": "现在分词作伴随状语",
+            "part": "selectively strengthening their connections"
+          }
+        ],
+        "segZh": {
+          "Neurons communicate": "神经元相互通信",
+          "with one another through synapses": "通过突触",
+          "and": "并且",
+          "through a process known as synaptic plasticity": "通过被称为“突触可塑性”的过程",
+          "they constantly produce new proteins": "它们不断产生新的蛋白质",
+          "to remodel parts of the synapse": "来重塑突触的某些部分",
+          "selectively": "有选择地",
+          "strengthening their connections": "强化它们的连接"
+        }
+      },
+      {
+        "id": "long-3",
+        "type": "复合句 · 时间状语从句 + 被动语态",
+        "sentence": "Memories are encoded when the strength of the connection between neurons increases, and that connection strength is determined by the amount of a particular type of receptor at the synapse.",
+        "translation": "当神经元之间连接的强度增强时，记忆便被编码；而连接的强度又取决于突触上某种特定类型受体的数量。",
+        "clauses": [
+          {
+            "label": "主句（被动）",
+            "part": "Memories are encoded"
+          },
+          {
+            "label": "时间状语从句",
+            "part": "when the strength of the connection between neurons increases"
+          },
+          {
+            "label": "并列分句（被动）",
+            "part": "and that connection strength is determined by the amount of a particular type of receptor at the synapse"
+          }
+        ],
+        "segZh": {
+          "Memories are encoded": "记忆被编码",
+          "when the strength of the connection between neurons increases": "当神经元之间连接的强度增强时",
+          "and": "而",
+          "that connection strength is determined by the amount of a particular type of receptor at the synapse": "连接强度由突触上特定类型受体的数量决定"
+        }
+      },
+      {
+        "id": "long-4",
+        "type": "复合句 · 宾语从句 + 非限制性定语从句 + so…that 结果状语",
+        "sentence": "Blake Richards suggests that the brain's ability to forget might prevent an effect known as overfit, which occurs when a mathematical model is so good at matching the data it has been trained on that it cannot predict what comes next.",
+        "translation": "布莱克·理查兹提出，大脑的遗忘能力或许可以防止一种名为“过拟合”的效应——当一个数学模型太擅长匹配其训练过的数据，以至于无法预测接下来会发生什么时，这种效应就会出现。",
+        "clauses": [
+          {
+            "label": "主句",
+            "part": "Blake Richards suggests"
+          },
+          {
+            "label": "宾语从句",
+            "part": "that the brain's ability to forget might prevent an effect known as overfit"
+          },
+          {
+            "label": "非限制性定语从句",
+            "part": "which occurs when a mathematical model is so good at matching the data it has been trained on"
+          },
+          {
+            "label": "结果状语从句",
+            "part": "that it cannot predict what comes next"
+          }
+        ],
+        "segZh": {
+          "Blake Richards suggests that the brain’s ability": "布莱克·理查兹提出，大脑的",
+          "to forget might prevent an effect known as overfit": "遗忘能力或许可以防止一种名为“过拟合”的效应",
+          "which occurs": "这种效应出现在",
+          "when a mathematical model is so good at matching the data it has been trained on that it cannot predict": "当一个数学模型太擅长匹配其训练过的数据，以至于无法预测",
+          "what comes next": "接下来会发生什么"
+        }
+      }
+    ],
+    "vocabBook": [
+      {
+        "word": "hippocampus",
+        "pos": "n.",
+        "meaning": "海马体（参与记忆形成与巩固的脑区）",
+        "source": "begin to take lasting form in a part of the brain called the hippocampus in the hours and days that follow the event"
+      },
+      {
+        "word": "synapse",
+        "pos": "n.",
+        "meaning": "突触（神经元之间的连接点）",
+        "source": "Neurons communicate with one another through synapses"
+      },
+      {
+        "word": "plasticity",
+        "pos": "n.",
+        "meaning": "可塑性（神经连接可被重塑的特性）",
+        "source": "through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse"
+      },
+      {
+        "word": "engram",
+        "pos": "n.",
+        "meaning": "记忆印痕（记忆在大脑中的物理表征）",
+        "source": "Neuroscientists refer to this physical representation of a memory as an engram"
+      },
+      {
+        "word": "dopamine",
+        "pos": "n.",
+        "meaning": "多巴胺（一种神经递质，与遗忘密切相关）",
+        "source": "he found that dopamine is essential to forgetting"
+      },
+      {
+        "word": "receptor",
+        "pos": "n.",
+        "meaning": "受体（接受信号并触发反应的蛋白质结构）",
+        "source": "connection strength is determined by the amount of a particular type of receptor at the synapse"
+      },
+      {
+        "word": "overfit",
+        "pos": "v./n.",
+        "meaning": "过拟合（对训练数据过度匹配而失去泛化能力）",
+        "source": "the brain's ability to forget might prevent an effect known as overfit"
+      },
+      {
+        "word": "generalize",
+        "pos": "v.",
+        "meaning": "泛化；推广（将经验应用到新情境）",
+        "source": "if a person remembered every detail of an experience, it might be more difficult to generalize across experiences"
+      },
+      {
+        "word": "gist",
+        "pos": "n.",
+        "meaning": "要点；主旨大意",
+        "source": "if you wash out a few details but retain the gist, it helps you to use it in novel situations"
+      },
+      {
+        "word": "wired",
+        "pos": "adj.",
+        "meaning": "天生的（be wired to 天生倾向于…）",
+        "source": "Paul Frankland found further evidence that the brain is wired to forget"
+      },
+      {
+        "word": "conditioned",
+        "pos": "v.",
+        "meaning": "使形成条件反射（condition 的过去式，熟词僻义）",
+        "source": "He and his colleagues conditioned flies to associate electric shocks with certain odours"
+      }
+    ],
+    "wordGlossary": [
+      {
+        "word": "passive",
+        "pos": "adj.",
+        "meaning": "被动的；消极的",
+        "meaningEn": "not active; acted upon rather than acting (syn. inactive, inert)"
+      },
+      {
+        "word": "decay",
+        "pos": "v./n.",
+        "meaning": "衰退；腐烂",
+        "meaningEn": "to gradually decline, rot or lose strength (syn. deteriorate, decompose)"
+      },
+      {
+        "word": "contradict",
+        "pos": "v.",
+        "meaning": "与……相矛盾",
+        "meaningEn": "to assert the opposite; to conflict with (syn. dispute, oppose)"
+      },
+      {
+        "word": "assumption",
+        "pos": "n.",
+        "meaning": "假设；设想",
+        "meaningEn": "something accepted as true without proof (syn. supposition, presumption)"
+      },
+      {
+        "word": "radical",
+        "pos": "adj.",
+        "meaning": "激进的；根本的",
+        "meaningEn": "fundamental or far-reaching; drastic (syn. sweeping, thoroughgoing)"
+      },
+      {
+        "word": "mechanism",
+        "pos": "n.",
+        "meaning": "机制；机理",
+        "meaningEn": "a process or system by which something works (syn. machinery, apparatus)"
+      },
+      {
+        "word": "plasticity",
+        "pos": "n.",
+        "meaning": "可塑性",
+        "meaningEn": "the ability to change, mould and adapt (syn. adaptability, flexibility)"
+      },
+      {
+        "word": "Autobiographical",
+        "pos": "adj.",
+        "meaning": "自传体的；自传式的",
+        "meaningEn": "relating to a person’s own life story (syn. self-referential)"
+      },
+      {
+        "word": "overfit",
+        "pos": "v./n.",
+        "meaning": "过拟合（模型过度匹配训练数据）",
+        "meaningEn": "to match training data too closely and lose general applicability"
+      },
+      {
+        "word": "remodel",
+        "pos": "v.",
+        "meaning": "重塑；改造",
+        "meaningEn": "to change the structure or form of something (syn. reshape, rebuild)"
+      },
+      {
+        "word": "encode",
+        "pos": "v.",
+        "meaning": "编码；将……转化为记忆",
+        "meaningEn": "to convert information into a stored form, e.g. a memory (syn. record, code)"
+      },
+      {
+        "word": "essential",
+        "pos": "adj.",
+        "meaning": "必不可少的；本质的",
+        "meaningEn": "absolutely necessary; central (syn. crucial, vital)"
+      },
+      {
+        "word": "neural",
+        "pos": "adj.",
+        "meaning": "神经的",
+        "meaningEn": "relating to a nerve or the nervous system (syn. neuronal)"
+      },
+      {
+        "word": "sensory",
+        "pos": "adj.",
+        "meaning": "感觉的；感官的",
+        "meaningEn": "relating to the senses or sensation (syn. perceptual)"
+      },
+      {
+        "word": "retrieve",
+        "pos": "v.",
+        "meaning": "提取；检索（记忆）",
+        "meaningEn": "to get something back; to recall a memory (syn. recover, recall)"
+      },
+      {
+        "word": "adaptive",
+        "pos": "adj.",
+        "meaning": "适应性的；有适应能力的",
+        "meaningEn": "able to adjust to new conditions (syn. flexible, adjustable)"
+      },
+      {
+        "word": "impair",
+        "pos": "v.",
+        "meaning": "损害；削弱",
+        "meaningEn": "to weaken or damage (syn. undermine, harm)"
+      },
+      {
+        "word": "boost",
+        "pos": "v.",
+        "meaning": "促进；增强",
+        "meaningEn": "to increase, raise or strengthen (syn. enhance, strengthen)"
+      },
+      {
+        "word": "permanent",
+        "pos": "adj.",
+        "meaning": "永久的；长久的",
+        "meaningEn": "lasting or intended to last forever (syn. enduring, lasting)"
+      },
+      {
+        "word": "mushroom bodies",
+        "pos": "n.",
+        "meaning": "蕈形体（昆虫脑内与学习记忆相关的结构）",
+        "meaningEn": "paired structures in insect brains involved in learning and memory"
+      }
+    ]
+  },
+  "postReading": {
+    "predictionCheck": {
+      "prompt": "Look back at your prediction from the pre-reading stage. Was it correct? What surprised you most about the new science of forgetting?",
+      "placeholder": "My reflection..."
+    },
+    "speaking": {
+      "hint": "Discuss with a partner in class, or jot down your own thoughts if you're working alone.",
+      "prompts": [
+        {
+          "prompt": "Do you agree that forgetting is a \"function\" rather than a \"failure\" of memory? Give an example from your own study or daily life.",
+          "placeholder": "Notes for discussion..."
+        },
+        {
+          "prompt": "Which piece of evidence in the article (flies, rats, or mice) do you find most convincing, and why?",
+          "placeholder": "Notes for discussion..."
+        }
+      ]
+    },
+    "textToSelf": {
+      "prompt": "Think of a time you \"overfit\" — memorised details without understanding the gist. How might controlled forgetting have helped you?",
+      "placeholder": "My reflection..."
+    },
+    "textToWorld": {
+      "prompt": "Should we design education, exams, or AI systems to \"forget\" more? Pick a side and explain your reasoning.",
+      "placeholder": "Explain your reasoning...",
+      "sides": [
+        {
+          "id": "optimistic",
+          "label": "🌊 更乐观 Optimistic"
+        },
+        {
+          "id": "concerned",
+          "label": "📺 更担忧 Concerned"
+        }
+      ],
+      "extensionPrompt": "The article compares the brain to AI models that \"overfit\". What other everyday systems — apps, study plans, habits — might benefit from controlled forgetting?",
+      "extensionPlaceholder": "Your comparison...",
+      "tipKey": "debate"
+    },
+    "exitTicket": {
+      "prompt": "Complete this sentence, using one of today's target words if you can: \"One thing I now understand about forgetting is ___.\"",
+      "placeholder": "One thing I understand...",
+      "tipKey": "exit"
+    }
+  }
+}
