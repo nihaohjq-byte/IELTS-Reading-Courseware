@@ -160,6 +160,10 @@
   .passage-column{ min-width:0; }
   .while-mode-details .passage-pane-full{ display:none; }
   .while-mode-gist .section-carousel{ display:none; }
+  /* Gist (skim) view must stay fully English: hide the whole Details panel
+     (Deep Dive / Text Walkthrough / phrases with Chinese glosses) so no
+     Chinese commentary or translations leak into the gist screen. */
+  .while-mode-gist #view-details{ display:none !important; }
   .passage-pane{ background:var(--white); border-radius:var(--radius); border:1px solid var(--line); padding:26px 28px; }
   .passage-pane p{ margin:0; font-size:15.5px; line-height:1.75; }
   .passage-para{ display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start; margin:0 0 18px; }
