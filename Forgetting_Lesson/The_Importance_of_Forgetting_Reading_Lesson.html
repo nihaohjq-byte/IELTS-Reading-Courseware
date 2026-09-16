@@ -281,9 +281,23 @@
   .pick-word-card .pw-head .pw-voice{ margin-left:4px; border:1px solid var(--line); background:var(--paper); border-radius:999px; width:26px; height:26px; cursor:pointer; font-size:12px; line-height:1; }
   .pick-word-card .pw-head .pw-voice:hover{ background:var(--gold-light); border-color:var(--gold); }
   .pick-word-card .pw-mean-en{ font-size:12.5px; color:var(--ocean-deep); background:#EAF2F4; border-radius:8px; padding:7px 9px; margin-bottom:6px; line-height:1.5; font-style:italic; }
+  .quick-long-card{ width:320px; }
+  .quick-long-card .ql-sent{ font-size:12px; color:var(--ink-soft); font-style:italic; line-height:1.5; max-height:104px; overflow:auto; margin-bottom:8px; padding:6px 8px; background:var(--paper); border-radius:8px; }
+  .quick-long-card .pw-save.done{ background:#2E7D5B; border-color:#2E7D5B; }
+  .sent-zh-card{ position:fixed; z-index:1203; width:340px; max-width:calc(100vw - 16px); background:var(--white); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:12px; box-shadow:0 8px 30px rgba(15,42,60,.20); padding:10px 30px 10px 12px; }
+  .sent-zh-card .sz-en{ font-size:11.5px; color:var(--ink-soft); font-style:italic; line-height:1.5; margin-bottom:6px; max-height:72px; overflow:auto; }
+  .sent-zh-card .sz-zh{ font-size:13.5px; color:var(--ocean-deep); line-height:1.6; font-weight:600; }
+  .sent-zh-card .sz-loading{ color:var(--ink-soft); font-weight:400; }
+  .sent-zh-card .sz-x{ position:absolute; top:5px; right:7px; border:0; background:none; font-size:15px; line-height:1; color:var(--ink-soft); cursor:pointer; padding:2px 6px; }
+  .sent-zh-card .sz-retry{ border:1px solid var(--line); background:var(--paper); border-radius:999px; font-size:10.5px; padding:1px 9px; cursor:pointer; color:var(--ocean-deep); margin-left:6px; }
   .pick-word-form .pw-voice-sm{ border:1px solid var(--line); background:var(--paper); border-radius:999px; width:24px; height:24px; cursor:pointer; font-size:11px; vertical-align:middle; }
   .pick-word-form input.pw-in-en{ margin-bottom:6px; font-style:italic; }
   .vocab-entry-mean-en{ font-size:12px; color:var(--ocean-mid); font-style:italic; margin-top:2px; line-height:1.45; }
+  .pw-pho{ font-size:11px; color:var(--ink-soft); font-style:italic; font-weight:400; }
+  .pick-word-card .pw-loading{ font-size:11px; color:var(--ink-soft); font-style:italic; }
+  .vocab-entry-pho{ font-size:11px; color:var(--ink-soft); font-style:italic; margin-left:6px; font-weight:400; }
+  .vocab-entry-voice{ margin-left:6px; border:1px solid var(--line); background:var(--paper); border-radius:999px; width:24px; height:24px; cursor:pointer; font-size:11px; line-height:1; }
+  .vocab-entry-voice:hover{ background:var(--gold-light); border-color:var(--gold); }
   .pick-word-form .pw-src{ font-size:11px; color:var(--ink-soft); font-style:italic; line-height:1.45; margin:0 0 8px; max-height:52px; overflow:hidden; }
 
   /* User long-sentence analysis (划句自动分析 / NPC) */
@@ -713,7 +727,7 @@
           <div class="mcq-list" id="mcqList"></div>
           <div class="mcq-feedback" id="mcqFeedback"></div>
           <div class="match-wrap compact">
-            <div class="match-col-label">段落功能匹配 · Match each section to its function</div>
+            <div class="match-col-label">Match each section to its function</div>
             <div class="match-progress">
               <div class="bar"><div class="bar-fill" id="gistBar"></div></div>
               <span class="count" id="gistCount">0 / 0 matched</span>
@@ -807,7 +821,7 @@
 </div>
 
 <script>
-const INITIAL_DATA = {"meta":{"titleEn":"The Importance of Forgetting","titleZh":"读前 · 读中 · 读后：遗忘的重要性","filenameStem":"The_Importance_of_Forgetting","lessonType":"reading_and_writing","badges":["Reading & Writing","The Importance of Forgetting"],"objectives":["通过略读识别文章从“旧观点 → 激进新说 → 跨物种证据 → 适应意义”的篇章推进","通过精读理解主动遗忘的神经机制（多巴胺、AMPA 受体、神经发生）","掌握 contradict、mechanism、plasticity 等学术词汇并从语境推断含义","围绕“完美记忆是福是祸”进行有依据的思辨表达"],"timeEstimate":"建议用时：读前 ~6分钟 · 读中 ~22分钟 · 读后 ~16分钟","footer":"Reading & Writing courseware · Pre / While / Post · Adapted from Nature, “The importance of forgetting”"},"teacherTips":{"leadin":"可先请学生口头分享一次“忘掉反而更好”的经历（30秒/人），用2分钟快速导入“遗忘也有价值”的话题，再进入下一环节。自学模式下学生可直接写下想法。","debate":"可先让学生个人表态，再按立场分组做小型辩论：2分钟准备后各组陈述理由。可提示他们引用文中的证据（果蝇/大鼠/小鼠实验）支撑观点。","exit":"可作为下课前的快速检验：请学生用今天学到的一个目标词造句，教师快速抽查2–3位。"},"preReading":{"leadIn":{"prompt":"Think of something you forgot recently — a name, a password, or a lesson. Did forgetting ever turn out to be useful?","placeholder":"Write a few sentences...","tipKey":"leadin"},"prediction":{"hint":"Look at the title and the first two paragraphs.","prompt":"Based on the title \"The Importance of Forgetting\", what do you think the article argues — and how might forgetting actually help us? Jot down a quick guess; you'll check it after reading.","placeholder":"My prediction..."},"keyWords":[{"word":"hippocampus","meaning":"a seahorse-shaped part of the brain where new memories begin to take lasting form","example":"Autobiographical memories begin in the hippocampus.","meaningZh":"海马体（大脑中形成新记忆的结构）"},{"word":"synapse","meaning":"the junction between two neurons, across which chemical messages pass","example":"Neurons communicate with one another through synapses.","meaningZh":"突触（神经元之间传递信号的连接点）"},{"word":"dopamine","meaning":"a chemical messenger in the brain involved in mood, movement and memory","example":"Dopamine is essential to forgetting in fruit flies.","meaningZh":"多巴胺（与情绪、运动和记忆有关的神经递质）"},{"word":"engram","meaning":"the physical trace of a memory stored in the brain","example":"Neuroscientists call this physical trace an engram.","meaningZh":"记忆印痕（记忆在大脑中的物理痕迹）"},{"word":"receptor","meaning":"a structure on a cell that receives chemical signals","example":"AMPA receptors sit at the synapse.","meaningZh":"受体（细胞上接收化学信号的结构）"},{"word":"neurogenesis","meaning":"the production of new neurons in the brain","example":"Neurogenesis in adult mice made them forget more.","meaningZh":"神经发生（大脑中新神经元的生成）"}]},"whileReading":{"passageParagraphs":["<p id=\"para-1\"><span class=\"sent-step\" data-step=\"1\">Memory makes us who we are.</span> It shapes our understanding of the world and helps us to predict what is coming. For more than a century, researchers have worked to understand how memories are formed and then fixed for recall. <span class=\"sent-step\" data-step=\"2\" id=\"sent-contrast-1\"><span class=\"cue dm\" data-cat=\"contrast\">But</span> those scientists might have been looking at only <span id=\"phrase-half-picture\">half the picture</span>.</span> To understand how we remember, we must also understand how, and why, we forget.</p>","<p id=\"para-2\"><span class=\"sent-step\" data-step=\"3\" id=\"sent-in-which\">Until about ten years ago, most researchers thought that forgetting was a passive process <span class=\"cue\">in which</span> memories, unused, decay over time like a photograph left in the sunlight.</span> <span class=\"sent-step\" data-step=\"4\" id=\"sent-that-findings\">Then a handful of researchers investigating memory began to <span id=\"phrase-bump-against\">bump up against</span> findings <span class=\"cue\">that</span> seemed to <span id=\"pw-contradict\" class=\"vocab\" data-word=\"contradict\">contradict</span> that decades-old <span id=\"pw-assumption\" class=\"vocab\" data-word=\"assumption\">assumption</span>, and they began to put forward the radical idea <span class=\"cue\">that</span> the brain is built to forget.</span> <span class=\"sent-step\" data-step=\"5\" id=\"sent-rather\">A growing body of work suggests <span class=\"cue\">that</span> the loss of memories is not a passive process. <span class=\"cue dm\" data-cat=\"contrast\">Rather</span>, forgetting seems to be an active <span id=\"pw-mechanism\" class=\"vocab\" data-word=\"mechanism\">mechanism</span>, constantly at work in the brain; in some animals, the brain's standard state is not to remember, but to forget. A better understanding of this state could lead to breakthroughs in treatments for anxiety, post-traumatic stress disorder, and even Alzheimer's disease.</span></p>","<p id=\"para-3\"><span class=\"sent-step\" data-step=\"1\">Different types of memory are created and stored in varying ways. Autobiographical memories — those of events experienced personally — begin to take lasting form in a part of the brain called the hippocampus in the hours and days <span class=\"cue\">that</span> follow the event.</span> <span class=\"sent-step\" data-step=\"2\">Neurons communicate with one another through synapses, and through a process known as synaptic <span id=\"pw-plasticity\" class=\"vocab\" data-word=\"plasticity\">plasticity</span> they constantly produce new proteins to remodel parts of the synapse, selectively strengthening their connections.</span> <span id=\"sent-the-more\">The more often a memory is recalled, the stronger its neural network becomes.</span> <span class=\"sent-step\" data-step=\"3\" id=\"sent-where\"><span class=\"dm\" data-cat=\"sequence\">Over time</span>, the memory becomes encoded in both the hippocampus and the cortex, <span class=\"cue\">where</span> it is eventually put away for long-term storage.</span> <span class=\"sent-step\" data-step=\"4\">Neuroscientists refer to this physical representation of a memory as an engram.</span></p>","<p id=\"para-4\"><span class=\"sent-step\" data-step=\"1\">Much is still unknown about how memories are created, <span class=\"cue dm\" data-cat=\"contrast\">but</span> how the brain forgets has been largely <span id=\"pw-overlook\" class=\"vocab\" data-word=\"overlook\">overlooked</span>.</span> <span class=\"sent-step\" data-step=\"2\">It was not at the forefront of Ron Davis's mind when he uncovered evidence of active forgetting in fruit flies in 2012.</span> <span class=\"sent-step\" data-step=\"3\">Davis was studying memory formation in the flies' mushroom bodies — dense networks of neurons <span class=\"cue\">that</span> store sensory memories. Intriguingly, he found <span class=\"cue\">that</span> dopamine is <span class=\"vocab\" data-word=\"essential\">essential</span> to forgetting.</span> <span class=\"sent-step\" data-step=\"4\" id=\"sent-yet\">He and his colleagues conditioned flies to associate electric shocks with certain odours, thereby training the insects to avoid them. They then activated the dopaminergic neurons and observed <span class=\"cue\">that</span> the flies quickly forgot the association. <span class=\"cue dm\" data-cat=\"contrast\">Yet</span> blocking the same neurons <span class=\"vocab\" data-word=\"preserve\">preserved</span> the memory. 'The brain is always trying to forget the information it's already learnt,' Davis says.</span></p>","<p id=\"para-5\"><span class=\"sent-step\" data-step=\"5\"><span class=\"dm\" data-cat=\"sequence\">A few years later</span>, Oliver Hardt found something similar in rats.</span> <span class=\"sent-step\" data-step=\"6\">Memories are encoded when the strength of the connection between neurons increases, and <span class=\"cue\">that</span> connection strength is determined by the amount of a particular type of receptor at the synapse. Known as AMPA receptors, these structures must be maintained for a memory to remain intact. Hardt's lab showed <span class=\"cue\">that</span> a dedicated mechanism continuously promotes the expression of AMPA receptors, yet some memories are still forgotten.</span> <span class=\"sent-step\" data-step=\"7\">When he blocked the mechanism behind AMPA-receptor removal in the hippocampus of rats, the animals were prevented from forgetting the locations of objects.</span> <span class=\"sent-step\" data-step=\"8\" id=\"sent-not-but\">Paul Frankland found further evidence <span class=\"cue\">that</span> the brain is wired to forget: when new neurons <span class=\"vocab\" data-word=\"integrate\">integrate</span> into an adult mouse's hippocampus, the mice forget more. Forgetting, Hardt says, 'is not a failure of memory, but a function of it'.</span></p>","<p id=\"para-6\"><span class=\"sent-step\" data-step=\"1\">Researchers think <span class=\"cue\">that</span> the human brain might operate in a similar way.</span> <span class=\"sent-step\" data-step=\"2\">Blake Richards suggests <span class=\"cue\">that</span> the brain's ability to forget might prevent an effect known as overfit, <span class=\"cue\">which</span> occurs when a mathematical model is so good at matching the data it has been trained on <span class=\"cue\">that</span> it cannot predict what comes next.</span> <span class=\"sent-step\" data-step=\"3\"><span class=\"dm\" data-cat=\"addition\">In a similar way</span>, if a person remembered every detail of an experience, it might be more difficult to generalize across experiences.</span> <span class=\"sent-step\" data-step=\"4\">'If you <span id=\"phrase-wash-out\">wash out a few details</span> but retain the gist, it helps you to use it in novel situations,' Richards says. 'It's entirely possible <span class=\"cue\">that</span> our brain engages in a bit of controlled forgetting in order to prevent us from overfitting to our experiences.'</span></p>"],"gist":{"hint":"先限时1–2分钟快速通读全文，不逐词读，抓住大意。","question":"What is the main idea of this article?","options":["Forgetting is a sign of memory failure that scientists hope to prevent.","Forgetting is an active, adaptive brain function — not the opposite of remembering, but part of it.","Memories are stored permanently in the hippocampus and never change.","Animals remember better when they produce more new neurons."],"correct":1,"paragraphFunctions":[{"p":"¶1–2","label":"The Puzzle and the Radical Idea 谜题与激进观点"},{"p":"¶3","label":"How Memories Are Made 记忆如何形成"},{"p":"¶4–5","label":"Evidence Across Species 跨物种的证据"},{"p":"¶6","label":"What Forgetting Is For 遗忘的作用"}],"doneMessage":"✓ 结构梳理完成——这是一篇“旧观点→激进新说→跨物种证据→适应意义”的科学报道。"},"structure":{"cardTitle":"Text Structure","cardSubtitle":"说明结构 · Description","layout":"hub","question":"How is this article organised overall? (Hint: it is not a single chronological story.)","centerLines":["The new science","of forgetting"],"centerSub":"Description structure","nodes":[{"label":"Puzzle ¶1","sub":"Memory defines us — why forget?","tone":"mint"},{"label":"Radical idea ¶2","sub":"Passive decay → active mechanism","tone":"gold"},{"label":"Biology ¶3","sub":"Hippocampus · synapse · engram","tone":"mint"},{"label":"Flies ¶4","sub":"Dopamine = 'forget' signal","tone":"coral"},{"label":"Rodents ¶5","sub":"AMPA removal + neurogenesis","tone":"gold"},{"label":"Humans ¶6","sub":"Controlled forgetting → avoid overfit","tone":"plum"}],"summaryHtml":"全文整体是<strong>Description（分说式）结构</strong>——围绕“遗忘的新科学”从“旧观点 → 激进新说 → 生物学基础 → 跨物种证据 → 人类意义”逐层展开；其中第4–5段内部构成一个<strong>Evidence chain（证据链）</strong>子结构，从果蝇到大鼠、小鼠层层推进。"},"textWalkthrough":[{"title":"The Puzzle and the Radical Idea","subtitle":"谜题与激进观点","tag":"¶1–2","targets":["para-1","para-2"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Open claim","labelZh":"提出主张"},{"id":"2","labelEn":"Turn: half the picture","labelZh":"转折：只看到一半"},{"id":"3","labelEn":"Old assumption","labelZh":"旧观点：被动遗忘"},{"id":"4","labelEn":"Radical idea","labelZh":"新观点：大脑为遗忘而生"},{"id":"5","labelEn":"Stakes","labelZh":"研究意义"}],"devices":[{"cat":"contrast","labelEn":"Contrast","labelZh":"转折/让步"}]},"questions":[{"type":"Fact","question":"What did most researchers believe about forgetting until about ten years ago?","questionZh":"直到约十年前，多数研究者认为遗忘是怎样的？","answerEn":"They believed it was a passive process in which unused memories decay over time, like a photograph left in the sunlight.","answerZh":"他们认为遗忘是被动过程：未被使用的记忆随时间衰退，如同照片在阳光下褪色。"},{"type":"Structure","question":"How does the opening turn from \"how we remember\" to \"why we forget\" — and what device signals the turn?","questionZh":"开头如何从“我们如何记忆”转向“我们为何遗忘”？用什么衔接手段标志这一转折？","answerEn":"It opens with the familiar question of how memories form, then turns with \"But\" to argue that scientists were looking at only half the picture: remembering cannot be understood without forgetting.","answerZh":"先提出熟悉的“记忆如何形成”问题，再用 But 转折指出科学家只看到一半图景：不理解遗忘就无法理解记忆。"},{"type":"Infer","question":"Why might studying forgetting lead to treatments for anxiety or PTSD?","questionZh":"为什么研究遗忘可能推动焦虑、PTSD 等疾病的治疗？","answerEn":"If forgetting is an active, regulated mechanism, then disorders involving intrusive or persistent memories may be cases of faulty forgetting — so understanding the mechanism could point to new treatments.","answerZh":"如果遗忘是主动、可调节的机制，那么与侵入性记忆相关的疾病（焦虑、PTSD）可能是遗忘失灵——理解机制就指向治疗思路。"}]},{"title":"How Memories Are Made","subtitle":"记忆如何形成","tag":"¶3","targets":["para-3"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Location","labelZh":"定位：海马体"},{"id":"2","labelEn":"Mechanism","labelZh":"机制：突触可塑性"},{"id":"3","labelEn":"Consolidation","labelZh":"巩固：长期储存"},{"id":"4","labelEn":"Trace","labelZh":"命名：印痕"}],"devices":[{"cat":"sequence","labelEn":"Sequence","labelZh":"顺序/推进"}]},"questions":[{"type":"Fact","question":"Where do autobiographical memories first take lasting form, and what happens to them over time?","questionZh":"自传体记忆最初在哪里形成持久痕迹？随时间推移它们会怎样？","answerEn":"They begin in the hippocampus; through repeated recall they become encoded in both the hippocampus and the cortex, and are eventually stored long-term in the cortex.","answerZh":"它们先在海马体形成；反复提取后同时编码于海马体与皮层，最终长期储存在皮层。"},{"type":"Vocabulary","question":"What does \"plasticity\" mean in \"synaptic plasticity\"?","questionZh":"“突触可塑性”中的 plasticity 是什么意思？","answerEn":"Plasticity means the ability to change and adapt; synaptic plasticity is the constant remodelling of synapses that lets neurons strengthen or weaken their connections.","answerZh":"plasticity 意为“可塑性”：突触可塑性指突触不断重塑，使神经元连接增强或减弱的能力。"},{"type":"Structure","question":"What pattern is used in \"The more often a memory is recalled, the stronger its neural network becomes\"?","questionZh":"“记忆被提取得越频繁，其神经回路就越强”使用了什么句式？","answerEn":"A comparative correlative: \"the more…, the stronger…\" expresses a proportional relationship — recall frequency directly scales with network strength.","answerZh":"比较关联句式 the more…, the stronger…：表达正比关系——提取越频繁，神经回路越强。"}]},{"title":"Evidence Across Species","subtitle":"跨物种的证据","tag":"¶4–5","targets":["para-4","para-5"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Overlooked problem","labelZh":"被忽视的问题"},{"id":"2","labelEn":"Case: flies","labelZh":"果蝇实验"},{"id":"3","labelEn":"Twist: dopamine","labelZh":"转折：多巴胺"},{"id":"4","labelEn":"Proof: block & preserve","labelZh":"验证：阻断与保留"},{"id":"5","labelEn":"From flies to rodents","labelZh":"从果蝇到大鼠"},{"id":"6","labelEn":"Mechanism: AMPA receptors","labelZh":"机制：AMPA 受体"},{"id":"7","labelEn":"Proof: blocking removal","labelZh":"验证：阻断清除"},{"id":"8","labelEn":"Function","labelZh":"结论：遗忘是功能"}],"devices":[{"cat":"contrast","labelEn":"Contrast","labelZh":"转折"},{"cat":"sequence","labelEn":"Sequence","labelZh":"顺序/推进"}]},"questions":[{"type":"Fact","question":"What did Davis find about dopamine in fruit flies, and how did he test it?","questionZh":"Davis 在果蝇身上发现了多巴胺的什么作用？他是如何验证的？","answerEn":"Dopamine is essential to forgetting: activating the dopaminergic neurons made flies quickly forget a shock–odour association, while blocking the same neurons preserved the memory.","answerZh":"多巴胺是遗忘所必需的：激活多巴胺神经元使果蝇迅速忘记“电击—气味”关联；阻断这些神经元则保留记忆。"},{"type":"Structure","question":"How does the evidence move across paragraphs — and what signals the shift?","questionZh":"证据如何在段落间推进？什么标志了这种转换？","answerEn":"It moves from fruit flies (Davis) to rats (Hardt) and mice (Frankland) — a cross-species progression signalled by \"A few years later\" and parallel block-and-observe experiments.","answerZh":"证据从果蝇（Davis）到大鼠（Hardt）、小鼠（Frankland）逐层推进——由 A few years later 和平行的“阻断—观察”实验标志。"},{"type":"Infer","question":"Why does Hardt call forgetting \"not a failure of memory, but a function of it\"?","questionZh":"Hardt 为何称遗忘“不是记忆的失败，而是记忆的功能”？","answerEn":"Because a dedicated mechanism actively removes AMPA receptors to erase connections; when that removal was blocked, rats stopped forgetting — so forgetting is built-in, regulated work, not decay.","answerZh":"因为存在专门移除 AMPA 受体、清除连接的主动机制；阻断该机制后大鼠不再遗忘——所以遗忘是内置且受调控的功能，而非衰退。"}]},{"title":"What Forgetting Is For","subtitle":"遗忘的作用","tag":"¶6","targets":["para-6"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Claim","labelZh":"提出观点"},{"id":"2","labelEn":"Analogy: overfit","labelZh":"类比：过度拟合"},{"id":"3","labelEn":"Illustration","labelZh":"举例说明"},{"id":"4","labelEn":"Conclusion","labelZh":"结论"}],"devices":[{"cat":"addition","labelEn":"Addition","labelZh":"补充/类比"}]},"questions":[{"type":"Vocabulary","question":"What does \"overfit\" mean, and why does Richards borrow it from artificial intelligence?","questionZh":"overfit 是什么意思？Richards 为什么从人工智能领域借用这个词？","answerEn":"Overfitting means a model matches its training data so precisely that it cannot predict new data; Richards uses it as an analogy for a memory that keeps every detail and therefore cannot generalise.","answerZh":"过度拟合指模型对训练数据拟合得过于精确，以致无法预测新数据；Richards 借它类比“记住一切细节、无法泛化”的记忆。"},{"type":"Infer","question":"According to Richards, how does forgetting help us use past experience in new situations?","questionZh":"按 Richards 的观点，遗忘如何帮助我们把过往经验用于新情境？","answerEn":"By washing out a few details while retaining the gist, we avoid being trapped by specific instances and can apply the essence of an experience elsewhere.","answerZh":"忘掉部分细节、保留要旨，我们才不会被具体实例困住，能把经验的要点迁移到新情境。"},{"type":"Reflect","question":"Do you think a perfect memory would be a blessing or a burden? Give reasons.","questionZh":"你认为完美的记忆是福还是祸？请说明理由。","answerEn":"Open response — strong answers weigh the trade-off: rich recall can help, but remembering every detail may make it harder to extract the gist and can feed obsessive thinking.","answerZh":"开放性回答——有力回答会权衡得失：丰富的回忆有帮助，但记住一切细节可能让人难以提取要旨，并助长强迫倾向。"}]}],"deepDive":{"title":"Four Threads Through the New Science of Forgetting","subtitle":"遗忘新科学的四条线索","question":"What four ideas weave through the article's account of the new science of forgetting?","bulletsEn":[["Paradigm shift","Forgetting was long treated as passive decay; researchers now argue the brain is actively built to forget."],["Cross-species evidence","Dopamine in flies, AMPA-receptor removal in rats and neurogenesis in mice all point to active forgetting."],["The biology","Memories exist as changing synaptic connections; forgetting works by dismantling or rewriting them."],["Adaptive purpose","Controlled forgetting prevents 'overfitting', supports generalisation, and may guide treatments for anxiety, PTSD and Alzheimer's."]],"summaryEn":"The article describes a paradigm shift: forgetting is not memory failure but an adaptive brain function, backed by evidence across species and promising for treatment.","bulletsZh":[["范式转变","遗忘长期被视为被动衰退；研究者如今认为大脑天生就是要遗忘的。"],["跨物种证据","果蝇的多巴胺、大鼠的 AMPA 受体移除、小鼠的神经发生，都指向主动遗忘。"],["生物学基础","记忆以不断变化的突触连接存在；遗忘通过拆除或改写连接实现。"],["适应功能","受控遗忘防止“过度拟合”、支持泛化，并可能为焦虑、PTSD 与阿尔茨海默病提供治疗思路。"]],"summaryZh":"文章描述了一场范式转变：遗忘不是记忆的失败，而是大脑的适应功能，有跨物种证据支持，并蕴含治疗前景。"},"powerWords":[{"target":"pw-contradict","word":"contradict","pos":"v.","meaningEn":"(of facts or statements) to disagree with something else","trait":"academic register","meaningZh":"与……矛盾；反驳"},{"target":"pw-assumption","word":"assumption","pos":"n.","meaningEn":"something accepted as true without proof","trait":"academic register","meaningZh":"假设；假定"},{"target":"pw-mechanism","word":"mechanism","pos":"n.","meaningEn":"a system of parts or processes working together (here: a biological process)","trait":"academic register","meaningZh":"机制；机理"},{"target":"pw-plasticity","word":"plasticity","pos":"n.","meaningEn":"the ability to change and adapt (neural plasticity)","trait":"technical register","meaningZh":"可塑性（神经可塑性）"},{"target":"pw-overlook","word":"overlook","pos":"v.","meaningEn":"to fail to notice or consider something","trait":"熟词僻义","meaningZh":"忽视；漏看（不是“俯瞰”）"}],"phrases":[{"target":"phrase-half-picture","word":"look at only half the picture","pos":"phr.","meaningEn":"to understand only part of a situation","trait":"idiomatic","meaningZh":"只看到事情的一面（片面理解）"},{"target":"phrase-bump-against","word":"bump up against","pos":"phr.","meaningEn":"to come across something unexpected (a problem or a finding)","trait":"idiomatic","meaningZh":"偶然遇到（难题或发现）"},{"target":"phrase-wash-out","word":"wash out a few details","pos":"phr.","meaningEn":"to forget or remove some details, keeping only the essentials","trait":"idiomatic","meaningZh":"滤掉一些细节（只留要点）"}],"structures":[{"title":"Contrast & Concession","subtitle":"转折与让步","tag":"but / rather / yet","items":[{"target":"sent-contrast-1","text":"But those scientists might have been looking at only half the picture."},{"target":"sent-rather","text":"Rather, forgetting seems to be an active mechanism, constantly at work in the brain."},{"target":"sent-yet","text":"Yet blocking the same neurons preserved the memory."},{"target":"sent-not-but","text":"Forgetting, Hardt says, 'is not a failure of memory, but a function of it'."}]},{"title":"Relative Clauses","subtitle":"定语从句（补充说明）","tag":"that / in which / where","items":[{"target":"sent-in-which","text":"a passive process in which memories, unused, decay over time like a photograph left in the sunlight"},{"target":"sent-that-findings","text":"findings that seemed to contradict that decades-old assumption"},{"target":"sent-where","text":"the cortex, where it is eventually put away for long-term storage"}]},{"title":"Comparative Correlative","subtitle":"比较关联句式","tag":"the more…, the stronger…","items":[{"target":"sent-the-more","text":"The more often a memory is recalled, the stronger its neural network becomes."}]}],"trueFalse":[{"n":1,"text":"Until recently, most scientists believed that forgetting was an active process.","answer":false,"reason":"The article says most researchers thought forgetting was a passive process in which unused memories decay over time."},{"n":2,"text":"In Davis's experiments, blocking dopaminergic neurons preserved the flies' memory of the shock–odour association.","answer":true,"reason":"Activating the neurons made the flies forget quickly, while blocking the same neurons preserved the memory."},{"n":3,"text":"Hardt found that actively removing AMPA receptors at synapses strengthens long-term memory.","answer":false,"reason":"It is the maintenance of AMPA receptors that keeps a memory intact; their active removal is what allows forgetting."},{"n":4,"text":"Increasing neurogenesis in adult mice made them forget more.","answer":true,"reason":"Frankland's 2014 study found the opposite of better memory: more new neurons meant the mice forgot more."},{"n":5,"text":"Richards believes that remembering every detail helps people generalise across experiences.","answer":false,"reason":"He argues that controlled forgetting — washing out details while keeping the gist — prevents overfitting and supports generalisation."}],"vocabMatch":[{"word":"contradict","meaning":"to say the opposite of something; (of facts) to disagree with something"},{"word":"assumption","meaning":"something accepted as true without proof"},{"word":"mechanism","meaning":"a system of parts or processes that work together"},{"word":"plasticity","meaning":"the ability to change and adapt"},{"word":"overlook","meaning":"to fail to notice or consider something"},{"word":"preserve","meaning":"to keep something unchanged or intact"},{"word":"essential","meaning":"absolutely necessary; central"},{"word":"integrate","meaning":"to combine into an existing whole"}],"vocabMatchHint":"There are eight highlighted words in the text. Match each word with its meaning.","vocabDoneMessage":"🎉 全部配对成功！你已从语境推断出生词含义。","longSentences":[{"id":"long-1","type":"复合句 · 时间状语 + 宾语从句 + 定语从句","sentence":"Until about ten years ago, most researchers thought that forgetting was a passive process in which memories, unused, decay over time like a photograph left in the sunlight.","translation":"直到大约十年前，多数研究者认为遗忘是一个被动过程：未被使用的记忆会随时间流逝而衰退，就像遗留在阳光下的照片。","clauses":[{"label":"时间状语从句","part":"Until about ten years ago"},{"label":"主句","part":"most researchers thought"},{"label":"宾语从句","part":"that forgetting was a passive process"},{"label":"定语从句","part":"in which memories, unused, decay over time like a photograph left in the sunlight"}],"segZh":{"Until about ten years ago":"大约十年前","most researchers thought":"大多数研究人员认为","that forgetting was a passive process in which":"遗忘是一个被动的过程，在这个过程中","memories":"记忆","unused":"未被使用的","decay":"随时间衰退","over time like a photograph":"就像一张照片","left":"遗留在","in the sunlight":"阳光之下"}},{"id":"long-5","type":"复合句 · 定语从句 + 同位语从句","sentence":"Then a handful of researchers investigating memory began to bump up against findings that seemed to contradict that decades-old assumption, and they began to put forward the radical idea that the brain is built to forget.","translation":"随后，少数研究记忆的科学家开始碰到一些似乎与那个几十年之久的假设相矛盾的研究发现，并开始提出一个激进的观点：大脑天生就是要遗忘的。","clauses":[{"label":"句首时间状语","part":"Then"},{"label":"主句（含分词定语）","part":"a handful of researchers investigating memory began to bump up against findings"},{"label":"定语从句","part":"that seemed to contradict that decades-old assumption"},{"label":"并列分句","part":"and they began to put forward the radical idea"},{"label":"同位语从句","part":"that the brain is built to forget"}],"segZh":{"Then a handful":"随后一小部分","of researchers investigating memory":"研究记忆的研究者","began":"开始","to bump up against findings":"撞上了一些研究发现","that seemed":"这些发现似乎","to contradict that decades-old assumption":"与那个几十年的旧假设相矛盾","and they began":"并且他们开始","to put forward the radical idea":"提出这个激进的观点","that the brain is built":"大脑天生就被构建成","to forget":"去遗忘"}},{"id":"long-2","type":"并列复合句 · 分词状语","sentence":"Neurons communicate with one another through synapses, and through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse, selectively strengthening their connections.","translation":"神经元通过突触相互通信；通过一个被称为“突触可塑性”的过程，它们不断产生新的蛋白质来重塑突触的某些部分，从而有选择地强化连接。","clauses":[{"label":"并列分句 1","part":"Neurons communicate with one another through synapses"},{"label":"并列分句 2","part":"and through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse"},{"label":"现在分词作伴随状语","part":"selectively strengthening their connections"}],"segZh":{"Neurons communicate":"神经元相互通信","with one another through synapses":"通过突触","and":"并且","through a process known as synaptic plasticity":"通过被称为“突触可塑性”的过程","they constantly produce new proteins":"它们不断产生新的蛋白质","to remodel parts of the synapse":"来重塑突触的某些部分","selectively":"有选择地","strengthening their connections":"强化它们的连接"}},{"id":"long-3","type":"复合句 · 时间状语从句 + 被动语态","sentence":"Memories are encoded when the strength of the connection between neurons increases, and that connection strength is determined by the amount of a particular type of receptor at the synapse.","translation":"当神经元之间连接的强度增强时，记忆便被编码；而连接的强度又取决于突触上某种特定类型受体的数量。","clauses":[{"label":"主句（被动）","part":"Memories are encoded"},{"label":"时间状语从句","part":"when the strength of the connection between neurons increases"},{"label":"并列分句（被动）","part":"and that connection strength is determined by the amount of a particular type of receptor at the synapse"}],"segZh":{"Memories are encoded":"记忆被编码","when the strength of the connection between neurons increases":"当神经元之间连接的强度增强时","and":"而","that connection strength is determined by the amount of a particular type of receptor at the synapse":"连接强度由突触上特定类型受体的数量决定"}},{"id":"long-4","type":"复合句 · 宾语从句 + 非限制性定语从句 + so…that 结果状语","sentence":"Blake Richards suggests that the brain's ability to forget might prevent an effect known as overfit, which occurs when a mathematical model is so good at matching the data it has been trained on that it cannot predict what comes next.","translation":"布莱克·理查兹提出，大脑的遗忘能力或许可以防止一种名为“过拟合”的效应——当一个数学模型太擅长匹配其训练过的数据，以至于无法预测接下来会发生什么时，这种效应就会出现。","clauses":[{"label":"主句","part":"Blake Richards suggests"},{"label":"宾语从句","part":"that the brain's ability to forget might prevent an effect known as overfit"},{"label":"非限制性定语从句","part":"which occurs when a mathematical model is so good at matching the data it has been trained on"},{"label":"结果状语从句","part":"that it cannot predict what comes next"}],"segZh":{"Blake Richards suggests that the brain’s ability":"布莱克·理查兹提出，大脑的","to forget might prevent an effect known as overfit":"遗忘能力或许可以防止一种名为“过拟合”的效应","which occurs":"这种效应出现在","when a mathematical model is so good at matching the data it has been trained on that it cannot predict":"当一个数学模型太擅长匹配其训练过的数据，以至于无法预测","what comes next":"接下来会发生什么"}}],"vocabBook":[{"word":"hippocampus","pos":"n.","meaning":"海马体（参与记忆形成与巩固的脑区）","source":"begin to take lasting form in a part of the brain called the hippocampus in the hours and days that follow the event"},{"word":"synapse","pos":"n.","meaning":"突触（神经元之间的连接点）","source":"Neurons communicate with one another through synapses"},{"word":"plasticity","pos":"n.","meaning":"可塑性（神经连接可被重塑的特性）","source":"through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse"},{"word":"engram","pos":"n.","meaning":"记忆印痕（记忆在大脑中的物理表征）","source":"Neuroscientists refer to this physical representation of a memory as an engram"},{"word":"dopamine","pos":"n.","meaning":"多巴胺（一种神经递质，与遗忘密切相关）","source":"he found that dopamine is essential to forgetting"},{"word":"receptor","pos":"n.","meaning":"受体（接受信号并触发反应的蛋白质结构）","source":"connection strength is determined by the amount of a particular type of receptor at the synapse"},{"word":"overfit","pos":"v./n.","meaning":"过拟合（对训练数据过度匹配而失去泛化能力）","source":"the brain's ability to forget might prevent an effect known as overfit"},{"word":"generalize","pos":"v.","meaning":"泛化；推广（将经验应用到新情境）","source":"if a person remembered every detail of an experience, it might be more difficult to generalize across experiences"},{"word":"gist","pos":"n.","meaning":"要点；主旨大意","source":"if you wash out a few details but retain the gist, it helps you to use it in novel situations"},{"word":"wired","pos":"adj.","meaning":"天生的（be wired to 天生倾向于…）","source":"Paul Frankland found further evidence that the brain is wired to forget"},{"word":"conditioned","pos":"v.","meaning":"使形成条件反射（condition 的过去式，熟词僻义）","source":"He and his colleagues conditioned flies to associate electric shocks with certain odours"}],"wordGlossary":[{"word":"passive","pos":"adj.","meaning":"被动的；消极的","meaningEn":"not active; acted upon rather than acting (syn. inactive, inert)"},{"word":"decay","pos":"v./n.","meaning":"衰退；腐烂","meaningEn":"to gradually decline, rot or lose strength (syn. deteriorate, decompose)"},{"word":"contradict","pos":"v.","meaning":"与……相矛盾","meaningEn":"to assert the opposite; to conflict with (syn. dispute, oppose)"},{"word":"assumption","pos":"n.","meaning":"假设；设想","meaningEn":"something accepted as true without proof (syn. supposition, presumption)"},{"word":"radical","pos":"adj.","meaning":"激进的；根本的","meaningEn":"fundamental or far-reaching; drastic (syn. sweeping, thoroughgoing)"},{"word":"mechanism","pos":"n.","meaning":"机制；机理","meaningEn":"a process or system by which something works (syn. machinery, apparatus)"},{"word":"plasticity","pos":"n.","meaning":"可塑性","meaningEn":"the ability to change, mould and adapt (syn. adaptability, flexibility)"},{"word":"Autobiographical","pos":"adj.","meaning":"自传体的；自传式的","meaningEn":"relating to a person’s own life story (syn. self-referential)"},{"word":"overfit","pos":"v./n.","meaning":"过拟合（模型过度匹配训练数据）","meaningEn":"to match training data too closely and lose general applicability"},{"word":"remodel","pos":"v.","meaning":"重塑；改造","meaningEn":"to change the structure or form of something (syn. reshape, rebuild)"},{"word":"encode","pos":"v.","meaning":"编码；将……转化为记忆","meaningEn":"to convert information into a stored form, e.g. a memory (syn. record, code)"},{"word":"essential","pos":"adj.","meaning":"必不可少的；本质的","meaningEn":"absolutely necessary; central (syn. crucial, vital)"},{"word":"neural","pos":"adj.","meaning":"神经的","meaningEn":"relating to a nerve or the nervous system (syn. neuronal)"},{"word":"sensory","pos":"adj.","meaning":"感觉的；感官的","meaningEn":"relating to the senses or sensation (syn. perceptual)"},{"word":"retrieve","pos":"v.","meaning":"提取；检索（记忆）","meaningEn":"to get something back; to recall a memory (syn. recover, recall)"},{"word":"adaptive","pos":"adj.","meaning":"适应性的；有适应能力的","meaningEn":"able to adjust to new conditions (syn. flexible, adjustable)"},{"word":"impair","pos":"v.","meaning":"损害；削弱","meaningEn":"to weaken or damage (syn. undermine, harm)"},{"word":"boost","pos":"v.","meaning":"促进；增强","meaningEn":"to increase, raise or strengthen (syn. enhance, strengthen)"},{"word":"permanent","pos":"adj.","meaning":"永久的；长久的","meaningEn":"lasting or intended to last forever (syn. enduring, lasting)"},{"word":"mushroom bodies","pos":"n.","meaning":"蕈形体（昆虫脑内与学习记忆相关的结构）","meaningEn":"paired structures in insect brains involved in learning and memory"}]},"postReading":{"predictionCheck":{"prompt":"Look back at your prediction from the pre-reading stage. Was it correct? What surprised you most about the new science of forgetting?","placeholder":"My reflection..."},"speaking":{"hint":"Discuss with a partner in class, or jot down your own thoughts if you're working alone.","prompts":[{"prompt":"Do you agree that forgetting is a \"function\" rather than a \"failure\" of memory? Give an example from your own study or daily life.","placeholder":"Notes for discussion..."},{"prompt":"Which piece of evidence in the article (flies, rats, or mice) do you find most convincing, and why?","placeholder":"Notes for discussion..."}]},"textToSelf":{"prompt":"Think of a time you \"overfit\" — memorised details without understanding the gist. How might controlled forgetting have helped you?","placeholder":"My reflection..."},"textToWorld":{"prompt":"Should we design education, exams, or AI systems to \"forget\" more? Pick a side and explain your reasoning.","placeholder":"Explain your reasoning...","sides":[{"id":"optimistic","label":"🌊 更乐观 Optimistic"},{"id":"concerned","label":"📺 更担忧 Concerned"}],"extensionPrompt":"The article compares the brain to AI models that \"overfit\". What other everyday systems — apps, study plans, habits — might benefit from controlled forgetting?","extensionPlaceholder":"Your comparison...","tipKey":"debate"},"exitTicket":{"prompt":"Complete this sentence, using one of today's target words if you can: \"One thing I now understand about forgetting is ___.\"","placeholder":"One thing I understand...","tipKey":"exit"}}};
+const INITIAL_DATA = {"meta":{"titleEn":"The Importance of Forgetting","titleZh":"读前 · 读中 · 读后：遗忘的重要性","filenameStem":"The_Importance_of_Forgetting","lessonType":"reading_and_writing","badges":["Reading & Writing","The Importance of Forgetting"],"objectives":["通过略读识别文章从“旧观点 → 激进新说 → 跨物种证据 → 适应意义”的篇章推进","通过精读理解主动遗忘的神经机制（多巴胺、AMPA 受体、神经发生）","掌握 contradict、mechanism、plasticity 等学术词汇并从语境推断含义","围绕“完美记忆是福是祸”进行有依据的思辨表达"],"timeEstimate":"建议用时：读前 ~6分钟 · 读中 ~22分钟 · 读后 ~16分钟","footer":"Reading & Writing courseware · Pre / While / Post · Adapted from Nature, “The importance of forgetting”"},"teacherTips":{"leadin":"可先请学生口头分享一次“忘掉反而更好”的经历（30秒/人），用2分钟快速导入“遗忘也有价值”的话题，再进入下一环节。自学模式下学生可直接写下想法。","debate":"可先让学生个人表态，再按立场分组做小型辩论：2分钟准备后各组陈述理由。可提示他们引用文中的证据（果蝇/大鼠/小鼠实验）支撑观点。","exit":"可作为下课前的快速检验：请学生用今天学到的一个目标词造句，教师快速抽查2–3位。"},"preReading":{"leadIn":{"prompt":"Think of something you forgot recently — a name, a password, or a lesson. Did forgetting ever turn out to be useful?","placeholder":"Write a few sentences...","tipKey":"leadin"},"prediction":{"hint":"Look at the title and the first two paragraphs.","prompt":"Based on the title \"The Importance of Forgetting\", what do you think the article argues — and how might forgetting actually help us? Jot down a quick guess; you'll check it after reading.","placeholder":"My prediction..."},"keyWords":[{"word":"hippocampus","meaning":"a seahorse-shaped part of the brain where new memories begin to take lasting form","example":"Autobiographical memories begin in the hippocampus.","meaningZh":"海马体（大脑中形成新记忆的结构）"},{"word":"synapse","meaning":"the junction between two neurons, across which chemical messages pass","example":"Neurons communicate with one another through synapses.","meaningZh":"突触（神经元之间传递信号的连接点）"},{"word":"dopamine","meaning":"a chemical messenger in the brain involved in mood, movement and memory","example":"Dopamine is essential to forgetting in fruit flies.","meaningZh":"多巴胺（与情绪、运动和记忆有关的神经递质）"},{"word":"engram","meaning":"the physical trace of a memory stored in the brain","example":"Neuroscientists call this physical trace an engram.","meaningZh":"记忆印痕（记忆在大脑中的物理痕迹）"},{"word":"receptor","meaning":"a structure on a cell that receives chemical signals","example":"AMPA receptors sit at the synapse.","meaningZh":"受体（细胞上接收化学信号的结构）"},{"word":"neurogenesis","meaning":"the production of new neurons in the brain","example":"Neurogenesis in adult mice made them forget more.","meaningZh":"神经发生（大脑中新神经元的生成）"}]},"whileReading":{"passageParagraphs":["<p id=\"para-1\"><span class=\"sent-step\" data-step=\"1\">Memory makes us who we are.</span> It shapes our understanding of the world and helps us to predict what is coming. For more than a century, researchers have worked to understand how memories are formed and then fixed for recall. <span class=\"sent-step\" data-step=\"2\" id=\"sent-contrast-1\"><span class=\"cue dm\" data-cat=\"contrast\">But</span> those scientists might have been looking at only <span id=\"phrase-half-picture\">half the picture</span>.</span> To understand how we remember, we must also understand how, and why, we forget.</p>","<p id=\"para-2\"><span class=\"sent-step\" data-step=\"3\" id=\"sent-in-which\">Until about ten years ago, most researchers thought that forgetting was a passive process <span class=\"cue\">in which</span> memories, unused, decay over time like a photograph left in the sunlight.</span> <span class=\"sent-step\" data-step=\"4\" id=\"sent-that-findings\">Then a handful of researchers investigating memory began to <span id=\"phrase-bump-against\">bump up against</span> findings <span class=\"cue\">that</span> seemed to <span id=\"pw-contradict\" class=\"vocab\" data-word=\"contradict\">contradict</span> that decades-old <span id=\"pw-assumption\" class=\"vocab\" data-word=\"assumption\">assumption</span>, and they began to put forward the radical idea <span class=\"cue\">that</span> the brain is built to forget.</span> <span class=\"sent-step\" data-step=\"5\" id=\"sent-rather\">A growing body of work suggests <span class=\"cue\">that</span> the loss of memories is not a passive process. <span class=\"cue dm\" data-cat=\"contrast\">Rather</span>, forgetting seems to be an active <span id=\"pw-mechanism\" class=\"vocab\" data-word=\"mechanism\">mechanism</span>, constantly at work in the brain; in some animals, the brain's standard state is not to remember, but to forget. A better understanding of this state could lead to breakthroughs in treatments for anxiety, post-traumatic stress disorder, and even Alzheimer's disease.</span></p>","<p id=\"para-3\"><span class=\"sent-step\" data-step=\"1\">Different types of memory are created and stored in varying ways. Autobiographical memories — those of events experienced personally — begin to take lasting form in a part of the brain called the hippocampus in the hours and days <span class=\"cue\">that</span> follow the event.</span> <span class=\"sent-step\" data-step=\"2\">Neurons communicate with one another through synapses, and through a process known as synaptic <span id=\"pw-plasticity\" class=\"vocab\" data-word=\"plasticity\">plasticity</span> they constantly produce new proteins to remodel parts of the synapse, selectively strengthening their connections.</span> <span id=\"sent-the-more\">The more often a memory is recalled, the stronger its neural network becomes.</span> <span class=\"sent-step\" data-step=\"3\" id=\"sent-where\"><span class=\"dm\" data-cat=\"sequence\">Over time</span>, the memory becomes encoded in both the hippocampus and the cortex, <span class=\"cue\">where</span> it is eventually put away for long-term storage.</span> <span class=\"sent-step\" data-step=\"4\">Neuroscientists refer to this physical representation of a memory as an engram.</span></p>","<p id=\"para-4\"><span class=\"sent-step\" data-step=\"1\">Much is still unknown about how memories are created, <span class=\"cue dm\" data-cat=\"contrast\">but</span> how the brain forgets has been largely <span id=\"pw-overlook\" class=\"vocab\" data-word=\"overlook\">overlooked</span>.</span> <span class=\"sent-step\" data-step=\"2\">It was not at the forefront of Ron Davis's mind when he uncovered evidence of active forgetting in fruit flies in 2012.</span> <span class=\"sent-step\" data-step=\"3\">Davis was studying memory formation in the flies' mushroom bodies — dense networks of neurons <span class=\"cue\">that</span> store sensory memories. Intriguingly, he found <span class=\"cue\">that</span> dopamine is <span class=\"vocab\" data-word=\"essential\">essential</span> to forgetting.</span> <span class=\"sent-step\" data-step=\"4\" id=\"sent-yet\">He and his colleagues conditioned flies to associate electric shocks with certain odours, thereby training the insects to avoid them. They then activated the dopaminergic neurons and observed <span class=\"cue\">that</span> the flies quickly forgot the association. <span class=\"cue dm\" data-cat=\"contrast\">Yet</span> blocking the same neurons <span class=\"vocab\" data-word=\"preserve\">preserved</span> the memory. 'The brain is always trying to forget the information it's already learnt,' Davis says.</span></p>","<p id=\"para-5\"><span class=\"sent-step\" data-step=\"5\"><span class=\"dm\" data-cat=\"sequence\">A few years later</span>, Oliver Hardt found something similar in rats.</span> <span class=\"sent-step\" data-step=\"6\">Memories are encoded when the strength of the connection between neurons increases, and <span class=\"cue\">that</span> connection strength is determined by the amount of a particular type of receptor at the synapse. Known as AMPA receptors, these structures must be maintained for a memory to remain intact. Hardt's lab showed <span class=\"cue\">that</span> a dedicated mechanism continuously promotes the expression of AMPA receptors, yet some memories are still forgotten.</span> <span class=\"sent-step\" data-step=\"7\">When he blocked the mechanism behind AMPA-receptor removal in the hippocampus of rats, the animals were prevented from forgetting the locations of objects.</span> <span class=\"sent-step\" data-step=\"8\" id=\"sent-not-but\">Paul Frankland found further evidence <span class=\"cue\">that</span> the brain is wired to forget: when new neurons <span class=\"vocab\" data-word=\"integrate\">integrate</span> into an adult mouse's hippocampus, the mice forget more. Forgetting, Hardt says, 'is not a failure of memory, but a function of it'.</span></p>","<p id=\"para-6\"><span class=\"sent-step\" data-step=\"1\">Researchers think <span class=\"cue\">that</span> the human brain might operate in a similar way.</span> <span class=\"sent-step\" data-step=\"2\">Blake Richards suggests <span class=\"cue\">that</span> the brain's ability to forget might prevent an effect known as overfit, <span class=\"cue\">which</span> occurs when a mathematical model is so good at matching the data it has been trained on <span class=\"cue\">that</span> it cannot predict what comes next.</span> <span class=\"sent-step\" data-step=\"3\"><span class=\"dm\" data-cat=\"addition\">In a similar way</span>, if a person remembered every detail of an experience, it might be more difficult to generalize across experiences.</span> <span class=\"sent-step\" data-step=\"4\">'If you <span id=\"phrase-wash-out\">wash out a few details</span> but retain the gist, it helps you to use it in novel situations,' Richards says. 'It's entirely possible <span class=\"cue\">that</span> our brain engages in a bit of controlled forgetting in order to prevent us from overfitting to our experiences.'</span></p>"],"gist":{"hint":"Skim the whole passage in 1–2 minutes. Don't read word by word — catch the main idea only.","question":"What is the main idea of this article?","options":["Forgetting is a sign of memory failure that scientists hope to prevent.","Forgetting is an active, adaptive brain function — not the opposite of remembering, but part of it.","Memories are stored permanently in the hippocampus and never change.","Animals remember better when they produce more new neurons."],"correct":1,"paragraphFunctions":[{"p":"¶1–2","label":"The Puzzle and the Radical Idea"},{"p":"¶3","label":"How Memories Are Made"},{"p":"¶4–5","label":"Evidence Across Species"},{"p":"¶6","label":"What Forgetting Is For"}],"doneMessage":"✓ Structure mapped: an old view → a radical new idea → cross-species evidence → the adaptive value of forgetting."},"structure":{"cardTitle":"Text Structure","cardSubtitle":"说明结构 · Description","layout":"hub","question":"How is this article organised overall? (Hint: it is not a single chronological story.)","centerLines":["The new science","of forgetting"],"centerSub":"Description structure","nodes":[{"label":"Puzzle ¶1","sub":"Memory defines us — why forget?","tone":"mint"},{"label":"Radical idea ¶2","sub":"Passive decay → active mechanism","tone":"gold"},{"label":"Biology ¶3","sub":"Hippocampus · synapse · engram","tone":"mint"},{"label":"Flies ¶4","sub":"Dopamine = 'forget' signal","tone":"coral"},{"label":"Rodents ¶5","sub":"AMPA removal + neurogenesis","tone":"gold"},{"label":"Humans ¶6","sub":"Controlled forgetting → avoid overfit","tone":"plum"}],"summaryHtml":"全文整体是<strong>Description（分说式）结构</strong>——围绕“遗忘的新科学”从“旧观点 → 激进新说 → 生物学基础 → 跨物种证据 → 人类意义”逐层展开；其中第4–5段内部构成一个<strong>Evidence chain（证据链）</strong>子结构，从果蝇到大鼠、小鼠层层推进。"},"textWalkthrough":[{"title":"The Puzzle and the Radical Idea","subtitle":"谜题与激进观点","tag":"¶1–2","targets":["para-1","para-2"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Open claim","labelZh":"提出主张"},{"id":"2","labelEn":"Turn: half the picture","labelZh":"转折：只看到一半"},{"id":"3","labelEn":"Old assumption","labelZh":"旧观点：被动遗忘"},{"id":"4","labelEn":"Radical idea","labelZh":"新观点：大脑为遗忘而生"},{"id":"5","labelEn":"Stakes","labelZh":"研究意义"}],"devices":[{"cat":"contrast","labelEn":"Contrast","labelZh":"转折/让步"}]},"questions":[{"type":"Fact","question":"What did most researchers believe about forgetting until about ten years ago?","questionZh":"直到约十年前，多数研究者认为遗忘是怎样的？","answerEn":"They believed it was a passive process in which unused memories decay over time, like a photograph left in the sunlight.","answerZh":"他们认为遗忘是被动过程：未被使用的记忆随时间衰退，如同照片在阳光下褪色。"},{"type":"Structure","question":"How does the opening turn from \"how we remember\" to \"why we forget\" — and what device signals the turn?","questionZh":"开头如何从“我们如何记忆”转向“我们为何遗忘”？用什么衔接手段标志这一转折？","answerEn":"It opens with the familiar question of how memories form, then turns with \"But\" to argue that scientists were looking at only half the picture: remembering cannot be understood without forgetting.","answerZh":"先提出熟悉的“记忆如何形成”问题，再用 But 转折指出科学家只看到一半图景：不理解遗忘就无法理解记忆。"},{"type":"Infer","question":"Why might studying forgetting lead to treatments for anxiety or PTSD?","questionZh":"为什么研究遗忘可能推动焦虑、PTSD 等疾病的治疗？","answerEn":"If forgetting is an active, regulated mechanism, then disorders involving intrusive or persistent memories may be cases of faulty forgetting — so understanding the mechanism could point to new treatments.","answerZh":"如果遗忘是主动、可调节的机制，那么与侵入性记忆相关的疾病（焦虑、PTSD）可能是遗忘失灵——理解机制就指向治疗思路。"}]},{"title":"How Memories Are Made","subtitle":"记忆如何形成","tag":"¶3","targets":["para-3"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Location","labelZh":"定位：海马体"},{"id":"2","labelEn":"Mechanism","labelZh":"机制：突触可塑性"},{"id":"3","labelEn":"Consolidation","labelZh":"巩固：长期储存"},{"id":"4","labelEn":"Trace","labelZh":"命名：印痕"}],"devices":[{"cat":"sequence","labelEn":"Sequence","labelZh":"顺序/推进"}]},"questions":[{"type":"Fact","question":"Where do autobiographical memories first take lasting form, and what happens to them over time?","questionZh":"自传体记忆最初在哪里形成持久痕迹？随时间推移它们会怎样？","answerEn":"They begin in the hippocampus; through repeated recall they become encoded in both the hippocampus and the cortex, and are eventually stored long-term in the cortex.","answerZh":"它们先在海马体形成；反复提取后同时编码于海马体与皮层，最终长期储存在皮层。"},{"type":"Vocabulary","question":"What does \"plasticity\" mean in \"synaptic plasticity\"?","questionZh":"“突触可塑性”中的 plasticity 是什么意思？","answerEn":"Plasticity means the ability to change and adapt; synaptic plasticity is the constant remodelling of synapses that lets neurons strengthen or weaken their connections.","answerZh":"plasticity 意为“可塑性”：突触可塑性指突触不断重塑，使神经元连接增强或减弱的能力。"},{"type":"Structure","question":"What pattern is used in \"The more often a memory is recalled, the stronger its neural network becomes\"?","questionZh":"“记忆被提取得越频繁，其神经回路就越强”使用了什么句式？","answerEn":"A comparative correlative: \"the more…, the stronger…\" expresses a proportional relationship — recall frequency directly scales with network strength.","answerZh":"比较关联句式 the more…, the stronger…：表达正比关系——提取越频繁，神经回路越强。"}]},{"title":"Evidence Across Species","subtitle":"跨物种的证据","tag":"¶4–5","targets":["para-4","para-5"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Overlooked problem","labelZh":"被忽视的问题"},{"id":"2","labelEn":"Case: flies","labelZh":"果蝇实验"},{"id":"3","labelEn":"Twist: dopamine","labelZh":"转折：多巴胺"},{"id":"4","labelEn":"Proof: block & preserve","labelZh":"验证：阻断与保留"},{"id":"5","labelEn":"From flies to rodents","labelZh":"从果蝇到大鼠"},{"id":"6","labelEn":"Mechanism: AMPA receptors","labelZh":"机制：AMPA 受体"},{"id":"7","labelEn":"Proof: blocking removal","labelZh":"验证：阻断清除"},{"id":"8","labelEn":"Function","labelZh":"结论：遗忘是功能"}],"devices":[{"cat":"contrast","labelEn":"Contrast","labelZh":"转折"},{"cat":"sequence","labelEn":"Sequence","labelZh":"顺序/推进"}]},"questions":[{"type":"Fact","question":"What did Davis find about dopamine in fruit flies, and how did he test it?","questionZh":"Davis 在果蝇身上发现了多巴胺的什么作用？他是如何验证的？","answerEn":"Dopamine is essential to forgetting: activating the dopaminergic neurons made flies quickly forget a shock–odour association, while blocking the same neurons preserved the memory.","answerZh":"多巴胺是遗忘所必需的：激活多巴胺神经元使果蝇迅速忘记“电击—气味”关联；阻断这些神经元则保留记忆。"},{"type":"Structure","question":"How does the evidence move across paragraphs — and what signals the shift?","questionZh":"证据如何在段落间推进？什么标志了这种转换？","answerEn":"It moves from fruit flies (Davis) to rats (Hardt) and mice (Frankland) — a cross-species progression signalled by \"A few years later\" and parallel block-and-observe experiments.","answerZh":"证据从果蝇（Davis）到大鼠（Hardt）、小鼠（Frankland）逐层推进——由 A few years later 和平行的“阻断—观察”实验标志。"},{"type":"Infer","question":"Why does Hardt call forgetting \"not a failure of memory, but a function of it\"?","questionZh":"Hardt 为何称遗忘“不是记忆的失败，而是记忆的功能”？","answerEn":"Because a dedicated mechanism actively removes AMPA receptors to erase connections; when that removal was blocked, rats stopped forgetting — so forgetting is built-in, regulated work, not decay.","answerZh":"因为存在专门移除 AMPA 受体、清除连接的主动机制；阻断该机制后大鼠不再遗忘——所以遗忘是内置且受调控的功能，而非衰退。"}]},{"title":"What Forgetting Is For","subtitle":"遗忘的作用","tag":"¶6","targets":["para-6"],"paragraphLogic":{"steps":[{"id":"1","labelEn":"Claim","labelZh":"提出观点"},{"id":"2","labelEn":"Analogy: overfit","labelZh":"类比：过度拟合"},{"id":"3","labelEn":"Illustration","labelZh":"举例说明"},{"id":"4","labelEn":"Conclusion","labelZh":"结论"}],"devices":[{"cat":"addition","labelEn":"Addition","labelZh":"补充/类比"}]},"questions":[{"type":"Vocabulary","question":"What does \"overfit\" mean, and why does Richards borrow it from artificial intelligence?","questionZh":"overfit 是什么意思？Richards 为什么从人工智能领域借用这个词？","answerEn":"Overfitting means a model matches its training data so precisely that it cannot predict new data; Richards uses it as an analogy for a memory that keeps every detail and therefore cannot generalise.","answerZh":"过度拟合指模型对训练数据拟合得过于精确，以致无法预测新数据；Richards 借它类比“记住一切细节、无法泛化”的记忆。"},{"type":"Infer","question":"According to Richards, how does forgetting help us use past experience in new situations?","questionZh":"按 Richards 的观点，遗忘如何帮助我们把过往经验用于新情境？","answerEn":"By washing out a few details while retaining the gist, we avoid being trapped by specific instances and can apply the essence of an experience elsewhere.","answerZh":"忘掉部分细节、保留要旨，我们才不会被具体实例困住，能把经验的要点迁移到新情境。"},{"type":"Reflect","question":"Do you think a perfect memory would be a blessing or a burden? Give reasons.","questionZh":"你认为完美的记忆是福还是祸？请说明理由。","answerEn":"Open response — strong answers weigh the trade-off: rich recall can help, but remembering every detail may make it harder to extract the gist and can feed obsessive thinking.","answerZh":"开放性回答——有力回答会权衡得失：丰富的回忆有帮助，但记住一切细节可能让人难以提取要旨，并助长强迫倾向。"}]}],"deepDive":{"title":"Four Threads Through the New Science of Forgetting","subtitle":"遗忘新科学的四条线索","question":"What four ideas weave through the article's account of the new science of forgetting?","bulletsEn":[["Paradigm shift","Forgetting was long treated as passive decay; researchers now argue the brain is actively built to forget."],["Cross-species evidence","Dopamine in flies, AMPA-receptor removal in rats and neurogenesis in mice all point to active forgetting."],["The biology","Memories exist as changing synaptic connections; forgetting works by dismantling or rewriting them."],["Adaptive purpose","Controlled forgetting prevents 'overfitting', supports generalisation, and may guide treatments for anxiety, PTSD and Alzheimer's."]],"summaryEn":"The article describes a paradigm shift: forgetting is not memory failure but an adaptive brain function, backed by evidence across species and promising for treatment.","bulletsZh":[["范式转变","遗忘长期被视为被动衰退；研究者如今认为大脑天生就是要遗忘的。"],["跨物种证据","果蝇的多巴胺、大鼠的 AMPA 受体移除、小鼠的神经发生，都指向主动遗忘。"],["生物学基础","记忆以不断变化的突触连接存在；遗忘通过拆除或改写连接实现。"],["适应功能","受控遗忘防止“过度拟合”、支持泛化，并可能为焦虑、PTSD 与阿尔茨海默病提供治疗思路。"]],"summaryZh":"文章描述了一场范式转变：遗忘不是记忆的失败，而是大脑的适应功能，有跨物种证据支持，并蕴含治疗前景。"},"powerWords":[{"target":"pw-contradict","word":"contradict","pos":"v.","meaningEn":"(of facts or statements) to disagree with something else","trait":"academic register","meaningZh":"与……矛盾；反驳"},{"target":"pw-assumption","word":"assumption","pos":"n.","meaningEn":"something accepted as true without proof","trait":"academic register","meaningZh":"假设；假定"},{"target":"pw-mechanism","word":"mechanism","pos":"n.","meaningEn":"a system of parts or processes working together (here: a biological process)","trait":"academic register","meaningZh":"机制；机理"},{"target":"pw-plasticity","word":"plasticity","pos":"n.","meaningEn":"the ability to change and adapt (neural plasticity)","trait":"technical register","meaningZh":"可塑性（神经可塑性）"},{"target":"pw-overlook","word":"overlook","pos":"v.","meaningEn":"to fail to notice or consider something","trait":"熟词僻义","meaningZh":"忽视；漏看（不是“俯瞰”）"}],"phrases":[{"target":"phrase-half-picture","word":"look at only half the picture","pos":"phr.","meaningEn":"to understand only part of a situation","trait":"idiomatic","meaningZh":"只看到事情的一面（片面理解）"},{"target":"phrase-bump-against","word":"bump up against","pos":"phr.","meaningEn":"to come across something unexpected (a problem or a finding)","trait":"idiomatic","meaningZh":"偶然遇到（难题或发现）"},{"target":"phrase-wash-out","word":"wash out a few details","pos":"phr.","meaningEn":"to forget or remove some details, keeping only the essentials","trait":"idiomatic","meaningZh":"滤掉一些细节（只留要点）"}],"structures":[{"title":"Contrast & Concession","subtitle":"转折与让步","tag":"but / rather / yet","items":[{"target":"sent-contrast-1","text":"But those scientists might have been looking at only half the picture."},{"target":"sent-rather","text":"Rather, forgetting seems to be an active mechanism, constantly at work in the brain."},{"target":"sent-yet","text":"Yet blocking the same neurons preserved the memory."},{"target":"sent-not-but","text":"Forgetting, Hardt says, 'is not a failure of memory, but a function of it'."}]},{"title":"Relative Clauses","subtitle":"定语从句（补充说明）","tag":"that / in which / where","items":[{"target":"sent-in-which","text":"a passive process in which memories, unused, decay over time like a photograph left in the sunlight"},{"target":"sent-that-findings","text":"findings that seemed to contradict that decades-old assumption"},{"target":"sent-where","text":"the cortex, where it is eventually put away for long-term storage"}]},{"title":"Comparative Correlative","subtitle":"比较关联句式","tag":"the more…, the stronger…","items":[{"target":"sent-the-more","text":"The more often a memory is recalled, the stronger its neural network becomes."}]}],"trueFalse":[{"n":1,"text":"Until recently, most scientists believed that forgetting was an active process.","answer":false,"reason":"The article says most researchers thought forgetting was a passive process in which unused memories decay over time."},{"n":2,"text":"In Davis's experiments, blocking dopaminergic neurons preserved the flies' memory of the shock–odour association.","answer":true,"reason":"Activating the neurons made the flies forget quickly, while blocking the same neurons preserved the memory."},{"n":3,"text":"Hardt found that actively removing AMPA receptors at synapses strengthens long-term memory.","answer":false,"reason":"It is the maintenance of AMPA receptors that keeps a memory intact; their active removal is what allows forgetting."},{"n":4,"text":"Increasing neurogenesis in adult mice made them forget more.","answer":true,"reason":"Frankland's 2014 study found the opposite of better memory: more new neurons meant the mice forgot more."},{"n":5,"text":"Richards believes that remembering every detail helps people generalise across experiences.","answer":false,"reason":"He argues that controlled forgetting — washing out details while keeping the gist — prevents overfitting and supports generalisation."}],"vocabMatch":[{"word":"contradict","meaning":"to say the opposite of something; (of facts) to disagree with something"},{"word":"assumption","meaning":"something accepted as true without proof"},{"word":"mechanism","meaning":"a system of parts or processes that work together"},{"word":"plasticity","meaning":"the ability to change and adapt"},{"word":"overlook","meaning":"to fail to notice or consider something"},{"word":"preserve","meaning":"to keep something unchanged or intact"},{"word":"essential","meaning":"absolutely necessary; central"},{"word":"integrate","meaning":"to combine into an existing whole"}],"vocabMatchHint":"There are eight highlighted words in the text. Match each word with its meaning.","vocabDoneMessage":"🎉 全部配对成功！你已从语境推断出生词含义。","longSentences":[{"id":"long-1","type":"复合句 · 时间状语 + 宾语从句 + 定语从句","sentence":"Until about ten years ago, most researchers thought that forgetting was a passive process in which memories, unused, decay over time like a photograph left in the sunlight.","translation":"直到大约十年前，多数研究者认为遗忘是一个被动过程：未被使用的记忆会随时间流逝而衰退，就像遗留在阳光下的照片。","clauses":[{"label":"时间状语","part":"Until about ten years ago","zh":"直到大约十年前"},{"label":"主句","part":"most researchers thought","zh":"多数研究者（曾）认为"},{"label":"宾语从句","part":"that forgetting was a passive process","zh":"遗忘是一个被动的过程"},{"label":"定语从句","part":"in which memories, unused, decay over time like a photograph left in the sunlight","zh":"在这一过程中，未被使用的记忆如同遗留在阳光下的照片一般随时间衰退"}],"exercises":[{"ask":"找出全句的主句主干（主语＋谓语）","askEn":"Find the main clause (subject + predicate)","target":"most researchers thought","why":"most researchers 是主语，thought 是谓语动词，二者构成全句主干；其后 that 引导的整块都是 thought 的内容（宾语），不是主干。","confuse":"你选的是修饰或从属成分：它要么交代时间，要么由 that / in which 引导，不能独立成为全句主干。","transfer":"先找“谁＋做了什么”：名词主语加谓语动词就是主干，从句永远不是主干。"},{"ask":"找出 thought 后面的宾语从句","askEn":"Find the object clause after 'thought'","target":"that forgetting was a passive process","why":"thought 是表认知的及物动词，后面 that 从句回答“认为的是什么”，作 thought 的宾语，所以是宾语从句。","confuse":"in which 那块虽然也含完整主谓，但它修饰前面的名词 process，是定语从句，不是 thought 的宾语。","transfer":"认知动词（think / believe / suggest / find）＋that，that 从句通常是宾语从句。"},{"ask":"找出修饰名词 process 的定语从句","askEn":"Find the relative clause modifying 'process'","target":"in which memories, unused, decay over time like a photograph left in the sunlight","why":"in which 可还原为 in the process，整个从句修饰前面的名词 process，说明“在这个过程中”发生什么，是定语从句。","confuse":"that forgetting… 那块是 thought 的宾语，并不修饰 process，注意被修饰名词是谁。","transfer":"介词＋which（in which / by which）引导、修饰前面名词的，是定语从句。"}]},{"id":"long-5","type":"复合句 · 定语从句 + 同位语从句","sentence":"Then a handful of researchers investigating memory began to bump up against findings that seemed to contradict that decades-old assumption, and they began to put forward the radical idea that the brain is built to forget.","translation":"随后，少数研究记忆的科学家开始碰到一些似乎与那个几十年之久的假设相矛盾的研究发现，并开始提出一个激进的观点：大脑天生就是要遗忘的。","clauses":[{"label":"句首时间状语","part":"Then","zh":"随后"},{"label":"主句（含分词定语）","part":"a handful of researchers investigating memory began to bump up against findings","zh":"少数研究记忆的研究者开始碰到一些研究发现"},{"label":"定语从句","part":"that seemed to contradict that decades-old assumption","zh":"这些发现似乎与那个存在了几十年的假设相矛盾"},{"label":"并列分句","part":"and they began to put forward the radical idea","zh":"于是他们开始提出一个激进的观点"},{"label":"同位语从句","part":"that the brain is built to forget","zh":"大脑天生就是用来遗忘的"}],"exercises":[{"ask":"找出第一个主句的主干","askEn":"Find the first main clause","target":"a handful of researchers investigating memory began to bump up against findings","why":"researchers 是主语，investigating memory 是现在分词作后置定语修饰 researchers，began to bump up against 是谓语，findings 是宾语，合起来是第一个并列句的主干。","confuse":"investigating memory 前面没有 be 动词，不是进行时谓语，而是修饰 researchers 的分词定语，别把它当成一个从句。","transfer":"-ing 前没有 be 动词时，它多半是定语或状语，而不是谓语。"},{"ask":"找出修饰 findings 的定语从句","askEn":"Find the relative clause modifying 'findings'","target":"that seemed to contradict that decades-old assumption","why":"这个 that 在从句中充当主语（seemed 的主语），从句用来限定前面的 findings（“什么样的”发现），是定语从句。","confuse":"句末 that the brain is built to forget 里的 that 不充当成分，只连接，是同位语从句；而本题 that 在从句里当主语，是定语从句。","transfer":"that 在从句中充当主语/宾语 → 定语从句；that 只起连接、不充当成分 → 同位语或宾语从句。"},{"ask":"找出说明 idea 具体内容的同位语从句","askEn":"Find the appositive clause explaining 'idea'","target":"that the brain is built to forget","why":"that 从句完整陈述 idea 的具体内容（idea 就等于这句话），且 that 不在从句中充当任何成分，是同位语从句。","confuse":"修饰 findings 的 that 在从句中作主语，是定语从句；本题从句结构完整、that 不充当成分，才是同位语从句。","transfer":"名词（idea / fact / belief）＋that＋结构完整的句子，且 that 不充当成分 = 同位语从句。"}]},{"id":"long-2","type":"并列复合句 · 分词状语","sentence":"Neurons communicate with one another through synapses, and through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse, selectively strengthening their connections.","translation":"神经元通过突触相互通信；通过一个被称为“突触可塑性”的过程，它们不断产生新的蛋白质来重塑突触的某些部分，从而有选择地强化连接。","clauses":[{"label":"并列分句 1","part":"Neurons communicate with one another through synapses","zh":"神经元通过突触彼此传递信息"},{"label":"并列分句 2","part":"and through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse","zh":"而通过一个被称为“突触可塑性”的过程，它们不断产生新的蛋白质，以重塑突触的各个部分"},{"label":"现在分词作伴随状语","part":"selectively strengthening their connections","zh":"有选择地强化它们之间的连接"}],"exercises":[{"ask":"找出句末现在分词作伴随状语的部分","askEn":"Find the present-participle adverbial","target":"selectively strengthening their connections","why":"strengthening 前没有 be 动词，逻辑主语就是主句主语 they，用逗号隔开表示伴随主句发生的次要动作，是现在分词作伴随状语。","confuse":"它既没有并列连词也没有独立主语，不能算并列分句，只是依附主句的伴随状语。","transfer":"句末逗号＋doing，且逻辑主语等于主句主语，表伴随或结果 → 分词状语。"},{"ask":"找出 and 连接的第一个并列分句","askEn":"Find the first coordinated clause","target":"Neurons communicate with one another through synapses","why":"它有独立主语 Neurons 和谓语 communicate，是 and 连接的两个完整分句中的第一个。","confuse":"句末 strengthening… 没有独立主语，不是分句；只有“主语＋谓语”齐全的才算一个分句。","transfer":"and 连接两个各自具备主谓的完整句子，就是并列复合句。"}]},{"id":"long-3","type":"复合句 · 时间状语从句 + 被动语态","sentence":"Memories are encoded when the strength of the connection between neurons increases, and that connection strength is determined by the amount of a particular type of receptor at the synapse.","translation":"当神经元之间连接的强度增强时，记忆便被编码；而连接的强度又取决于突触上某种特定类型受体的数量。","clauses":[{"label":"主句（被动）","part":"Memories are encoded","zh":"记忆被编码"},{"label":"时间状语从句","part":"when the strength of the connection between neurons increases","zh":"当神经元之间连接的强度增强时"},{"label":"并列分句（被动）","part":"and that connection strength is determined by the amount of a particular type of receptor at the synapse","zh":"而这种连接强度由突触上某类特定受体的数量决定"}],"exercises":[{"ask":"找出 when 引导的时间状语从句","askEn":"Find the time adverbial clause introduced by 'when'","target":"when the strength of the connection between neurons increases","why":"when 从句有完整主谓（strength…increases），用来说明主句动作“被编码”发生的时间，是时间状语从句。","confuse":"这个 when 说明的是整个主句发生的时间，并不修饰某个时间名词，所以不是定语从句。","transfer":"when 表“当……时”、修饰整个主句 → 时间状语从句；只有紧跟时间名词并修饰该名词时才是定语从句。"},{"ask":"找出使用被动语态的主句","askEn":"Find the main clause in the passive voice","target":"Memories are encoded","why":"Memories 是动作 encode 的承受者，are encoded 是 be＋过去分词的被动结构，且是全句主句。","confuse":"后面 is determined by… 也是被动，但它由 and 连接、是第二个并列分句，不是开头的主句。","transfer":"be＋过去分词、主语是动作承受者 = 被动语态。"}]},{"id":"long-4","type":"复合句 · 宾语从句 + 非限制性定语从句 + so…that 结果状语","sentence":"Blake Richards suggests that the brain's ability to forget might prevent an effect known as overfit, which occurs when a mathematical model is so good at matching the data it has been trained on that it cannot predict what comes next.","translation":"布莱克·理查兹提出，大脑的遗忘能力或许可以防止一种名为“过拟合”的效应——当一个数学模型太擅长匹配其训练过的数据，以至于无法预测接下来会发生什么时，这种效应就会出现。","clauses":[{"label":"主句","part":"Blake Richards suggests","zh":"布莱克·理查兹提出"},{"label":"宾语从句","part":"that the brain's ability to forget might prevent an effect known as overfit","zh":"大脑的遗忘能力或许可以避免一种被称为“过拟合”的效应"},{"label":"非限制性定语从句","part":"which occurs when a mathematical model is so good at matching the data it has been trained on","zh":"当一个数学模型过于擅长拟合它所训练的数据时，（这种效应）就会出现"},{"label":"结果状语从句","part":"that it cannot predict what comes next","zh":"以至于它无法预测接下来会发生什么"}],"exercises":[{"ask":"找出 suggests 后面的宾语从句","askEn":"Find the object clause after 'suggests'","target":"that the brain's ability to forget might prevent an effect known as overfit","why":"suggests 后的 that 从句回答“提出了什么内容”，作 suggests 的宾语，是宾语从句。","confuse":"which occurs… 由 which 引导、修饰 overfit，是定语从句；紧跟谓语动词 suggests 的 that 从句才是宾语。","transfer":"及物动词＋that 陈述其具体内容 → 宾语从句。"},{"ask":"找出 so…that 引导的结果状语从句","askEn":"Find the result clause of 'so…that'","target":"that it cannot predict what comes next","why":"前半句有 so good，这个 that 从句表示“如此擅长……以至于……”的结果，是结果状语从句。","confuse":"这个 that 呼应的是前面的 so，而不是某个名词，不能误判为定语从句。","transfer":"so＋形容词/副词＋that 从句 = 结果状语从句。"},{"ask":"找出补充说明 overfit 的非限制性定语从句","askEn":"Find the non-restrictive relative clause for 'overfit'","target":"which occurs when a mathematical model is so good at matching the data it has been trained on","why":"which 指代前面的名词 overfit（一种效应），补充说明它在什么情况下出现，前面用逗号隔开，是非限制性定语从句。","confuse":"句末 that it cannot predict… 与 so good 搭配表结果，是结果状语从句；本题 which 才是修饰 overfit 的定语从句。","transfer":"逗号＋which，指代前面的名词或整件事、作补充说明 = 非限制性定语从句。"}]}],"vocabBook":[{"word":"hippocampus","pos":"n.","meaning":"海马体（参与记忆形成与巩固的脑区）","source":"begin to take lasting form in a part of the brain called the hippocampus in the hours and days that follow the event"},{"word":"synapse","pos":"n.","meaning":"突触（神经元之间的连接点）","source":"Neurons communicate with one another through synapses"},{"word":"plasticity","pos":"n.","meaning":"可塑性（神经连接可被重塑的特性）","source":"through a process known as synaptic plasticity they constantly produce new proteins to remodel parts of the synapse"},{"word":"engram","pos":"n.","meaning":"记忆印痕（记忆在大脑中的物理表征）","source":"Neuroscientists refer to this physical representation of a memory as an engram"},{"word":"dopamine","pos":"n.","meaning":"多巴胺（一种神经递质，与遗忘密切相关）","source":"he found that dopamine is essential to forgetting"},{"word":"receptor","pos":"n.","meaning":"受体（接受信号并触发反应的蛋白质结构）","source":"connection strength is determined by the amount of a particular type of receptor at the synapse"},{"word":"overfit","pos":"v./n.","meaning":"过拟合（对训练数据过度匹配而失去泛化能力）","source":"the brain's ability to forget might prevent an effect known as overfit"},{"word":"generalize","pos":"v.","meaning":"泛化；推广（将经验应用到新情境）","source":"if a person remembered every detail of an experience, it might be more difficult to generalize across experiences"},{"word":"gist","pos":"n.","meaning":"要点；主旨大意","source":"if you wash out a few details but retain the gist, it helps you to use it in novel situations"},{"word":"wired","pos":"adj.","meaning":"天生的（be wired to 天生倾向于…）","source":"Paul Frankland found further evidence that the brain is wired to forget"},{"word":"conditioned","pos":"v.","meaning":"使形成条件反射（condition 的过去式，熟词僻义）","source":"He and his colleagues conditioned flies to associate electric shocks with certain odours"}],"wordGlossary":[{"word":"passive","pos":"adj.","meaning":"被动的；消极的","meaningEn":"not active; acted upon rather than acting (syn. inactive, inert)"},{"word":"decay","pos":"v./n.","meaning":"衰退；腐烂","meaningEn":"to gradually decline, rot or lose strength (syn. deteriorate, decompose)"},{"word":"contradict","pos":"v.","meaning":"与……相矛盾","meaningEn":"to assert the opposite; to conflict with (syn. dispute, oppose)"},{"word":"assumption","pos":"n.","meaning":"假设；设想","meaningEn":"something accepted as true without proof (syn. supposition, presumption)"},{"word":"radical","pos":"adj.","meaning":"激进的；根本的","meaningEn":"fundamental or far-reaching; drastic (syn. sweeping, thoroughgoing)"},{"word":"mechanism","pos":"n.","meaning":"机制；机理","meaningEn":"a process or system by which something works (syn. machinery, apparatus)"},{"word":"plasticity","pos":"n.","meaning":"可塑性","meaningEn":"the ability to change, mould and adapt (syn. adaptability, flexibility)"},{"word":"Autobiographical","pos":"adj.","meaning":"自传体的；自传式的","meaningEn":"relating to a person’s own life story (syn. self-referential)"},{"word":"overfit","pos":"v./n.","meaning":"过拟合（模型过度匹配训练数据）","meaningEn":"to match training data too closely and lose general applicability"},{"word":"remodel","pos":"v.","meaning":"重塑；改造","meaningEn":"to change the structure or form of something (syn. reshape, rebuild)"},{"word":"encode","pos":"v.","meaning":"编码；将……转化为记忆","meaningEn":"to convert information into a stored form, e.g. a memory (syn. record, code)"},{"word":"essential","pos":"adj.","meaning":"必不可少的；本质的","meaningEn":"absolutely necessary; central (syn. crucial, vital)"},{"word":"neural","pos":"adj.","meaning":"神经的","meaningEn":"relating to a nerve or the nervous system (syn. neuronal)"},{"word":"sensory","pos":"adj.","meaning":"感觉的；感官的","meaningEn":"relating to the senses or sensation (syn. perceptual)"},{"word":"retrieve","pos":"v.","meaning":"提取；检索（记忆）","meaningEn":"to get something back; to recall a memory (syn. recover, recall)"},{"word":"adaptive","pos":"adj.","meaning":"适应性的；有适应能力的","meaningEn":"able to adjust to new conditions (syn. flexible, adjustable)"},{"word":"impair","pos":"v.","meaning":"损害；削弱","meaningEn":"to weaken or damage (syn. undermine, harm)"},{"word":"boost","pos":"v.","meaning":"促进；增强","meaningEn":"to increase, raise or strengthen (syn. enhance, strengthen)"},{"word":"permanent","pos":"adj.","meaning":"永久的；长久的","meaningEn":"lasting or intended to last forever (syn. enduring, lasting)"},{"word":"mushroom bodies","pos":"n.","meaning":"蕈形体（昆虫脑内与学习记忆相关的结构）","meaningEn":"paired structures in insect brains involved in learning and memory"}]},"postReading":{"predictionCheck":{"prompt":"Look back at your prediction from the pre-reading stage. Was it correct? What surprised you most about the new science of forgetting?","placeholder":"My reflection..."},"speaking":{"hint":"Discuss with a partner in class, or jot down your own thoughts if you're working alone.","prompts":[{"prompt":"Do you agree that forgetting is a \"function\" rather than a \"failure\" of memory? Give an example from your own study or daily life.","placeholder":"Notes for discussion..."},{"prompt":"Which piece of evidence in the article (flies, rats, or mice) do you find most convincing, and why?","placeholder":"Notes for discussion..."}]},"textToSelf":{"prompt":"Think of a time you \"overfit\" — memorised details without understanding the gist. How might controlled forgetting have helped you?","placeholder":"My reflection..."},"textToWorld":{"prompt":"Should we design education, exams, or AI systems to \"forget\" more? Pick a side and explain your reasoning.","placeholder":"Explain your reasoning...","sides":[{"id":"optimistic","label":"🌊 更乐观 Optimistic"},{"id":"concerned","label":"📺 更担忧 Concerned"}],"extensionPrompt":"The article compares the brain to AI models that \"overfit\". What other everyday systems — apps, study plans, habits — might benefit from controlled forgetting?","extensionPlaceholder":"Your comparison...","tipKey":"debate"},"exitTicket":{"prompt":"Complete this sentence, using one of today's target words if you can: \"One thing I now understand about forgetting is ___.\"","placeholder":"One thing I understand...","tipKey":"exit"}}};
 hydrateFromLocalStorageIfNewer();
 
 const meta = INITIAL_DATA.meta;
@@ -2468,6 +2482,14 @@ document.getElementById('tfRetry').addEventListener('click', () => {
 });
 
 /* ---------- Persist user edits into INITIAL_DATA ---------- */
+function __lessonSig(obj) {
+  try {
+    const s = JSON.stringify(obj, function (k, v) { return k === '_savedAt' ? undefined : v; });
+    let h = 2166136261;
+    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return (h >>> 0).toString(36);
+  } catch (e) { return ''; }
+}
 function hydrateFromLocalStorageIfNewer() {
   try {
     const stem = INITIAL_DATA.meta?.filenameStem;
@@ -2475,6 +2497,11 @@ function hydrateFromLocalStorageIfNewer() {
     const raw = localStorage.getItem(`lesson:${stem}`);
     if (!raw) return;
     const saved = JSON.parse(raw);
+    // Rebuilt lesson JSON is authoritative: if any content changed, drop the stale edit draft.
+    if (__lessonSig(saved) !== __lessonSig(INITIAL_DATA)) {
+      try { localStorage.removeItem(`lesson:${stem}`); } catch (e) {}
+      return;
+    }
     if ((saved._savedAt || 0) > (INITIAL_DATA._savedAt || 0)) {
       const preserved = {};
       for (const k of ['longSentences', 'vocabBook', 'wordGlossary']) {
@@ -2497,6 +2524,13 @@ function hydrateFromLocalStorageIfNewer() {
           !savedParas.some(function (p) { return String(p).indexOf('class="long-sent"') >= 0; })) {
         preserved.passageParagraphs = curParas;
       }
+      // Author-authored NPC annotation (clause.zh / exercises) is content, not a student edit:
+      // it always wins over an older local edit draft, so rebuilt lessons show correct parsing.
+      const curHasAuth = Array.isArray(curLS) && curLS.some(function (ls) {
+        return (Array.isArray(ls.exercises) && ls.exercises.length) ||
+               (Array.isArray(ls.clauses) && ls.clauses.some(function (c) { return !!c.zh; }));
+      });
+      if (curHasAuth) preserved.longSentences = curLS;
       Object.keys(INITIAL_DATA).forEach(k => delete INITIAL_DATA[k]);
       Object.assign(INITIAL_DATA, JSON.parse(JSON.stringify(saved)));
       if (!INITIAL_DATA.whileReading) INITIAL_DATA.whileReading = {};
@@ -3555,13 +3589,106 @@ function sentenceHTML(text, segs, keyWords) {
   });
   return html;
 }
+// Map a (Chinese) grammar label authored in content.json to NPC type/colour:
+// M=main trunk, P=prepositional/adverbial, N=non-finite, C=clause
+function clauseTypeOf(label) {
+  const t = String(label || '');
+  if (/非谓语|分词|不定式|动名词|non-?finite|participle|infinitive|gerund/i.test(t)) return 'N';
+  if (/从句|clause/i.test(t)) return 'C';
+  if (/主干|主句|主语|谓语|宾语|表语|同位|main|subject|predicate|object/i.test(t)) return 'M';
+  return 'P';
+}
+const CLAUSE_CLS = {
+  M: ['np-main', 'af-seg-M'],
+  P: ['np-p', 'af-seg-P'],
+  N: ['np-n', 'af-seg-N'],
+  C: ['np-c', 'af-seg-C']
+};
+// Inline slash-separated colour blocks straight from the human-authored clauses.
+function presetSentenceHTML(clauses) {
+  return (clauses || []).map(function (c) {
+    const t = clauseTypeOf(c.label), seg = CLAUSE_CLS[t][1];
+    return '<span class="af-seg ' + seg + '"><b class="af-seg-tag">' + esc(c.label) + '</b><span class="af-seg-body">' + esc(c.part) + '</span></span>';
+  }).join('<span class="af-slash">/</span>');
+}
+// Per-line breakdown straight from human clauses (label + part + fluent zh).
+function presetNpcHTML(clauses) {
+  return (clauses || []).map(function (c) {
+    const t = clauseTypeOf(c.label), tag = CLAUSE_CLS[t][0];
+    const zh = c.zh ? '<span class="np-zh">' + esc(c.zh) + '</span>' : '';
+    return '<div class="np-row"><span class="np-tag ' + tag + '">' + esc(c.label) + '</span><span class="np-text ' + tag + '">' + esc(c.part) + '</span>' + zh + '</div>';
+  }).join('');
+}
 function analysisBodyHTML(it) {
+  const clauses = it._clauses || null;
+  const hasHuman = clauses && clauses.length;
+  // Keep ONLY the inline slash-separated NPC colour blocks (no per-line breakdown rows,
+  // no key-word/collocation definition list).
+  let sentence;
+  if (hasHuman) {
+    sentence = presetSentenceHTML(clauses);
+  } else if (Array.isArray(it.segs) && it.segs.length) {
+    sentence = sentenceHTML(it.text, it.segs, it.keyWords);
+  } else {
+    // A bare sentence saved from Gist without NPC analysis yet: show the original text block.
+    sentence = '<span class="af-seg af-seg-M"><b class="af-seg-tag">原句</b><span class="af-seg-body">' + esc(it.text || '') + '</span>';
+  }
   return (
-    '<p class="af-sentence">' + sentenceHTML(it.text, it.segs, it.keyWords) + '</p>' +
-    '<div class="af-npc">' + npcHTML(it.segs, presetSegZh(it.text)) + '</div>' +
+    '<p class="af-sentence">' + sentence + '</p>' +
     '<div class="af-section">参考翻译</div>' +
     '<input type="text" class="af-translate" placeholder="输入或修改中文翻译（自动保存）" value="' + esc(it.translation || '') + '" data-trans="1" />'
   );
+}
+
+/* ---------- Cross-article global stores (home Sentence Lab / Vocab Test) ---------- */
+const GLOBAL_LONG_KEY = 'longan:__all__';
+const GLOBAL_VOCAB_KEY = 'vocabbook:__all__';
+function readGlobal(key) {
+  try { const p = JSON.parse(localStorage.getItem(key) || 'null'); return (p && Array.isArray(p.items)) ? p.items : []; } catch (_) { return []; }
+}
+function writeGlobal(key, items) {
+  try { localStorage.setItem(key, JSON.stringify({ items: items, _savedAt: Date.now() })); } catch (_) {}
+}
+function articleMeta() { return { stem: meta.filenameStem || '', title: meta.titleEn || '' }; }
+// Rebuild this article's slice inside the global long-sentence pool.
+function syncGlobalLong(userItems) {
+  const am = articleMeta();
+  const all = readGlobal(GLOBAL_LONG_KEY).filter(function (x) { return x.stem !== am.stem; });
+  // course (human-authored) long sentences first — they carry clauses + exercises
+  (whileR.longSentences || []).forEach(function (ls) {
+    all.push({
+      gkey: am.stem + '::c::' + ls.id,
+      stem: am.stem, articleTitle: am.title, source: 'course',
+      id: ls.id, text: ls.sentence, type: ls.type || '', translation: ls.translation || '',
+      clauses: ls.clauses || [], exercises: ls.exercises || [], savedAt: 0
+    });
+  });
+  (userItems || []).forEach(function (it) {
+    all.push({
+      gkey: am.stem + '::u::' + String(it.text || '').slice(0, 48),
+      stem: am.stem, articleTitle: am.title, source: 'student',
+      text: it.text, type: it.type || '', translation: it.translation || '',
+      clauses: it._clauses || [], exercises: it.exercises || [], savedAt: it.savedAt || Date.now()
+    });
+  });
+  // de-dupe by gkey (keep latest)
+  const seen = {}; const out = [];
+  for (let i = all.length - 1; i >= 0; i--) { const k = all[i].gkey; if (seen[k]) continue; seen[k] = 1; out.unshift(all[i]); }
+  writeGlobal(GLOBAL_LONG_KEY, out);
+}
+// Rebuild this article's slice inside the global vocab pool.
+function syncGlobalVocab(items) {
+  const am = articleMeta();
+  const all = readGlobal(GLOBAL_VOCAB_KEY).filter(function (x) { return x.stem !== am.stem; });
+  (items || []).forEach(function (v) {
+    all.push(Object.assign({}, v, { stem: am.stem, articleTitle: am.title }));
+  });
+  const seen = {}; const out = [];
+  for (let i = all.length - 1; i >= 0; i--) {
+    const k = all[i].stem + '::' + String(all[i].word || '').toLowerCase();
+    if (seen[k]) continue; seen[k] = 1; out.unshift(all[i]);
+  }
+  writeGlobal(GLOBAL_VOCAB_KEY, out);
 }
 
 /* ---------- User analysis persistence ---------- */
@@ -3576,9 +3703,11 @@ function loadUserAnalysis() {
 }
 function saveUserAnalysis(items) {
   try { localStorage.setItem(getLongAnKey(), JSON.stringify({ items: items, _savedAt: Date.now() })); } catch (_) {}
+  try { syncGlobalLong(items); } catch (_) {}
 }
 
 /* ---------- Highlight user sentence in passage (manual) ---------- */
+function normSpace(s) { return String(s || '').replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"').replace(/\s+/g, ' ').trim(); }
 function findTextRange(root, normText) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   const chunks = []; let fullRaw = '';
@@ -3587,18 +3716,35 @@ function findTextRange(root, normText) {
     chunks.push({ n: node, start: fullRaw.length, end: fullRaw.length + node.textContent.length });
     fullRaw += node.textContent;
   }
-  const tokens = normText.split(/\s+/);
-  const re = new RegExp('\\s*' + tokens.map(escRe).join('\\s+') + '\\s*', 'i');
-  const m = re.exec(fullRaw);
-  if (!m) return null;
-  const startIdx = m.index; const endIdx = m.index + m[0].length;
-  const startC = chunks.find(function (c) { return c.start <= startIdx && startIdx <= c.end; });
-  const endC = chunks.find(function (c) { return c.start <= endIdx && endIdx <= c.end; });
-  if (!startC || !endC) return null;
-  const range = document.createRange();
-  range.setStart(startC.n, Math.min(startIdx - startC.start, startC.n.textContent.length));
-  range.setEnd(endC.n, Math.min(endIdx - endC.start, endC.n.textContent.length));
-  return range;
+  function buildRange(startIdx, endIdx) {
+    const startC = chunks.find(function (c) { return c.start <= startIdx && startIdx <= c.end; });
+    const endC = chunks.find(function (c) { return c.start <= endIdx && endIdx <= c.end; });
+    if (!startC || !endC) return null;
+    const range = document.createRange();
+    range.setStart(startC.n, Math.min(startIdx - startC.start, startC.n.textContent.length));
+    range.setEnd(endC.n, Math.min(endIdx - endC.start, endC.n.textContent.length));
+    return range;
+  }
+  // 1) exact token join (tolerates any whitespace / curly quotes)
+  const tokens = normSpace(normText).split(/\s+/);
+  let re = new RegExp('\\s*' + tokens.map(escRe).join('\\s+') + '\\s*', 'i');
+  let m = re.exec(fullRaw);
+  if (m) return buildRange(m.index, m.index + m[0].length);
+  // 2) loose fallback: first content words .. last content words (handles tiny inner-tag/punct drift)
+  const isWord = function (w) { return /[A-Za-z]/.test(w); };
+  const cw = tokens.filter(isWord);
+  if (cw.length >= 2) {
+    const head = escRe(cw[0]), tail = escRe(cw[cw.length - 1]);
+    re = new RegExp(head + '[\\s\\S]*?' + tail, 'i');
+    m = re.exec(fullRaw);
+    if (m) {
+      // extend to word end of the tail match
+      const endIdx = m.index + m[0].length;
+      const r = buildRange(m.index, endIdx);
+      if (r) return r;
+    }
+  }
+  return null;
 }
 function visibleFirstScopes() {
   const scopes = Array.from(document.querySelectorAll('.passage-body p, .carousel-passage p'));
@@ -3660,7 +3806,13 @@ function closeAnalysisFloat() {
 function highlightSavedText(text) {
   const ps = visibleFirstScopes();
   let marked = false;
+  const norm = function (s) { return String(s || '').replace(/\s+/g, ' ').trim().toLowerCase(); };
+  const target = norm(text);
   for (let i = 0; i < ps.length; i++) {
+    // Avoid double-wrapping the same sentence when it is already highlighted.
+    let already = false;
+    ps[i].querySelectorAll('.user-sent-hl').forEach(function (h) { if (norm(h.textContent).indexOf(target) >= 0) already = true; });
+    if (already) continue;
     const r = findTextRange(ps[i], text);
     if (!r) continue;
     try {
@@ -3748,6 +3900,18 @@ function showSentenceAnalysis(text, rect) {
   div.style.maxHeight = Math.max(160, window.innerHeight - y - 12) + 'px';
   analysisFloatEl = div;
   bindAnalysisActions(div, item, true);
+  // Detail: auto-fill the whole-sentence Chinese translation for a freshly picked sentence.
+  if (!item.translation) {
+    translateSentenceZh(item.text).then(function (zh) {
+      if (!zh) return;
+      item.translation = zh;
+      const inp = analysisFloatEl && analysisFloatEl.querySelector('.af-translate');
+      if (inp) inp.value = zh;
+      const saved = loadUserAnalysis();
+      const hit = saved.find(function (x) { return x.text === item.text; });
+      if (hit) { hit.translation = zh; saveUserAnalysis(saved); }
+    });
+  }
 }
 
 /* ---------- Long Sentences panel (我的分析 + 课程示例) ---------- */
@@ -3769,7 +3933,9 @@ function presetCardHTML(ls) {
     translation: ls.translation || '',
     segs: analysis.segs,
     keyWords: analysis.keyWords,
-    phrases: analysis.phrases
+    phrases: analysis.phrases,
+    _clauses: (Array.isArray(ls.clauses) && ls.clauses.length) ? ls.clauses : null,
+    exercises: Array.isArray(ls.exercises) ? ls.exercises : []
   };
   return '<div class="long-card" data-target="' + esc(ls.id) + '">' +
     '<div class="long-card-head">' +
@@ -3782,10 +3948,15 @@ function presetCardHTML(ls) {
 function renderLongSentences() {
   const list = document.getElementById('longList');
   const user = loadUserAnalysis();
+  const presets = whileR.longSentences || [];
   const tab = document.querySelector('#langLightTabs [data-lv="long"]');
-  if (tab) tab.style.display = (whileR.longSentences && whileR.longSentences.length) || user.length ? '' : 'none';
+  if (tab) tab.style.display = presets.length || user.length ? '' : 'none';
   if (!list) return;
   let html = '';
+  if (presets.length) {
+    html += '<p class="af-section" style="text-transform:none;letter-spacing:0;">📐 课程示例长难句（人工标注 · 共 ' + presets.length + ' 句）</p>';
+    presets.forEach(function (ls) { html += presetCardHTML(ls); });
+  }
   if (user.length) {
     html += '<p class="af-section" style="text-transform:none;letter-spacing:0;">🤖 我的分析（划句后手动保存 · 共 ' + user.length + ' 句）</p>';
     user.forEach(function (it, i) { html += userAnalysisCardHTML(it, i); });
@@ -3795,6 +3966,12 @@ function renderLongSentences() {
     return;
   }
   list.innerHTML = html;
+  // preset cards: 定位原文（滚动到课文并标亮该句）
+  list.querySelectorAll('.long-card[data-target]').forEach(function (card) {
+    const id = card.dataset.target;
+    const loc = card.querySelector('.long-locate[data-target]');
+    if (loc) loc.addEventListener('click', function () { locateLongSentence(id); });
+  });
   // user cards: highlight / delete
   list.querySelectorAll('.user-analysis-card').forEach(function (card) {
     const it = user[parseInt(card.dataset.uidx, 10)];
@@ -3860,6 +4037,7 @@ function saveStudentVocab(items) {
   try {
     localStorage.setItem(getVocabBookKey(), JSON.stringify({ items: items, _savedAt: Date.now() }));
   } catch (_) {}
+  try { syncGlobalVocab(items); } catch (_) {}
 }
 function renderVocabBook() {
   const list = document.getElementById('vocabBookList');
@@ -3873,11 +4051,13 @@ function renderVocabBook() {
   if (countEl) countEl.textContent = '共 ' + (preset.length + student.length) + ' 个生词（Blocking Words ' + preset.length + ' · 学生划词 ' + student.length + '）';
   function entryHTML(it, badgeCls, badgeText, vidx, deletable) {
     const pos = it.pos ? '<span class="vocab-flip-pos">' + esc(it.pos) + '</span>' : '';
+    const pho = it.phonetic ? '<span class="vocab-entry-pho">' + esc(it.phonetic) + '</span>' : '';
+    const voice = '<button type="button" class="vocab-entry-voice" data-word="' + esc(it.word || '') + '" title="朗读">🔊</button>';
     const del = deletable ? '<button type="button" class="vocab-entry-del" title="删除">×</button>' : '';
     const src = it.source ? '<div class="vocab-entry-src">"' + esc(it.source) + '"</div>' : '';
     return '<div class="vocab-entry" data-vidx="' + vidx + '">' +
       '<div class="vocab-entry-head">' +
-        '<span class="vocab-entry-word">' + esc(it.word || '') + '</span>' + pos +
+        '<span class="vocab-entry-word">' + esc(it.word || '') + '</span>' + pos + pho + voice +
         '<span class="vocab-entry-badge' + badgeCls + '">' + badgeText + '</span>' + del +
       '</div>' +
       (it.meaningEn ? '<div class="vocab-entry-mean-en">' + esc(it.meaningEn) + '</div>' : '') +
@@ -3892,6 +4072,9 @@ function renderVocabBook() {
   preset.forEach(function (it) { html += entryHTML(it, '', 'Course', -1, false); });
   student.forEach(function (it, i) { html += entryHTML(it, ' student', 'Student', i, true); });
   list.innerHTML = html;
+  list.querySelectorAll('.vocab-entry-voice').forEach(function (btn) {
+    btn.addEventListener('click', function () { speakText(btn.dataset.word, btn); });
+  });
   list.querySelectorAll('.vocab-entry-del').forEach(function (btn) {
     btn.addEventListener('click', function () {
       const idx = parseInt(btn.closest('.vocab-entry').dataset.vidx, 10);
@@ -3948,6 +4131,91 @@ function initVocabBookActions() {
 }
 
 /* ---------- Pick-to-vocab (划词加入生词本) ---------- */
+/* Online dictionary: English definition/IPA (Wiktionary REST) + synonyms (Datamuse)
+   + Chinese (Google translate gtx). Free, keyless, CORS-enabled. Failure -> local glossary fallback. */
+let __dictAudio = null;
+function playDictAudio(url, btn) {
+  try { if (__dictAudio) { __dictAudio.pause(); } __dictAudio = new Audio(url); __dictAudio.play();
+    if (btn) { btn.classList.add('speaking'); __dictAudio.addEventListener('ended', function(){ btn.classList.remove('speaking'); }); }
+  } catch (e) {}
+}
+function __fetchTO(url, ms) {
+  const c = new AbortController();
+  const t = setTimeout(function () { try { c.abort(); } catch (e) {} }, ms || 9000);
+  return fetch(url, { signal: c.signal })
+    .then(function (r) { clearTimeout(t); return r.ok ? r.json() : null; })
+    .catch(function () { clearTimeout(t); return null; });
+}
+function __fetchTextTO(url, ms) {
+  const c = new AbortController();
+  const t = setTimeout(function () { try { c.abort(); } catch (e) {} }, ms || 9000);
+  return fetch(url, { signal: c.signal })
+    .then(function (r) { clearTimeout(t); return r.ok ? r.text() : ''; })
+    .catch(function () { clearTimeout(t); return ''; });
+}
+function __wiktIpaAudio(html) {
+  const s = String(html);
+  let ipa = '', au = '';
+  try {
+    // REST html stores Template:IPA params inside data-mw as {"wt":"/dɪˈkeɪ/"}; also try rendered span.
+    let im = s.match(/"wt":"(\/[^"\n]{1,48}\/)"/);
+    if (!im) im = s.match(/class="IPA"[^>]*>\s*(\/[^<]+?\/)/);
+    if (im) ipa = im[1].trim();
+    const am = s.match(/((?:https?:)?\/\/upload\.wikimedia\.org\/[^"'\\\s]+?\.(?:ogg|oga|wav|mp3))/i);
+    if (am) { au = am[1]; if (au.indexOf('//') === 0) au = 'https:' + au; }
+  } catch (e) {}
+  return { ipa: ipa, au: au };
+}
+function __stripHtml(h) {
+  try { const d = document.createElement('div'); d.innerHTML = String(h || ''); return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
+  catch (e) { return String(h || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(); }
+}
+function lookupOnline(word) {
+  word = String(word || '').trim();
+  if (!word) return Promise.resolve(null);
+  const head = encodeURIComponent(word.toLowerCase());
+  // Wiktionary REST: part of speech + English definitions + optional IPA/audio (keyless, CORS).
+  const wUrl = 'https://en.wiktionary.org/api/rest_v1/page/definition/' + head;
+  // Datamuse: English synonyms (keyless, CORS).
+  const sUrl = 'https://api.datamuse.com/words?rel_syn=' + head + '&max=8';
+  // Google gtx: Chinese gloss.
+  const tUrl = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + head;
+  // Wiktionary rendered HTML: extract IPA + ogg pronunciation when the definition endpoint omits them.
+  const hUrl = 'https://en.wiktionary.org/api/rest_v1/page/html/' + head;
+  return Promise.all([__fetchTO(wUrl), __fetchTO(sUrl), __fetchTO(tUrl), __fetchTextTO(hUrl)]).then(function (arr) {
+    const wj = arr[0], sj = arr[1], gj = arr[2], hj = arr[3];
+    const out = { pos: '', phonetic: '', audio: '', meaningEn: '', meaningZh: '', synonyms: [] };
+    try {
+      if (wj) {
+        const blocks = wj.en || [];
+        const defs = [];
+        let ipa = '', au = '';
+        blocks.forEach(function (b) {
+          if (!out.pos && b.partOfSpeech) out.pos = String(b.partOfSpeech).toLowerCase();
+          (b.pronunciations || []).forEach(function (p) {
+            if (!ipa && p.ipa) ipa = p.ipa;
+            if (!au && p.audio) au = p.audio;
+          });
+          (b.definitions || []).forEach(function (d) {
+            if (defs.length < 2) { const t = __stripHtml(d.definition); if (t) defs.push(t); }
+          });
+        });
+        if (au && au.indexOf('//') === 0) au = 'https:' + au;
+        out.phonetic = ipa || ''; out.audio = au || ''; out.meaningEn = defs.join(' ; ');
+      }
+    } catch (_) {}
+    if ((!out.phonetic || !out.audio) && hj) {
+      const pa = __wiktIpaAudio(hj);
+      if (!out.phonetic && pa.ipa) out.phonetic = pa.ipa;
+      if (!out.audio && pa.au) out.audio = pa.au;
+    }
+    try { if (Array.isArray(sj)) out.synonyms = sj.map(function (x) { return x.word; }).filter(Boolean).slice(0, 6); } catch (_) {}
+    try { if (Array.isArray(gj) && Array.isArray(gj[0])) out.meaningZh = gj[0].map(function (x) { return x[0]; }).filter(Boolean).join(''); } catch (_) {}
+    return out;
+  }).catch(function () { return null; });
+}
+
+
 let pickBtnEl = null;
 let pickFormEl = null;
 function removePickUI() {
@@ -3977,47 +4245,89 @@ function findSentenceInParagraph(pEl, word) {
   });
   return best;
 }
+function findSentenceContaining(pEl, word) {
+  if (!pEl) return '';
+  const full = pEl.innerText.replace(/\s+/g, ' ').trim();
+  const sentences = splitSentences(full);
+  const w = String(word || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  if (!w) return '';
+  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  let re;
+  try { re = new RegExp('(?<![A-Za-z0-9])' + esc + '(?![A-Za-z0-9])', 'i'); }
+  catch (e) { re = new RegExp(esc, 'i'); }
+  const hit = sentences.find(function (s) { return re.test(s); });
+  return hit || '';
+}
 function showWordCard(rect, word, sentence) {
   removePickUI();
   const card = document.createElement('div');
   card.className = 'pick-word-card';
   const g = buildGlossaryMap()[String(word).toLowerCase()] || {};
-  const pos = g.p ? '<span class="pw-pos">' + esc(g.p) + '</span>' : '';
-  const mEn = g.mEn || '';
-  const mZh = g.m && g.m !== g.mEn ? g.m : '';
-  card.innerHTML =
-    '<div class="pw-head"><span class="pw-word">' + esc(word) + '</span>' + pos +
-      '<button type="button" class="pw-voice" title="朗读单词">🔊</button>' +
-      '<button type="button" class="pw-x" title="关闭">×</button></div>' +
-    '<div class="pw-mean-en">' + (mEn ? esc(mEn) : '（暂无英文释义，可在添加时自行填写）') + '</div>' +
-    (mZh ? '<div class="pw-mean">' + esc(mZh) + '</div>' : '') +
-    (sentence ? '<p class="pw-src">' + esc(sentence) + '</p>' : '') +
-    '<div class="pw-actions">' +
-      '<button type="button" class="pw-cancel">关闭</button>' +
-      '<button type="button" class="pw-save">＋ 添加生词</button>' +
-    '</div>';
+  const info = {
+    word: word, pos: g.p || '', phonetic: '', audio: '',
+    meaningEn: g.mEn || '', meaning: (g.m && g.m !== g.mEn) ? g.m : '', source: sentence || ''
+  };
+  card._info = info;
+  function paint(loading) {
+    card.innerHTML =
+      '<div class="pw-head"><span class="pw-word">' + esc(word) + '</span>' +
+        (info.pos ? '<span class="pw-pos">' + esc(info.pos) + '</span>' : '') +
+        (info.phonetic ? '<span class="pw-pho">' + esc(info.phonetic) + '</span>' : '') +
+        '<button type="button" class="pw-voice" title="朗读单词">🔊</button>' +
+        '<button type="button" class="pw-x" title="关闭">×</button></div>' +
+      '<div class="pw-mean-en">' + (info.meaningEn ? esc(info.meaningEn) : (loading ? '<span class="pw-loading">正在查询英文释义…</span>' : '（暂无英文释义，可在添加时自行填写）')) + '</div>' +
+      '<div class="pw-mean">' + (info.meaning ? esc(info.meaning) : (loading ? '<span class="pw-loading">正在查询中文释义…</span>' : '')) + '</div>' +
+      (sentence ? '<p class="pw-src">' + esc(sentence) + '</p>' : '') +
+      '<div class="pw-actions">' +
+        '<button type="button" class="pw-cancel">关闭</button>' +
+        '<button type="button" class="pw-save">＋ 添加生词</button>' +
+      '</div>';
+    card.querySelector('.pw-x').addEventListener('click', removePickUI);
+    card.querySelector('.pw-cancel').addEventListener('click', removePickUI);
+    card.querySelector('.pw-voice').addEventListener('click', function () {
+      if (info.audio) playDictAudio(info.audio, this); else speakText(word, this);
+    });
+    card.querySelector('.pw-save').addEventListener('click', function () { showPickForm(rect, info); });
+  }
+  paint(true);
   document.body.appendChild(card);
   const x = Math.max(8, Math.min(rect.left, window.innerWidth - 320));
-  const y = Math.max(8, Math.min(rect.bottom + 8, window.innerHeight - 260));
+  const y = Math.max(8, Math.min(rect.bottom + 8, window.innerHeight - 280));
   card.style.left = x + 'px';
   card.style.top = y + 'px';
-  card.querySelector('.pw-x').addEventListener('click', removePickUI);
-  card.querySelector('.pw-cancel').addEventListener('click', removePickUI);
-  card.querySelector('.pw-voice').addEventListener('click', function () { speakText(word, this); });
-  card.querySelector('.pw-save').addEventListener('click', function () {
-    showPickForm(rect, word, sentence, mZh || mEn, mEn);
-  });
   pickFormEl = card;
+  // online fill (English synonym/definition + Chinese + phonetic/audio)
+  lookupOnline(word).then(function (on) {
+    if (!on || !pickFormEl || pickFormEl !== card) return;
+    function synLine(o) { return (o.synonyms && o.synonyms.length) ? 'Syn: ' + o.synonyms.join(', ') : ''; }
+    if (!info.meaningEn) {
+      const parts = [];
+      if (on.meaningEn) parts.push(on.meaningEn);
+      const sy = synLine(on); if (sy) parts.push(sy);
+      if (parts.length) info.meaningEn = parts.join(' ｜ ');
+    } else if (on.synonyms && on.synonyms.length && info.meaningEn.indexOf('Syn:') < 0) {
+      info.meaningEn = info.meaningEn + ' ｜ ' + synLine(on);
+    }
+    if (!info.meaning && on.meaningZh) info.meaning = on.meaningZh;
+    if (!info.pos && on.pos) info.pos = on.pos;
+    if (on.phonetic) info.phonetic = on.phonetic;
+    if (on.audio) info.audio = on.audio;
+    paint(false);
+  });
 }
-function showPickForm(rect, word, sentence, presetMeaning, presetMeaningEn) {
+function showPickForm(rect, info) {
   removePickUI();
+  const word = info.word, sentence = info.source || '';
   const form = document.createElement('div');
   form.className = 'pick-word-form';
   form.innerHTML =
-    '<div class="pw-word">' + esc(word) + ' <button type="button" class="pw-voice pw-voice-sm" title="朗读单词">🔊</button></div>' +
+    '<div class="pw-word">' + esc(word) +
+      (info.pos ? ' <span class="pw-pos">' + esc(info.pos) + '</span>' : '') +
+      (info.phonetic ? ' <span class="pw-pho">' + esc(info.phonetic) + '</span>' : '') +
+      ' <button type="button" class="pw-voice pw-voice-sm" title="朗读单词">🔊</button></div>' +
     '<p class="pw-src">' + esc(sentence) + '</p>' +
-    '<input type="text" class="pw-in-en" placeholder="英文释义 / 同义词（选填）" value="' + esc(presetMeaningEn || '') + '" />' +
-    '<input type="text" class="pw-in-zh" placeholder="中文释义（选填，例如：衰退）" value="' + esc(presetMeaning || '') + '" />' +
+    '<input type="text" class="pw-in-en" placeholder="英文释义 / 同义词" value="' + esc(info.meaningEn || '') + '" />' +
+    '<input type="text" class="pw-in-zh" placeholder="中文释义（例如：衰退）" value="' + esc(info.meaning || '') + '" />' +
     '<div class="pw-actions">' +
       '<button type="button" class="pw-cancel">取消</button>' +
       '<button type="button" class="pw-save">加入生词本</button>' +
@@ -4028,14 +4338,19 @@ function showPickForm(rect, word, sentence, presetMeaning, presetMeaningEn) {
   form.style.left = x + 'px';
   form.style.top = y + 'px';
   form.querySelector('.pw-cancel').addEventListener('click', removePickUI);
-  form.querySelector('.pw-voice-sm').addEventListener('click', function () { speakText(word, this); });
+  form.querySelector('.pw-voice-sm').addEventListener('click', function () {
+    if (info.audio) playDictAudio(info.audio, this); else speakText(word, this);
+  });
   form.querySelector('.pw-save').addEventListener('click', function () {
     const meaningEn = form.querySelector('.pw-in-en').value.trim();
     const meaning = form.querySelector('.pw-in-zh').value.trim();
     const items = loadStudentVocab();
     const exists = items.some(function (it) { return it.word.toLowerCase() === word.toLowerCase(); });
     if (!exists) {
-      items.push({ word: word, meaning: meaning, meaningEn: meaningEn, source: sentence, savedAt: Date.now() });
+      items.push({
+        word: word, pos: info.pos || '', phonetic: info.phonetic || '', audio: info.audio || '',
+        meaning: meaning, meaningEn: meaningEn, source: sentence, badge: 'Student', savedAt: Date.now()
+      });
       saveStudentVocab(items);
       renderVocabBook();
       refreshFloatSentenceMark();
@@ -4050,6 +4365,65 @@ function showPickForm(rect, word, sentence, presetMeaning, presetMeaningEn) {
     removePickUI();
   });
   pickFormEl = form;
+}
+// Expand a partial sentence selection to the full sentence it sits in.
+function expandSelectionToSentence(sel, pEl, trimmed) {
+  const looksComplete = /[.!?]["')\]]?\s*$/.test(trimmed);
+  if (looksComplete) return trimmed;
+  const paras = [];
+  try {
+    for (let i = 0; i < sel.rangeCount; i++) {
+      const rg = sel.getRangeAt(i);
+      const sc = rg.startContainer.nodeType === 3 ? rg.startContainer.parentElement : rg.startContainer;
+      const ec = rg.endContainer.nodeType === 3 ? rg.endContainer.parentElement : rg.endContainer;
+      [sc, ec].forEach(function (el) {
+        const pp = el && el.closest ? el.closest('p') : null;
+        if (pp && paras.indexOf(pp) < 0) paras.push(pp);
+      });
+    }
+  } catch (_) {}
+  if (!paras.length && pEl) paras.push(pEl);
+  let target = null;
+  for (let k = 0; k < paras.length && !target; k++) target = findSentenceInParagraph(paras[k], trimmed);
+  return target || trimmed;
+}
+// Gist lightweight add: a small "add to long sentences" button only — no NPC analysis card.
+function showQuickAddLong(rect, sentenceText) {
+  removePickUI();
+  const text = String(sentenceText || '').trim();
+  if (!text) return;
+  const already = loadUserAnalysis().some(function (x) { return x.text.toLowerCase() === text.toLowerCase(); });
+  const bar = document.createElement('div');
+  bar.className = 'pick-word-card quick-long-card';
+  bar.innerHTML =
+    '<div class="ql-sent">' + esc(text.length > 180 ? text.slice(0, 180) + '…' : text) + '</div>' +
+    '<div class="pw-actions">' +
+      '<button type="button" class="pw-cancel">取消</button>' +
+      (already
+        ? '<button type="button" class="pw-save" disabled>已在长难句列表 ✓</button>'
+        : '<button type="button" class="pw-save">＋ 加入长难句</button>') +
+    '</div>';
+  document.body.appendChild(bar);
+  const x = Math.max(8, Math.min(rect.left, window.innerWidth - 340));
+  const y = Math.max(8, Math.min(rect.bottom + 8, window.innerHeight - 170));
+  bar.style.left = x + 'px';
+  bar.style.top = y + 'px';
+  bar.querySelector('.pw-cancel').addEventListener('click', removePickUI);
+  const saveBtn = bar.querySelector('.pw-save');
+  if (saveBtn && !already) saveBtn.addEventListener('click', function () {
+    const items = loadUserAnalysis();
+    if (!items.some(function (x) { return x.text.toLowerCase() === text.toLowerCase(); })) {
+      const item = Object.assign({ savedAt: Date.now() }, analyzeSentence(text));
+      items.unshift(item);
+      saveUserAnalysis(items);
+      highlightSavedText(text); // 加入即在原文标亮
+      renderLongSentences();
+    }
+    saveBtn.textContent = '已加入并标亮 ✓';
+    saveBtn.classList.add('done');
+    setTimeout(removePickUI, 1100);
+  });
+  pickFormEl = bar;
 }
 function setupPickWord() {
   const container = document.querySelector('.while-split') || document.body;
@@ -4076,30 +4450,17 @@ function setupPickWord() {
       const rect = sel.getRangeAt(0).getBoundingClientRect();
       const isSentence = text.length >= 25 || (text.indexOf('.') >= 0 && text.length >= 15);
       if (isSentence) {
-        if (inGist) { removePickUI(); return; } // 抓主旨阅读不弹句子翻译，但单词卡片照常弹出
-        removePickUI();
-        const trimmed = text.replace(/\s+/g, ' ').trim();
-        const looksComplete = /[.!?]["')\]]?\s*$/.test(trimmed);
-        let target = null;
-        if (!looksComplete) {
-          // 扩展为所在整句：跨段时遍历选区涉及的所有段落
-          const paras = [];
-          for (let i = 0; i < sel.rangeCount; i++) {
-            const rg = sel.getRangeAt(i);
-            const sc = rg.startContainer.nodeType === 3 ? rg.startContainer.parentElement : rg.startContainer;
-            const ec = rg.endContainer.nodeType === 3 ? rg.endContainer.parentElement : rg.endContainer;
-            [sc, ec].forEach(function (el) {
-              const pp = el && el.closest ? el.closest('p') : null;
-              if (pp && paras.indexOf(pp) < 0) paras.push(pp);
-            });
-          }
-          if (!paras.length && pEl) paras.push(pEl);
-          for (let k = 0; k < paras.length && !target; k++) target = findSentenceInParagraph(paras[k], trimmed);
+        const fullSentence = expandSelectionToSentence(sel, pEl, text);
+        if (inGist) {
+          // 抓主旨(Gist)：只弹「＋ 加入长难句」轻按钮，不弹 NPC 分析卡；单词卡片照常
+          showQuickAddLong(rect, fullSentence);
+          return;
         }
-        showSentenceAnalysis(target || trimmed, rect);
+        removePickUI();
+        showSentenceAnalysis(fullSentence, rect);
         return;
       }
-      const sentence = findSentenceInParagraph(pEl, text);
+      const sentence = findSentenceContaining(pEl, text) || findSentenceInParagraph(pEl, text);
       showWordCard(rect, text, sentence);
     }, 10);
   });
@@ -4116,6 +4477,92 @@ function setupPickWord() {
   });
 }
 
+/* ---------- Detail: tap a passage sentence -> whole-sentence Chinese (disabled in Gist) ---------- */
+let __sentZhMem = null;
+let sentZhEl = null;
+function sentZhCache() {
+  if (__sentZhMem) return __sentZhMem;
+  try { __sentZhMem = JSON.parse(localStorage.getItem('sentzh:' + meta.filenameStem) || '{}') || {}; } catch (e) { __sentZhMem = {}; }
+  return __sentZhMem;
+}
+function saveSentZhCache() { try { localStorage.setItem('sentzh:' + meta.filenameStem, JSON.stringify(__sentZhMem || {})); } catch (e) {} }
+function translateSentenceZh(text) {
+  const key = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!key) return Promise.resolve('');
+  const cache = sentZhCache();
+  if (cache[key]) return Promise.resolve(cache[key]);
+  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(key);
+  return __fetchTO(url, 9000).then(function (gj) {
+    let zh = '';
+    try { if (Array.isArray(gj) && Array.isArray(gj[0])) zh = gj[0].map(function (x) { return x[0]; }).filter(Boolean).join(''); } catch (e) {}
+    if (zh) { cache[key] = zh; saveSentZhCache(); }
+    return zh;
+  }).catch(function () { return ''; });
+}
+function wordAtTextOffset(str, off) {
+  const isW = function (ch) { return /[A-Za-z'’\-]/.test(ch); };
+  let a = off, b = off;
+  while (a > 0 && isW(str[a - 1])) a--;
+  while (b < str.length && isW(str[b])) b++;
+  return str.slice(a, b).replace(/’/g, "'").trim();
+}
+function closeSentZh() { if (sentZhEl) { sentZhEl.remove(); sentZhEl = null; } }
+function currentViewIsGist() {
+  const t = document.querySelector('.activity-tab.active');
+  return !!(t && t.dataset.view === 'gist');
+}
+function showSentZh(x, y, sentence) {
+  const key = String(sentence || '').trim();
+  if (!key) return;
+  if (sentZhEl && sentZhEl.dataset.key === key) { closeSentZh(); return; } // tap same sentence -> close
+  closeSentZh();
+  const card = document.createElement('div');
+  card.className = 'sent-zh-card';
+  card.dataset.key = key;
+  card.innerHTML =
+    '<button type="button" class="sz-x" title="关闭">×</button>' +
+    '<div class="sz-en">' + esc(key.length > 240 ? key.slice(0, 240) + '…' : key) + '</div>' +
+    '<div class="sz-zh"><span class="sz-loading">翻译中…</span></div>';
+  document.body.appendChild(card);
+  const w = 340;
+  card.style.left = Math.max(8, Math.min(x, window.innerWidth - w - 8)) + 'px';
+  card.style.top = Math.max(8, Math.min(y + 14, window.innerHeight - 160)) + 'px';
+  sentZhEl = card;
+  card.querySelector('.sz-x').addEventListener('click', closeSentZh);
+  function fill() {
+    translateSentenceZh(key).then(function (zh) {
+      if (!sentZhEl || sentZhEl !== card) return;
+      const z = card.querySelector('.sz-zh');
+      if (zh) { z.textContent = zh; return; }
+      z.innerHTML = '（暂时取不到翻译，请检查网络） <button type="button" class="sz-retry">重试</button>';
+      const rb = z.querySelector('.sz-retry');
+      if (rb) rb.addEventListener('click', function () { z.innerHTML = '<span class="sz-loading">翻译中…</span>'; fill(); });
+    });
+  }
+  fill();
+}
+function setupSentenceTranslation() {
+  document.body.addEventListener('click', function (e) {
+    if (currentViewIsGist()) { closeSentZh(); return; } // Gist 速读：不显示逐句翻译
+    if (e.target.closest && e.target.closest('.sent-zh-card')) return;
+    const pEl = (e.target.closest && e.target.closest('p')) || null;
+    const inPassage = !!(pEl && pEl.closest('.passage-body, .carousel-passage'));
+    if (!inPassage) {
+      if (!(e.target.closest && e.target.closest('button,input,select,textarea,a,.pick-word-card,.analysis-float'))) closeSentZh();
+      return;
+    }
+    if (e.target.closest('button,input,select,textarea,a,.dm-legend,.plogic-legend-bar')) return;
+    const sel = window.getSelection();
+    if (sel && !sel.isCollapsed && sel.toString().trim()) return; // 拖拽划词/划句走对应浮层
+    let word = '';
+    const r = document.caretRangeFromPoint ? document.caretRangeFromPoint(e.clientX, e.clientY) : null;
+    if (r && r.startContainer && r.startContainer.nodeType === 3) word = wordAtTextOffset(r.startContainer.textContent, r.startOffset);
+    if (!word) { const mt = (e.target.textContent || '').match(/[A-Za-z][A-Za-z'-]+/); if (mt) word = mt[0]; }
+    const sent = findSentenceContaining(pEl, word) || findSentenceInParagraph(pEl, word);
+    if (sent) showSentZh(e.clientX, e.clientY, sent); else closeSentZh();
+  });
+}
+
 /* ---------- Export vocabulary review file (生词课后复习) ---------- */
 function exportLongAndVocab() {
   closeExportMenu();
@@ -4129,18 +4576,35 @@ function exportLongAndVocab() {
   });
   const preset = all.filter(function (it) { return it.badge === 'Course'; });
   const student = all.filter(function (it) { return it.badge !== 'Course'; });
-  const lsCards = user.map(function (it) {
-    const segZh = presetSegZh(it.text);
-    const npc = splitClauseTail(it.segs || []).map(function (seg) {
-      const cls = seg.type === 'M' ? 'lm' : (seg.type === 'P' ? 'lp' : (seg.type === 'N' ? 'ln' : 'lc'));
-      const zh = segZh[seg.text] ? '<span class="ls-zh">' + esc(segZh[seg.text]) + '</span>' : '';
-      return '<div class="ls-line"><span class="ls-tag ' + cls + '">' + esc(npcLabel(seg)) + '</span><span>' + esc(seg.text) + '</span>' + zh + '</div>';
+  // Long sentences = human-authored course sentences + student-added ones.
+  // Export format per sentence: original sentence + inline NPC colour blocks + whole translation.
+  // (No per-line breakdown, no key-word/collocation definition list.)
+  const courseLs = (whileR.longSentences || []).map(function (ls) {
+    return {
+      kind: '📐 课程长难句', type: ls.type || '复合句', text: ls.sentence, translation: ls.translation || '',
+      blocks: (ls.clauses || []).map(function (c) { return { t: clauseTypeOf(c.label), label: c.label, part: c.part }; })
+    };
+  });
+  const userLs = user.map(function (it) {
+    const blocks = (it._clauses && it._clauses.length)
+      ? it._clauses.map(function (c) { return { t: clauseTypeOf(c.label), label: c.label, part: c.part }; })
+      : (it.segs || []).map(function (s) { return { t: s.type, label: npcLabel(s), part: s.text }; });
+    return { kind: '🤖 我的长难句', type: it.type || '', text: it.text, translation: it.translation || '', blocks: blocks };
+  });
+  const allLs = courseLs.concat(userLs);
+  function exportBlocksHTML(blocks) {
+    return blocks.map(function (b, i) {
+      const cls = b.t === 'M' ? 'lm' : (b.t === 'P' ? 'lp' : (b.t === 'N' ? 'ln' : 'lc'));
+      return (i ? '<span class="ls-slash">/</span>' : '') +
+        '<span class="ls-seg ' + cls + '"><b>' + esc(b.label) + '</b>' + esc(b.part) + '</span>';
     }).join('');
+  }
+  const lsCards = allLs.map(function (L) {
     return '<div class="ls-card">' +
-      '<div class="ls-head">🤖 长难句 · ' + esc(it.type) + '</div>' +
-      '<p class="ls-sentence">' + esc(it.text) + '</p>' +
-      (it.translation ? '<p class="ls-zh"><b>参考翻译：</b>' + esc(it.translation) + '</p>' : '') +
-      '<div class="ls-npc">' + npc + '</div>' +
+      '<div class="ls-head">' + L.kind + (L.type ? ' · ' + esc(L.type) : '') + '</div>' +
+      '<p class="ls-sentence">' + esc(L.text) + '</p>' +
+      (L.blocks.length ? '<div class="ls-blocks">' + exportBlocksHTML(L.blocks) + '</div>' : '') +
+      (L.translation ? '<p class="ls-zh"><b>参考翻译：</b>' + esc(L.translation) + '</p>' : '') +
     '</div>';
   }).join('');
   const rows = all.map(function (it) {
@@ -4162,13 +4626,14 @@ function exportLongAndVocab() {
     '.ls-head{ font-size:12px; font-weight:700; letter-spacing:.03em; color:var(--coral); margin-bottom:6px; }' +
     '.ls-sentence{ font-family:Georgia,serif; font-size:15px; font-weight:700; color:var(--ocean-deep); margin:4px 0 6px; }' +
     '.ls-zh{ color:#7A5610; font-size:13.5px; margin:2px 0 6px; }' +
-    '.ls-kws{ font-size:12.5px; color:var(--ink); margin:2px 0 6px; }' +
-    '.kw{ display:inline-block; background:var(--gold-light); border-radius:999px; padding:1px 9px; margin:1px 3px 1px 0; }' +
-    '.kw em{ font-style:normal; color:var(--ink-soft); }' +
-    '.ls-npc{ display:flex; flex-direction:column; gap:4px; margin-top:6px; }' +
-    '.ls-line{ display:flex; gap:8px; font-size:13px; }' +
-    '.ls-tag{ flex:none; font-size:10px; font-weight:700; padding:1px 7px; border-radius:4px; color:#fff; min-width:64px; text-align:center; }' +
-    '.ls-tag.lm{ background:#0F2A3C; } .ls-tag.lp{ background:#E7664C; } .ls-tag.ln{ background:#E9A03E; } .ls-tag.lc{ background:#704694; }' +
+    '.ls-blocks{ display:flex; flex-wrap:wrap; align-items:center; gap:3px 2px; background:rgba(233,160,62,.10); border:1px solid rgba(233,160,62,.30); border-radius:8px; padding:9px 10px; margin:4px 0 8px; }' +
+    '.ls-seg{ display:inline-block; border-radius:5px; padding:3px 7px; font-size:13px; font-weight:600; color:#243B49; line-height:1.35; }' +
+    '.ls-seg b{ display:block; font-size:9px; font-weight:700; letter-spacing:.02em; margin-bottom:1px; }' +
+    '.ls-seg.lm{ background:#DCEAF0; } .ls-seg.lm b{ color:#0F2A3C; }' +
+    '.ls-seg.lp{ background:#FBE3DD; } .ls-seg.lp b{ color:#C0502E; }' +
+    '.ls-seg.ln{ background:#FBF0DA; } .ls-seg.ln b{ color:#9A6A12; }' +
+    '.ls-seg.lc{ background:#EBE0F2; } .ls-seg.lc b{ color:#704694; }' +
+    '.ls-slash{ font-size:14px; font-weight:700; color:#8A6A3A; margin:0 1px; }' +
     'table{ width:100%; border-collapse:collapse; font-size:13px; }' +
     'th{ text-align:left; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); border-bottom:2px solid var(--ocean-deep); padding:8px 10px; }' +
     'td{ border-bottom:1px solid var(--line); padding:12px 10px; vertical-align:top; }' +
@@ -4185,13 +4650,13 @@ function exportLongAndVocab() {
     '<div class="kicker">After-class Review · 课后复习（长难句 + 生词）</div>' +
     '<div style="text-align:right;margin-bottom:10px"><button class="print-btn" onclick="window.print()">打印 / 另存为 PDF</button></div>' +
     '<h1>' + esc(title) + '</h1>' +
-    '<div class="sub">长难句 ' + user.length + ' 句 · 生词 ' + all.length + ' 个（课程 ' + preset.length + ' / 学生划词 ' + student.length + '）· ' + esc(stem) + '</div>' +
-    (user.length
-      ? '<h2>一、长难句分析（Long Sentences）</h2>' + lsCards
+    '<div class="sub">长难句 ' + allLs.length + ' 句（课程 ' + courseLs.length + ' / 我的 ' + userLs.length + '）· 生词 ' + all.length + ' 个（课程 ' + preset.length + ' / 学生划词 ' + student.length + '）· ' + esc(stem) + '</div>' +
+    (allLs.length
+      ? '<h2>一、长难句分析（Long Sentences · NPC 结构分块）</h2>' + lsCards
       : '') +
     '<h2>二、生词表（Vocabulary）</h2>' +
     '<table><thead><tr><th>Word</th><th>Meaning</th><th>Original Sentence</th></tr></thead><tbody>' + rows + '</tbody></table>' +
-    '<div class="foot">复习建议：先看长难句逐行拆解，遮住 “Meaning” 列自测生词 → 根据 “Original Sentence” 回想词义 → 用每个词各造一个新句子。Generated from reading lesson «' + esc(title) + '».</div>' +
+    '<div class="foot">复习建议：先看长难句的彩色结构分块、还原句子主干与从句，再遮住 “Meaning” 列自测生词 → 根据 “Original Sentence” 回想词义 → 用每个词各造一个新句子。Generated from reading lesson «' + esc(title) + '».</div>' +
     '</div></body></html>';
   const blob = new Blob([doc], { type: 'text/html;charset=utf-8' });
   const a = document.createElement('a');
@@ -4312,10 +4777,12 @@ if (document.fonts && document.fonts.ready) {
 }
 
 /* Boot lesson features after all definitions are loaded */
+try { syncGlobalLong(loadUserAnalysis()); } catch (e) {}
 renderLongSentences();
 renderVocabBook();
 initVocabBookActions();
 setupPickWord();
+setupSentenceTranslation();
 </script>
 
 </body>
