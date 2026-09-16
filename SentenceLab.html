@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长难句解析器 · Sentence Lab</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F2A3C'/%3E%3Cpath d='M8 9h11a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H8z' fill='%23E9A03E'/%3E%3Cpath d='M8 23v-9a2 2 0 0 1 2-2h8v11z' fill='%23E7664C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --sand:#F7F1E5; --paper:#FFFDF7; --ocean-deep:#0F2A3C; --ocean:#1B4A63;
+    --coral:#E7664C; --coral-light:#F6D9CF; --gold:#E9A03E; --gold-light:#F7E7C8;
+    --ink:#22313C; --ink-soft:#5C6E7A; --line:#DCCFB4;
+    --ok:#2F8F5B; --ok-bg:#DCF0E4; --no:#C2452F; --no-bg:#F8DDD5;
+    --M-bg:#DCEAF0; --M-tag:#0F2A3C; --P-bg:#FBE3DD; --P-tag:#C0502E;
+    --N-bg:#FBF0DA; --N-tag:#9A6A12; --C-bg:#EBE0F2; --C-tag:#704694;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:radial-gradient(900px 420px at 85% -5%, rgba(233,160,62,.14), transparent 60%),var(--sand);
+    color:var(--ink); font-family:'Work Sans','Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif; line-height:1.6; min-height:100vh;}
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,'Times New Roman',serif;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 20px;}
+  header.nav{position:sticky; top:0; z-index:50; background:rgba(247,241,229,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; color:var(--ocean-deep);}
+  .brand .mark{width:32px;height:32px;border-radius:9px;background:var(--ocean-deep);display:flex;align-items:center;justify-content:center;}
+  .btn{border-radius:999px; padding:9px 16px; font-size:13.5px; font-weight:600; border:1px solid transparent; cursor:pointer; font-family:inherit; line-height:1.2; display:inline-flex; align-items:center; gap:6px;}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--ocean-deep);}
+  .btn-ghost:hover{border-color:var(--coral); color:var(--coral);}
+  .btn-coral{background:var(--coral); color:#fff;} .btn-coral:hover{background:#D5543B;}
+  .btn-ocean{background:var(--ocean-deep); color:#fff;} .btn-ocean:hover{background:var(--ocean);}
+  .btn:disabled{opacity:.5; cursor:not-allowed;}
+
+  .head{margin:30px 0 18px; display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .head h1{font-size:30px; color:var(--ocean-deep);}
+  .head p{color:var(--ink-soft); font-size:13.5px; margin-top:6px;}
+  .tabs{display:inline-flex; background:#EDE2CC; border-radius:999px; padding:4px; gap:4px;}
+  .tab{border:none; background:transparent; font-family:inherit; font-size:14px; font-weight:700; color:var(--ink-soft);
+    padding:8px 20px; border-radius:999px; cursor:pointer;}
+  .tab.active{background:var(--ocean-deep); color:#fff; box-shadow:0 3px 10px rgba(15,42,60,.25);}
+
+  .layout{display:grid; grid-template-columns:1fr 300px; gap:20px; align-items:start; margin-bottom:50px;}
+  .panel{background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:22px 24px; box-shadow:0 14px 36px rgba(34,49,60,.08);}
+  .side{position:sticky; top:76px; display:flex; flex-direction:column; gap:14px;}
+  .side-card{background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:14px 15px; max-height:62vh; overflow:auto;}
+  .side-card h3{font-size:13px; letter-spacing:1px; color:var(--coral); margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;}
+  .side-card h3 .n{color:var(--ink-soft); font-family:'Work Sans',sans-serif; font-weight:600;}
+
+  .art-group{margin-bottom:10px;}
+  .art-name{font-size:11.5px; font-weight:700; color:var(--ocean); letter-spacing:.3px; margin:6px 2px 6px;}
+  .sent-item{display:flex; align-items:center; gap:8px; width:100%; text-align:left; border:1px solid transparent;
+    background:#FFFEF9; border-radius:10px; padding:8px 10px; margin-bottom:6px; cursor:pointer; font-family:inherit;}
+  .sent-item:hover{border-color:var(--gold);}
+  .sent-item.active{border-color:var(--gold); background:var(--gold-light); box-shadow:0 0 0 2px rgba(233,160,62,.3);}
+  .sent-item .tx{flex:1; font-size:12.5px; color:var(--ink); line-height:1.4;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .sent-item .del{flex:0 0 auto; border:none; background:none; color:var(--ink-soft); cursor:pointer; font-size:15px; line-height:1; padding:2px 4px; border-radius:6px;}
+  .sent-item .del:hover{color:var(--no); background:var(--no-bg);}
+  .src-badge{font-size:9.5px; font-weight:700; padding:1px 6px; border-radius:99px; flex:0 0 auto;}
+  .src-badge.course{background:#DCE9EE; color:var(--ocean-deep);}
+  .src-badge.student{background:var(--coral-light); color:#A33B26;}
+
+  /* clause blocks (shared colours with the lesson) */
+  .clause-line{display:flex; flex-wrap:wrap; gap:4px; align-items:center;}
+  .cb{display:inline-block; border-radius:6px; padding:5px 8px 4px; margin:1px 0; border:1.5px solid transparent; text-align:left; font-family:inherit;}
+  .cb .lab{display:block; font-size:9.5px; font-weight:800; letter-spacing:.02em; margin-bottom:1px;}
+  .cb .bd{font-size:15px; font-weight:600; color:#243B49;}
+  .cb-M{background:var(--M-bg);} .cb-M .lab{color:var(--M-tag);}
+  .cb-P{background:var(--P-bg);} .cb-P .lab{color:var(--P-tag);}
+  .cb-N{background:var(--N-bg);} .cb-N .lab{color:var(--N-tag);}
+  .cb-C{background:var(--C-bg);} .cb-C .lab{color:var(--C-tag);}
+  .slash{font-size:16px; font-weight:700; color:#8A6A3A; margin:0 1px;}
+  /* clickable in practice */
+  button.cb{cursor:pointer; transition:transform .08s, box-shadow .12s;}
+  button.cb:hover{box-shadow:0 3px 10px rgba(15,42,60,.16); transform:translateY(-1px);}
+  .cb.correct{border-color:var(--ok); background:var(--ok-bg) !important; box-shadow:0 0 0 2px rgba(47,143,91,.3);}
+  .cb.wrong{border-color:var(--no); background:var(--no-bg) !important; animation:shake .4s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-4px);}75%{transform:translateX(4px);}}
+
+  .npc{background:var(--sand); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:9px; margin-top:14px;}
+  .npc-row{display:grid; grid-template-columns:86px 1fr; gap:10px; align-items:start;}
+  .npc-tag{font-size:10px; font-weight:800; color:#fff; border-radius:5px; padding:3px 7px; text-align:center; margin-top:2px;}
+  .npc-tag.M{background:var(--ocean-deep);} .npc-tag.P{background:var(--coral);} .npc-tag.N{background:var(--gold);} .npc-tag.C{background:#704694;}
+  .npc-en{font-size:13.5px; color:var(--ink); line-height:1.5;}
+  .npc-zh{font-size:12.5px; color:#7A5610; margin-top:1px;}
+  .trans{margin-top:14px; border-top:1px dashed var(--line); padding-top:12px; font-size:13.5px; color:var(--ink-soft);}
+  .trans b{color:var(--ocean-deep);}
+  .bar-row{display:flex; align-items:center; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  .spacer{flex:1;}
+  .type-badge{font-size:11.5px; font-weight:700; color:var(--ocean-deep); background:#DCE9EE; border-radius:999px; padding:4px 11px;}
+  .voice{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:14px;}
+  .voice:hover{background:var(--gold-light); border-color:var(--gold);}
+
+  /* practice */
+  .q-meta{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .q-prog{font-size:12.5px; color:var(--ink-soft); font-weight:600;}
+  .q-ask{font-size:17px; font-weight:700; color:var(--ocean-deep); line-height:1.4;}
+  .q-ask-en{font-size:13px; color:var(--ink-soft); font-weight:500; margin-top:2px;}
+  .q-board{margin-top:16px; background:rgba(233,160,62,.08); border:1px solid rgba(233,160,62,.3); border-radius:12px; padding:16px;}
+  .feedback{margin-top:14px; display:none; flex-direction:column; gap:9px;}
+  .fb{border-radius:11px; padding:11px 14px; font-size:13px; line-height:1.55;}
+  .fb .fb-t{font-weight:800; font-size:11.5px; letter-spacing:.5px; display:block; margin-bottom:3px;}
+  .fb-l1{background:var(--ok-bg); border:1px solid #B7E0C8;} .fb-l1 .fb-t{color:var(--ok);}
+  .fb-l2{background:var(--no-bg); border:1px solid #F0C2B8;} .fb-l2 .fb-t{color:var(--no);}
+  .fb-l3{background:var(--gold-light); border:1px solid #EAD39C;} .fb-l3 .fb-t{color:#8A5A12;}
+
+  .q-item{display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:#FFFEF9; border:1px solid var(--line);
+    border-radius:9px; padding:7px 9px; margin-bottom:6px; cursor:pointer; font-family:inherit;}
+  .q-item:hover{border-color:var(--gold);}
+  .q-item.current{border-color:var(--gold); background:var(--gold-light);}
+  .q-item .qi-ic{flex:0 0 auto; width:18px; text-align:center; font-weight:800;}
+  .q-item .qi-tx{flex:1; font-size:11.5px; line-height:1.35; color:var(--ink);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .q-item.ok .qi-ic{color:var(--ok);} .q-item.no .qi-ic{color:var(--no);} .q-item.todo .qi-ic{color:var(--ink-soft);}
+
+  /* summary */
+  .summary{text-align:center; padding:10px 6px;}
+  .summary .big{font-family:'Fraunces',serif; font-size:56px; font-weight:700; color:var(--ocean-deep); line-height:1;}
+  .summary .rate{color:var(--ink-soft); margin-top:8px;}
+  .wrong-review{text-align:left; margin:20px 0 6px; display:flex; flex-direction:column; gap:10px;}
+  .wr-card{background:var(--sand); border-left:3px solid var(--coral); border-radius:0 10px 10px 0; padding:11px 14px; font-size:12.5px;}
+  .wr-card .wr-q{font-weight:700; color:var(--ocean-deep);}
+  .wr-card .wr-a{color:var(--ok); font-weight:700; margin-top:3px;}
+  .wr-card .wr-y{color:var(--ink-soft); margin-top:3px;}
+  .empty{background:var(--paper); border:1.5px dashed var(--line); border-radius:18px; padding:44px 26px; text-align:center;}
+  .empty h3{color:var(--ocean-deep); font-size:20px;}
+  .empty p{color:var(--ink-soft); font-size:13.5px; margin-top:8px;}
+  .empty .btn{margin-top:18px;}
+  .hidden{display:none !important;}
+  footer{border-top:1px solid var(--line); padding:22px 0 30px; text-align:center; color:var(--ink-soft); font-size:12.5px;}
+  @media (max-width:860px){ .layout{grid-template-columns:1fr;} .side{position:static;} .side-card{max-height:none;} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="SentenceLab.html">
+      <span class="mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 5h12a3 3 0 0 1 3 3v11a3 3 0 0 0-3-3H4z" fill="#E9A03E"/><path d="M4 5v14h11V5z" fill="#E7664C"/></svg></span>
+      <span>长难句解析器 · Sentence Lab</span>
+    </a>
+    <a class="btn btn-ghost" href="ReadingHome.html">← 返回主页</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="head">
+    <div>
+      <h1>长难句解析器</h1>
+      <p>汇总你在每篇外刊中划出的长难句：探索模式看结构拆解，练习模式点选语法成分、获得三层讲解。</p>
+    </div>
+    <div class="tabs" id="modeTabs">
+      <button class="tab active" data-mode="explore" type="button">探索 Explore</button>
+      <button class="tab" data-mode="practice" type="button">练习 Practice</button>
+    </div>
+  </div>
+
+  <div id="emptyState" class="empty hidden">
+    <h3>还没有收藏的长难句</h3>
+    <p>进入任意精读课件，在课文里划选一个完整句子即可自动分析并收藏；课程预设的长难句也会自动汇总到这里。</p>
+    <a class="btn btn-ocean" href="ReadingHome.html">去读文章 →</a>
+  </div>
+
+  <!-- ===================== EXPLORE ===================== -->
+  <section id="exploreView" class="layout">
+    <div class="panel" id="exploreMain"></div>
+    <aside class="side">
+      <div class="side-card">
+        <h3>全部长难句 <span class="n" id="exploreCount"></span></h3>
+        <div id="sentenceList"></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ===================== PRACTICE ===================== -->
+  <section id="practiceView" class="layout hidden">
+    <div class="panel" id="practiceMain"></div>
+    <aside class="side">
+      <div class="side-card">
+        <h3>题目队列 <span class="n" id="quizCount"></span></h3>
+        <div id="quizQueue"></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer>Sentence Lab · 数据来自各课件本地收藏（longan:__all__），保存在本机浏览器</footer>
+
+<script>
+/* =============== load global long-sentence pool =============== */
+function readGlobal(){
+  try{ var p=JSON.parse(localStorage.getItem('longan:__all__')||'null'); return (p&&Array.isArray(p.items))?p.items:[]; }catch(e){ return []; }
+}
+function writeGlobal(items){ try{ localStorage.setItem('longan:__all__', JSON.stringify({items:items,_savedAt:Date.now()})); }catch(e){} }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function clauseType(label){
+  var t=String(label||'');
+  if(/非谓语|分词|不定式|动名词/i.test(t)) return 'N';
+  if(/从句/i.test(t)) return 'C';
+  if(/主干|主句|主语|谓语|宾语|表语|同位/i.test(t)) return 'M';
+  return 'P';
+}
+function speak(text, btn){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=.92;
+    window.speechSynthesis.speak(u);
+    if(btn){ btn.classList.add('speaking'); setTimeout(function(){btn.classList.remove('speaking');},900); }
+  }catch(e){}
+}
+
+var SENTS = readGlobal();
+// stable order: course first by saved order, then student; de-dupe by gkey
+(function(){
+  var seen={}, out=[];
+  SENTS.forEach(function(x){ if(seen[x.gkey]) return; seen[x.gkey]=1; out.push(x); });
+  SENTS=out;
+})();
+
+/* =============== mode tabs =============== */
+var MODE='explore';
+document.getElementById('modeTabs').addEventListener('click', function(e){
+  var b=e.target.closest('.tab'); if(!b) return;
+  MODE=b.dataset.mode;
+  document.querySelectorAll('#modeTabs .tab').forEach(function(t){ t.classList.toggle('active', t===b); });
+  document.getElementById('exploreView').classList.toggle('hidden', MODE!=='explore');
+  document.getElementById('practiceView').classList.toggle('hidden', MODE!=='practice');
+  if(MODE==='practice') initPractice(); else renderExplore();
+});
+
+/* ============================ EXPLORE ============================ */
+var exIdx=0;
+function grouped(){
+  var g=[]; var map={};
+  SENTS.forEach(function(s,i){
+    var key=s.articleTitle||s.stem||'Unknown';
+    if(!map[key]){ map[key]={title:key, rows:[]}; g.push(map[key]); }
+    map[key].rows.push(i);
+  });
+  return g;
+}
+function renderExploreList(){
+  var box=document.getElementById('sentenceList'); var html='';
+  grouped().forEach(function(grp){
+    html+='<div class="art-group"><div class="art-name">'+esc(grp.title)+'</div>';
+    grp.rows.forEach(function(i){
+      var s=SENTS[i];
+      html+='<div class="sent-item '+(i===exIdx?'active':'')+'" data-i="'+i+'">'+
+        '<span class="src-badge '+(s.source==='course'?'course':'student')+'">'+(s.source==='course'?'课程':'我的')+'</span>'+
+        '<span class="tx">'+esc(s.text)+'</span>'+
+        '<button class="del" data-del="'+i+'" title="移除">×</button></div>';
+    });
+    html+='</div>';
+  });
+  box.innerHTML=html||'<div style="font-size:12.5px;color:var(--ink-soft);padding:6px 2px;">暂无句子</div>';
+  document.getElementById('exploreCount').textContent=SENTS.length+' 句';
+  box.querySelectorAll('[data-i]').forEach(function(el){
+    el.addEventListener('click', function(ev){
+      if(ev.target.closest('[data-del]')) return;
+      exIdx=parseInt(el.dataset.i,10); renderExplore();
+    });
+  });
+  box.querySelectorAll('[data-del]').forEach(function(b){
+    b.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      var i=parseInt(b.dataset.del,10);
+      var gk=SENTS[i].gkey;
+      SENTS.splice(i,1);
+      writeGlobal(SENTS);
+      if(exIdx>=SENTS.length) exIdx=Math.max(0,SENTS.length-1);
+      if(!SENTS.length) showEmpty(); else renderExplore();
+    });
+  });
+}
+function inlineClauses(s, clickable){
+  var cs=s.clauses&&s.clauses.length?s.clauses:[{label:'句子',part:s.text}];
+  return cs.map(function(c){
+    var t=clauseType(c.label);
+    var tag=clickable?('button'):('span');
+    return '<'+tag+' class="cb cb-'+t+(clickable?'':'')+'" data-part="'+esc(c.part)+'">'+
+      '<span class="lab">'+esc(c.label)+'</span><span class="bd">'+esc(c.part)+'</span></'+tag+'>';
+  }).join('<span class="slash">/</span>');
+}
+function renderExplore(){
+  if(!SENTS.length){ showEmpty(); return; }
+  document.getElementById('emptyState').classList.add('hidden');
+  document.getElementById('exploreView').classList.toggle('hidden', MODE!=='explore');
+  if(exIdx<0) exIdx=0; if(exIdx>=SENTS.length) exIdx=SENTS.length-1;
+  var s=SENTS[exIdx];
+  var hasClauses=s.clauses&&s.clauses.length;
+  var npc='';
+  if(hasClauses){
+    npc='<div class="npc">'+s.clauses.map(function(c){
+      var t=clauseType(c.label);
+      return '<div class="npc-row"><span class="npc-tag '+t+'">'+esc(c.label)+'</span>'+
+        '<div><div class="npc-en">'+esc(c.part)+'</div>'+(c.zh?'<div class="npc-zh">'+esc(c.zh)+'</div>':'')+'</div></div>';
+    }).join('')+'</div>';
+  }
+  var main=document.getElementById('exploreMain');
+  main.innerHTML=
+    '<div class="clause-line">'+inlineClauses(s,false)+'</div>'+
+    npc+
+    (s.translation?'<div class="trans"><b>参考翻译：</b>'+esc(s.translation)+'</div>':'')+
+    '<div class="bar-row">'+
+      '<span class="type-badge">'+esc(s.type||'长难句')+'</span>'+
+      '<button class="voice" data-voice title="朗读整句">🔊</button>'+
+      '<span class="spacer"></span>'+
+      '<button class="btn btn-ghost" id="exPrev">← 上一句</button>'+
+      '<button class="btn btn-ocean" id="exNext">下一句 →</button>'+
+    '</div>';
+  main.querySelector('[data-voice]').addEventListener('click', function(){ speak(s.text,this); });
+  main.querySelector('#exPrev').disabled=(exIdx<=0);
+  main.querySelector('#exNext').disabled=(exIdx>=SENTS.length-1);
+  main.querySelector('#exPrev').addEventListener('click', function(){ if(exIdx>0){exIdx--; renderExplore();} });
+  main.querySelector('#exNext').addEventListener('click', function(){ if(exIdx<SENTS.length-1){exIdx++; renderExplore();} });
+  renderExploreList();
+}
+
+/* ============================ PRACTICE ============================ */
+var QUIZ=[], qIdx=0, results=[]; // results: {ok, chosen, q, sent}
+function buildQuiz(pool){
+  var q=[];
+  (pool||SENTS).forEach(function(s){
+    (s.exercises||[]).forEach(function(ex){
+      // only usable when the target block exists among clauses
+      var ok=(s.clauses||[]).some(function(c){ return c.part===ex.target; });
+      if(ok) q.push({sent:s, ex:ex});
+    });
+  });
+  return q;
+}
+function initPractice(reviewOnly){
+  if(!SENTS.length){ showEmpty(); return; }
+  document.getElementById('emptyState').classList.add('hidden');
+  var pool=reviewOnly?SENTS:null;
+  QUIZ=buildQuiz(pool);
+  // when reviewing wrong, rebuild from the stored wrong gkeys below; default shuffle order
+  if(!reviewOnly) QUIZ=shuffle(QUIZ);
+  qIdx=0; results=[];
+  if(!QUIZ.length){
+    document.getElementById('practiceMain').innerHTML=
+      '<div class="empty" style="border-style:dashed;"><h3>当前收藏还没有可练习的标注题</h3>'+
+      '<p>课程预设的长难句自带成分点选练习；手动划出的句子以结构探索为主。打开一篇新课件后，课程长难句会自动出现在这里。</p>'+
+      '<a class="btn btn-ocean" href="ReadingHome.html">去读文章 →</a></div>';
+    document.getElementById('quizQueue').innerHTML='';
+    document.getElementById('quizCount').textContent='0 题';
+    return;
+  }
+  renderQuestion();
+}
+var wrongPool=[];
+function startReview(wrong){
+  var keys={}; wrong.forEach(function(w){ keys[w.gkey]=1; });
+  var pool=SENTS.filter(function(s){ return keys[s.gkey]; });
+  QUIZ=shuffle(buildQuiz(pool).filter(function(q){ return wrong.some(function(w){return w.ask===q.ex.ask;}); }));
+  qIdx=0; results=[];
+  if(QUIZ.length) renderQuestion();
+}
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function targetLabel(q){
+  var c=q.sent.clauses.find(function(c){return c.part===q.ex.target;});
+  return c?c.label:'';
+}
+function renderQuestion(){
+  var q=QUIZ[qIdx]; if(!q){ renderSummary(); return; }
+  var answered = results[qIdx] ? true : false;
+  var main=document.getElementById('practiceMain');
+  main.innerHTML=
+    '<div class="q-meta"><span class="q-prog">第 '+(qIdx+1)+' / '+QUIZ.length+' 题</span>'+
+      '<span class="type-badge">'+esc(q.sent.articleTitle||'')+'</span></div>'+
+    '<div class="q-ask">'+esc(q.ex.ask)+'</div>'+
+    '<div class="q-ask-en">'+esc(q.ex.askEn||'')+'</div>'+
+    '<div class="q-board"><div class="clause-line" id="qBoard">'+inlineClauses(q.sent,true)+'</div></div>'+
+    '<div class="feedback" id="feedback"></div>'+
+    '<div class="bar-row"><span class="spacer"></span>'+
+      '<button class="btn btn-ghost" id="qSkip">换一题 ↷</button>'+
+      '<button class="btn btn-coral hidden" id="qNext">下一题 →</button></div>';
+
+  var board=main.querySelector('#qBoard');
+  board.querySelectorAll('button.cb').forEach(function(btn){
+    btn.addEventListener('click', function(){ answer(btn, q); });
+  });
+  if(answered) revealPast(q);
+  main.querySelector('#qSkip').addEventListener('click', function(){ if(qIdx<QUIZ.length-1){qIdx++; renderQuestion();} });
+  main.querySelector('#qNext').addEventListener('click', function(){
+    qIdx++; if(qIdx>=QUIZ.length) renderSummary(); else renderQuestion();
+  });
+  renderQueue();
+}
+function revealPast(q){
+  var r=results[qIdx];
+  var board=document.getElementById('qBoard');
+  board.querySelectorAll('button.cb').forEach(function(btn){
+    if(btn.dataset.part===q.ex.target) btn.classList.add('correct');
+    if(r && !r.ok && r.chosen===btn.dataset.part) btn.classList.add('wrong');
+    btn.disabled=true;
+  });
+  showFeedback(q, r.ok, r.chosen, true);
+  document.getElementById('qNext').classList.remove('hidden');
+}
+function answer(btn, q){
+  if(results[qIdx]) return;
+  var chosen=btn.dataset.part;
+  var ok=(chosen===q.ex.target);
+  var board=document.getElementById('qBoard');
+  board.querySelectorAll('button.cb').forEach(function(b){
+    b.disabled=true;
+    if(b.dataset.part===q.ex.target) b.classList.add('correct'); // auto-highlight right answer
+  });
+  if(!ok) btn.classList.add('wrong');
+  results[qIdx]={ok:ok, chosen:chosen, q:q};
+  showFeedback(q, ok, chosen, false);
+  document.getElementById('qNext').classList.remove('hidden');
+  renderQueue();
+}
+function showFeedback(q, ok, chosen, past){
+  var fb=document.getElementById('feedback'); fb.style.display='flex';
+  var chosenClause=q.sent.clauses.find(function(c){return c.part===chosen;});
+  var chosenLabel=chosenClause?chosenClause.label:'';
+  var l1='<div class="fb fb-l1"><span class="fb-t">第一层 · 为什么是「'+esc(targetLabel(q))+'」</span>'+esc(q.ex.why)+'</div>';
+  var l2=ok?'':('<div class="fb fb-l2"><span class="fb-t">第二层 · 错在哪里 / 易混点</span>'+
+      '你选的是「'+esc(chosenLabel)+'」。'+esc(q.ex.confuse||'注意区分各语法成分在句中承担的功能。')+'</div>');
+  var l3=q.ex.transfer?('<div class="fb fb-l3"><span class="fb-t">第三层 · 可迁移规律 / 口诀</span>'+esc(q.ex.transfer)+'</div>'):'';
+  var head=ok?'<div style="font-weight:800;color:var(--ok);">✅ 回答正确</div>':'<div style="font-weight:800;color:var(--no);">❌ 再看看（绿色为正确成分）</div>';
+  fb.innerHTML=head+l2+l1+l3;
+}
+function renderQueue(){
+  var box=document.getElementById('quizQueue'); var html='';
+  QUIZ.forEach(function(q,i){
+    var st=results[i]?(results[i].ok?'ok':'no'):'todo';
+    var ic=results[i]?(results[i].ok?'✓':'✗'):(i===qIdx?'●':'·');
+    html+='<div class="q-item '+st+(i===qIdx?' current':'')+'" data-i="'+i+'">'+
+      '<span class="qi-ic">'+ic+'</span><span class="qi-tx">'+esc(q.ex.ask)+'</span></div>';
+  });
+  box.innerHTML=html;
+  document.getElementById('quizCount').textContent=(results.filter(Boolean).length)+' / '+QUIZ.length;
+  box.querySelectorAll('[data-i]').forEach(function(el){
+    el.addEventListener('click', function(){ qIdx=parseInt(el.dataset.i,10); renderQuestion(); });
+  });
+}
+function renderSummary(){
+  var total=QUIZ.length, got=results.filter(function(r){return r&&r.ok;}).length;
+  var wrong=results.map(function(r,i){return r&&!r.ok?{i:i,gkey:r.q.sent.gkey,ask:r.q.ex.ask,target:r.q.ex.target,label:targetLabel(r.q),why:r.q.ex.why,sent:r.q.sent.text}:null;}).filter(Boolean);
+  var pct=Math.round(got/total*100);
+  var main=document.getElementById('practiceMain');
+  var wrHtml=wrong.length?('<div class="wrong-review"><div style="font-weight:700;color:var(--ocean-deep);">需重点复习的知识点（'+wrong.length+'）</div>'+
+    wrong.map(function(w){return '<div class="wr-card"><div class="wr-q">'+esc(w.ask)+'</div>'+
+      '<div class="wr-a">正确：'+esc(w.label)+' — '+esc(w.target)+'</div><div class="wr-y">'+esc(w.why)+'</div></div>';}).join('')+'</div>'):
+    '<p style="margin-top:14px;color:var(--ok);font-weight:700;">全部一次答对，掌握得很扎实！</p>';
+  main.innerHTML='<div class="summary"><div class="big">'+got+' / '+total+'</div>'+
+    '<div class="rate">正确率 '+pct+'%</div>'+wrHtml+
+    '<div class="bar-row" style="justify-content:center;margin-top:22px;">'+
+      (wrong.length?'<button class="btn btn-coral" id="reviewWrong">再练错题 ('+wrong.length+')</button>':'')+
+      '<button class="btn btn-ocean" id="againAll">全部再练</button>'+
+      '<button class="btn btn-ghost" id="toExplore">返回探索</button></div></div>';
+  document.getElementById('quizQueue').innerHTML='';
+  document.getElementById('quizCount').textContent=total+' 题';
+  var rw=main.querySelector('#reviewWrong'); if(rw) rw.addEventListener('click',function(){ startReview(wrong.map(function(w){return {gkey:w.gkey,ask:w.ask};})); });
+  main.querySelector('#againAll').addEventListener('click',function(){ initPractice(false); });
+  main.querySelector('#toExplore').addEventListener('click',function(){
+    document.querySelector('#modeTabs .tab[data-mode="explore"]').click();
+  });
+}
+
+/* ============================ boot ============================ */
+function showEmpty(){
+  document.getElementById('emptyState').classList.remove('hidden');
+  document.getElementById('exploreView').classList.add('hidden');
+  document.getElementById('practiceView').classList.add('hidden');
+}
+if(!SENTS.length) showEmpty(); else renderExplore();
+</script>
+</body>
+</html>
