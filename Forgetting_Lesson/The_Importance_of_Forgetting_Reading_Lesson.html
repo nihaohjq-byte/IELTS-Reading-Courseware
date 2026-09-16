@@ -4055,7 +4055,7 @@ function renderVocabBook() {
     const voice = '<button type="button" class="vocab-entry-voice" data-word="' + esc(it.word || '') + '" title="朗读">🔊</button>';
     const del = deletable ? '<button type="button" class="vocab-entry-del" title="删除">×</button>' : '';
     const src = it.source ? '<div class="vocab-entry-src">"' + esc(it.source) + '"</div>' : '';
-    return '<div class="vocab-entry" data-vidx="' + vidx + '">' +
+    return '<div class="vocab-entry" data-vidx="' + vidx + '" data-vword="' + esc(it.word || '') + '">' +
       '<div class="vocab-entry-head">' +
         '<span class="vocab-entry-word">' + esc(it.word || '') + '</span>' + pos + pho + voice +
         '<span class="vocab-entry-badge' + badgeCls + '">' + badgeText + '</span>' + del +
@@ -4077,10 +4077,15 @@ function renderVocabBook() {
   });
   list.querySelectorAll('.vocab-entry-del').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      const idx = parseInt(btn.closest('.vocab-entry').dataset.vidx, 10);
+      const w = String(btn.closest('.vocab-entry').dataset.vword || '').toLowerCase();
       const items = loadStudentVocab();
-      if (items[idx] && items[idx].badge === 'Course') return; // Blocking Words 不可删
-      items.splice(idx, 1);
+      // Remove the first non-Course (student-picked) entry matching this word.
+      // (Index-based splice was wrong because preset Course entries precede student ones.)
+      const k = items.findIndex(function (it) {
+        return it.badge !== 'Course' && String(it.word || '').toLowerCase() === w;
+      });
+      if (k < 0) return;
+      items.splice(k, 1);
       saveStudentVocab(items);
       renderVocabBook();
       markManualVocab();
