@@ -164,6 +164,10 @@
      (Deep Dive / Text Walkthrough / phrases with Chinese glosses) so no
      Chinese commentary or translations leak into the gist screen. */
   .while-mode-gist #view-details{ display:none !important; }
+  /* Inline Chinese translation under each passage paragraph — Details only. */
+  .para-zh{ display:none; margin:6px 0 0; padding:8px 12px; background:rgba(247,236,220,.7); border-left:3px solid var(--gold); border-radius:8px; font-size:13.5px; line-height:1.7; color:var(--ocean-deep); font-weight:500; }
+  .while-mode-details .para-zh{ display:block; }
+  .while-mode-gist .para-zh{ display:none !important; }
   .passage-pane{ background:var(--white); border-radius:var(--radius); border:1px solid var(--line); padding:26px 28px; }
   .passage-pane p{ margin:0; font-size:15.5px; line-height:1.75; }
   .passage-para{ display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start; margin:0 0 18px; }
@@ -672,7 +676,7 @@
 <body>
 
 <header class="hero">
-  <a class="home-link" href="../ReadingHome.html" title="返回精读主页">← 返回主页</a>
+  <a class="home-link" href="/IELTS-Reading-Courseware/index.html" title="返回精读主页">← 返回主页</a>
   <div class="hero-inner" id="heroInner"></div>
 </header>
 
@@ -1099,7 +1103,26 @@ function setActivityView(view) {
   if (view === 'details') {
     closeParagraphLogic();
     ensureDetailsReady();
+    ensureInlineTranslations();
   }
+}
+/* Inject an inline Chinese translation under each passage paragraph in Details mode.
+   Gist mode hides them via CSS. Translations are fetched once and cached per paragraph. */
+function ensureInlineTranslations() {
+  const paras = document.querySelectorAll('#panel-while .carousel-passage p, #panel-while .passage-body p, #panel-while .passage-pane p');
+  paras.forEach(function (p) {
+    if (p.dataset.zhDone) return;
+    p.dataset.zhDone = '1';
+    const text = (p.textContent || '').trim();
+    if (text.length < 25) return;
+    const zh = document.createElement('p');
+    zh.className = 'para-zh';
+    zh.textContent = '…';
+    p.parentNode.insertBefore(zh, p.nextSibling);
+    Promise.resolve(translateSentenceZh(text)).then(function (t) {
+      zh.textContent = t || '';
+    }).catch(function () { zh.remove(); delete p.dataset.zhDone; });
+  });
 }
 function setSubview(sub) {
   document.querySelectorAll('.subtab').forEach(t => t.classList.toggle('active', t.dataset.sub === sub));
