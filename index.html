@@ -123,6 +123,8 @@
   .test-panel .stat{display:flex; gap:26px; margin-top:14px;}
   .test-panel .stat b{font-family:'Fraunces',serif; font-size:28px; color:var(--gold); display:block; line-height:1;}
   .test-panel .stat span{font-size:11.5px; color:#AFC9D3; letter-spacing:.5px;}
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:860px){ .duo{grid-template-columns:1fr;} }
 
   /* update note */
   .note{
@@ -157,6 +159,7 @@
     </a>
     <div class="nav-actions">
       <a class="btn btn-ghost" href="ReadingHome.html#library">文章库</a>
+      <a class="btn btn-ghost" href="SentenceLab.html">长难句解析器</a>
       <a class="btn btn-primary" href="Vocabulary_Test.html">生词测试</a>
     </div>
   </div>
@@ -171,9 +174,11 @@
         <span>今日更新 <b id="todayDate">—</b></span>
         <span>累计文章 <b id="totalCount">0</b> 篇</span>
         <span>词汇测试 <b id="wordCount">0</b> 词</span>
+        <span>长难句 <b id="longCount">0</b> 句</span>
       </div>
       <div class="hero-cta">
         <a class="btn btn-coral" id="heroGo" href="#">开始今日阅读 →</a>
+        <a class="btn btn-ghost" style="border-color:rgba(244,237,221,.4); color:#F4EDDD;" href="SentenceLab.html">长难句解析器</a>
         <a class="btn btn-ghost" style="border-color:rgba(244,237,221,.4); color:#F4EDDD;" href="Vocabulary_Test.html">生词卡片测试</a>
       </div>
     </div>
@@ -220,17 +225,28 @@
     <div id="libGrid" class="grid"></div>
   </section>
 
-  <section>
+  <section class="duo">
     <div class="test-panel">
       <div>
-        <h2>生词卡片测试</h2>
-        <p>所有文章中生词本积累的生词汇总在一起，以卡片形式出题测试（看词选义 / 看义选词），答完看错题回顾。</p>
+        <h2>生词配对测试</h2>
+        <p>所有文章生词本里的单词汇总，左右两列英文配对，配单词读音，答完查看正确率与错题。</p>
         <div class="stat">
           <div><b id="testWordCount">0</b><span>已积累生词</span></div>
           <div><b id="testArticleCount">0</b><span>已读文章</span></div>
         </div>
       </div>
       <a class="btn btn-coral" href="Vocabulary_Test.html" style="font-size:15px; padding:12px 22px;">开始测试 →</a>
+    </div>
+    <div class="test-panel" style="background:linear-gradient(120deg,#7A3B2E,#E7664C);">
+      <div>
+        <h2>长难句解析器</h2>
+        <p>汇总每篇文章划出的长难句：探索模式按语法成分彩色拆解，练习模式点选主语 / 从句等成分并给出三层讲解。</p>
+        <div class="stat">
+          <div><b id="labCount">0</b><span>已收藏长难句</span></div>
+          <div><b id="labArticleCount">0</b><span>覆盖文章</span></div>
+        </div>
+      </div>
+      <a class="btn btn-coral" href="SentenceLab.html" style="font-size:15px; padding:12px 22px; background:var(--ocean-deep); border-color:var(--ocean-deep);">进入解析器 →</a>
     </div>
   </section>
 
@@ -246,6 +262,17 @@
 <script>
 /* ================= 文章注册表（新增文章时在此加一条即可） ================= */
 var ARTICLES = [
+  {
+    date: "2026-09-16",
+    source: "Scientific American · The Conversation",
+    title: "Why Doing Nothing Is Good for Your Brain",
+    level: "雅思 6.5 / 六级",
+    minutes: 8,
+    tags: ["科学", "神经科学", "学习"],
+    file: "Articles/2026-09-16_Quiet_Rest_Memory/Quiet_Rest_Memory_Reading_Lesson.html",
+    stem: "Quiet_Rest_Memory",
+    desc: "学完就刷手机可能打断大脑。短暂静息如何帮助记忆巩固？证据仍有限，建议很简单：给自己留几分钟空白。"
+  },
   {
     date: "2026-09-12",
     source: "Nature · Lauren Gravitz",
@@ -332,16 +359,23 @@ lib.innerHTML = articles.map(function(a){
   '</article>';
 }).join('');
 
-/* ---------- vocab stats ---------- */
-var totalWords = 0, readArticles = 0;
-articles.forEach(function(a){
-  var items = loadVocab(a.stem);
-  if (items.length) readArticles++;
-  totalWords += items.length;
-});
+/* ---------- vocab / long-sentence stats (global pool first) ---------- */
+function readGlobalList(key){ try{ var p=JSON.parse(localStorage.getItem(key)||'null'); return (p&&Array.isArray(p.items))?p.items:[]; }catch(e){ return []; } }
+var gVocab = readGlobalList('vocabbook:__all__');
+var totalWords = gVocab.length, readArticles = 0;
+if (totalWords) {
+  var va={}; gVocab.forEach(function(it){ va[it.articleTitle||it.stem]=1; }); readArticles=Object.keys(va).length;
+} else {
+  articles.forEach(function(a){ var items=loadVocab(a.stem); if(items.length){readArticles++; totalWords+=items.length;} });
+}
+var gLong = readGlobalList('longan:__all__');
+var longArts={}; gLong.forEach(function(it){ longArts[it.articleTitle||it.stem]=1; });
 document.getElementById('wordCount').textContent = totalWords;
 document.getElementById('testWordCount').textContent = totalWords;
 document.getElementById('testArticleCount').textContent = readArticles;
+document.getElementById('longCount').textContent = gLong.length;
+document.getElementById('labCount').textContent = gLong.length;
+document.getElementById('labArticleCount').textContent = Object.keys(longArts).length;
 </script>
 </body>
 </html>
